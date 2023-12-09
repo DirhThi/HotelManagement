@@ -21,11 +21,29 @@ namespace Hotel_Management
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Button[] menuButton;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        private void MenuBtnChoose(Button bt)
+        {
+            menuButton = new Button[] { btnDatphong, btnPhong, btnHoadon, btnDichvu ,btnBaocao,btnNhansu,btnKhachhang};
+            foreach (Button btn in menuButton)
+            {
+                if (btn == bt)
+                {  
+                    btn.Style = (Style)Application.Current.Resources["PopupButtonChoosedStyle"];
+                }
+                else
+                {
+                    btn.Style = (Style)Application.Current.Resources["PopupButtonStyle"];
+                }
+            }
+
+        }
 
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -33,137 +51,137 @@ namespace Hotel_Management
         }
 
         // Start: MenuLeft PopupButton //
-        private void btnHome_MouseEnter(object sender, MouseEventArgs e)
+        private void btnDatphong_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnHome;
+                Popup.PlacementTarget = btnDatphong;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 PopupText.Text = "Quản lý thuê phòng";
             }
         }
 
-        private void btnHome_MouseLeave(object sender, MouseEventArgs e)
+        private void btnDatphong_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnDashboard_MouseEnter(object sender, MouseEventArgs e)
+        private void btnPhong_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnDashboard;
+                Popup.PlacementTarget = btnPhong;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 PopupText.Text = "Quản lý các phòng";
             }
         }
 
-        private void btnDashboard_MouseLeave(object sender, MouseEventArgs e)
+        private void btnPhong_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnProducts_MouseEnter(object sender, MouseEventArgs e)
+        private void btnHoadon_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnProducts;
+                Popup.PlacementTarget = btnHoadon;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 PopupText.Text = "Quản lý hóa đơn";
             }
         }
 
-        private void btnProducts_MouseLeave(object sender, MouseEventArgs e)
+        private void btnHoadon_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnProductStock_MouseEnter(object sender, MouseEventArgs e)
+        private void btnDichvu_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnProductStock;
+                Popup.PlacementTarget = btnDichvu;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 PopupText.Text = "Quản lý dịch vụ";
             }
         }
 
-        private void btnProductStock_MouseLeave(object sender, MouseEventArgs e)
+        private void btnDichvu_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnOrderList_MouseEnter(object sender, MouseEventArgs e)
+        private void btnBaocao_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnOrderList;
+                Popup.PlacementTarget = btnBaocao;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 PopupText.Text = "Báo cáo";
             }
         }
 
-        private void btnOrderList_MouseLeave(object sender, MouseEventArgs e)
+        private void btnBaocao_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnBilling_MouseEnter(object sender, MouseEventArgs e)
+        private void btnNhansu_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnBilling;
+                Popup.PlacementTarget = btnNhansu;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 PopupText.Text = "Quản lý nhân sự";
             }
         }
 
-        private void btnBilling_MouseLeave(object sender, MouseEventArgs e)
+        private void btnNhansu_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnPointOfSale_MouseEnter(object sender, MouseEventArgs e)
+        private void btnKhachhang_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnPointOfSale;
+                Popup.PlacementTarget = btnKhachhang;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 PopupText.Text = "Quản lý khách hàng";
             }
         }
 
-        private void btnPointOfSale_MouseLeave(object sender, MouseEventArgs e)
+        private void btnKhachhang_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
 
-        private void btnSecurity_MouseEnter(object sender, MouseEventArgs e)
+        private void btnDangxuat_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Tg_Btn.IsChecked == false)
             {
-                Popup.PlacementTarget = btnSecurity;
+                Popup.PlacementTarget = btnDangxuat;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
                 PopupText.Text = "Đăng xuất";
             }
         }
 
-        private void btnSecurity_MouseLeave(object sender, MouseEventArgs e)
+        private void btnDangxuat_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
@@ -206,19 +224,64 @@ namespace Hotel_Management
         }
         // End: Button Close | Restore | Minimize
 
-        private void btnHome_Click(object sender, RoutedEventArgs e)
+        private void btnDatphong_Click(object sender, RoutedEventArgs e)
         {
+            MenuBtnChoose(btnDatphong);
             fContainer.Navigate(new System.Uri("Pages/Quanlythuephong/Quanlythuephong.xaml", UriKind.RelativeOrAbsolute));
             title.Text = "Quản lý thuê phòng";
         }
 
-        private void btnDashboard_Click(object sender, RoutedEventArgs e)
+        private void btnPhong_Click(object sender, RoutedEventArgs e)
         {
+            MenuBtnChoose(btnPhong);
+            fContainer.Navigate(new System.Uri("Pages/QuanLyCacPhong/QuanLyCacPhong.xaml", UriKind.RelativeOrAbsolute));
+            title.Text = "Quản lý các phòng";
         }
 
         private void loaded(object sender, RoutedEventArgs e)
         {
-            //  btnHome.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            MenuBtnChoose(btnDatphong);
+            fContainer.Navigate(new System.Uri("Pages/Quanlythuephong/Quanlythuephong.xaml", UriKind.RelativeOrAbsolute));
+            title.Text = "Quản lý thuê phòng";
+        }
+
+        private void btnHoadon_Click(object sender, RoutedEventArgs e)
+        {
+            MenuBtnChoose(btnHoadon);
+            fContainer.Navigate(new System.Uri("Pages/QuanLyHoaDon/QuanLyHoaDon.xaml", UriKind.RelativeOrAbsolute));
+            title.Text = "Quản lý hóa đơn";
+        }
+        private void btnDichvu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuBtnChoose(btnDichvu);
+            fContainer.Navigate(new System.Uri("Pages/QuanLyDichVu/QuanLyDichVu.xaml", UriKind.RelativeOrAbsolute));
+            title.Text = "Quản lý dịch vụ";
+        }
+
+        private void btnBaocao_Click(object sender, RoutedEventArgs e)
+        {
+            MenuBtnChoose(btnBaocao);
+            fContainer.Navigate(new System.Uri("Pages/QuanLyBaoCao/QuanLyBaoCao.xaml", UriKind.RelativeOrAbsolute));
+            title.Text = "Quản lý báo cáo";
+        }
+
+        private void btnNhansu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuBtnChoose(btnNhansu);
+            fContainer.Navigate(new System.Uri("Pages/QuanLyNhanSu/QuanLyNhanSu.xaml", UriKind.RelativeOrAbsolute));
+            title.Text = "Quản lý nhân sự";
+        }
+
+        private void btnKhachhang_Click(object sender, RoutedEventArgs e)
+        {
+            MenuBtnChoose(btnKhachhang);
+            fContainer.Navigate(new System.Uri("Pages/QuanLyKhachHang/QuanLyKhachHang.xaml", UriKind.RelativeOrAbsolute));
+            title.Text = "Quản lý khách hàng";
+        }
+
+        private void btnDangxuat_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

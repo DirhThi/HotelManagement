@@ -78,12 +78,54 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\QuanLyBaoCao\QuanLyBaoCao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyCacPhong\QuanLyCacPhong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyDichVu\QuanLyDichVu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyHoaDon\QuanLyHoaDon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyKhachHang\QuanLyKhachHang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyNhanSu\QuanLyNhanSu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\QuanLyThuePhong\QuanLyThuePhong.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\QuanLyBaoCao\QuanLyBaoCao.xaml.cs">
+      <DependentUpon>QuanLyBaoCao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyCacPhong\QuanLyCacPhong.xaml.cs">
+      <DependentUpon>QuanLyCacPhong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyDichVu\QuanLyDichVu.xaml.cs">
+      <DependentUpon>QuanLyDichVu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyHoaDon\QuanLyHoaDon.xaml.cs">
+      <DependentUpon>QuanLyHoaDon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyKhachHang\QuanLyKhachHang.xaml.cs">
+      <DependentUpon>QuanLyKhachHang.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyNhanSu\QuanLyNhanSu.xaml.cs">
+      <DependentUpon>QuanLyNhanSu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\QuanLyThuePhong\QuanLyThuePhong.xaml.cs">
       <DependentUpon>QuanLyThuePhong.xaml</DependentUpon>
     </Compile>

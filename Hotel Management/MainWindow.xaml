@@ -47,7 +47,7 @@
 
                     <!-- Start: MenuItem -->
                     <StackPanel Background="#edf3ff"  Grid.Row="1" Margin="-1 40 0 20">
-                        <Button Style="{StaticResource PopupButtonStyle}" HorizontalAlignment="Left" x:Name="btnHome" Foreground="#0077b6"   MouseEnter="btnHome_MouseEnter" MouseLeave="btnHome_MouseLeave" Click="btnHome_Click">
+                        <Button Style="{StaticResource PopupButtonStyle}" HorizontalAlignment="Left" x:Name="btnDatphong"   MouseEnter="btnDatphong_MouseEnter" MouseLeave="btnDatphong_MouseLeave" Click="btnDatphong_Click">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Background="Transparent" Margin="20 0">
                                     <materialDesign:PackIcon Height="22" Width="22" Kind="Hotel" />
@@ -56,7 +56,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnDashboard" HorizontalAlignment="Left"   MouseEnter="btnDashboard_MouseEnter" MouseLeave="btnDashboard_MouseLeave" Click="btnDashboard_Click">
+                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnPhong" HorizontalAlignment="Left"   MouseEnter="btnPhong_MouseEnter" MouseLeave="btnPhong_MouseLeave" Click="btnPhong_Click">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Background="Transparent" Margin="20 0" >
                                     <materialDesign:PackIcon Height="22" Width="22" Kind="Home" />
@@ -65,7 +65,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnProducts" HorizontalAlignment="Left" Foreground="#161d36"   MouseEnter="btnProducts_MouseEnter" MouseLeave="btnProducts_MouseLeave">
+                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnHoadon" HorizontalAlignment="Left"   MouseEnter="btnHoadon_MouseEnter" MouseLeave="btnHoadon_MouseLeave" Click="btnHoadon_Click">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Background="Transparent" Margin="20 0" >
                                     <materialDesign:PackIcon Height="22" Width="22"  Kind="CashMultiple" />
@@ -74,7 +74,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnProductStock" HorizontalAlignment="Left" Foreground="#161d36"   MouseEnter="btnProductStock_MouseEnter" MouseLeave="btnProductStock_MouseLeave">
+                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnDichvu" HorizontalAlignment="Left"   MouseEnter="btnDichvu_MouseEnter" Click="btnDichvu_Click" MouseLeave="btnDichvu_MouseLeave">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Background="Transparent" Margin="20 0" >
                                     <materialDesign:PackIcon  Height="22" Width="22" Kind="Food" />
@@ -83,7 +83,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnOrderList" HorizontalAlignment="Left" Foreground="#161d36"   MouseEnter="btnOrderList_MouseEnter" MouseLeave="btnOrderList_MouseLeave">
+                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnBaocao" HorizontalAlignment="Left"   MouseEnter="btnBaocao_MouseEnter" MouseLeave="btnBaocao_MouseLeave" Click="btnBaocao_Click">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Background="Transparent" Margin="20 0">
                                     <materialDesign:PackIcon  Height="22" Width="22" Kind="ChartBar" />
@@ -92,7 +92,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnBilling" HorizontalAlignment="Left" Foreground="#161d36"   MouseEnter="btnBilling_MouseEnter" MouseLeave="btnBilling_MouseLeave">
+                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnNhansu" HorizontalAlignment="Left"   MouseEnter="btnNhansu_MouseEnter" MouseLeave="btnNhansu_MouseLeave" Click="btnNhansu_Click">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Background="Transparent" Margin="20 0">
                                     <materialDesign:PackIcon  Height="22" Width="22" Kind="AccountBox" />
@@ -101,7 +101,7 @@
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnPointOfSale" HorizontalAlignment="Left" Foreground="#161d36"   MouseEnter="btnPointOfSale_MouseEnter" MouseLeave="btnPointOfSale_MouseLeave">
+                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnKhachhang" HorizontalAlignment="Left"   MouseEnter="btnKhachhang_MouseEnter" MouseLeave="btnKhachhang_MouseLeave" Click="btnKhachhang_Click">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Background="Transparent" Margin="20 0" >
                                     <materialDesign:PackIcon Height="22" Width="22" Kind="AccountStar" />
@@ -112,7 +112,7 @@
                         </Button>
                         <Separator Margin="20" Background="#22223B"/>
 
-                        <Button  Style="{StaticResource PopupButtonStyle}" x:Name="btnSecurity" HorizontalAlignment="Left" Foreground="#161d36"   MouseEnter="btnSecurity_MouseEnter" MouseLeave="btnSecurity_MouseLeave">
+                        <Button  Style="{StaticResource PopupButtonStyle}" x:Name="btnDangxuat" HorizontalAlignment="Left"   MouseEnter="btnDangxuat_MouseEnter" MouseLeave="btnDangxuat_MouseLeave" Click="btnDangxuat_Click">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                 <Border Background="Transparent" Margin="20 0">
                                     <materialDesign:PackIcon  Height="22" Width="22"  Kind="ExitToApp" />
