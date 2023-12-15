@@ -9,7 +9,46 @@
       Title="QuanLyHoaDon">
 
     <Border CornerRadius="10" Background="#edf3ff">
-        <TextBlock Text="Hóa đơn" FontSize="30"  FontWeight="Bold"
-                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <!--Filter Buttons Start-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="?" Margin="15 0 15 0" Background="#C0C9E8" Foreground="#161D36" BorderThickness="0"/>
+                <Button Content="?" Margin="15 0 15 0" Background="#C0C9E8" Foreground="#161D36" BorderThickness="0" Grid.Column="1"/>
+                <Button Content="?" Margin="15 0 15 0" Background="#C0C9E8" Foreground="#161D36" BorderThickness="0" Grid.Column="2"/>
+                <Button Content="?" Margin="15 0 15 0" Background="#C0C9E8" Foreground="#161D36" BorderThickness="0" Grid.Column="3"/>
+            </Grid>
+            <!--Filter Buttons End-->
+            <!--DataGrid Start-->
+            <DataGrid Grid.Row="1" Name="GD_Hoa_Don" Margin="10 0 10 0" GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" IsReadOnly="True" Width="10*" Binding="{Binding Number}"/>
+                    <DataGridTextColumn Header="Trạng thái" IsReadOnly="True" Width="15*" Binding="{Binding Status}"/>
+                    <DataGridTextColumn Header="Tổng tiền" IsReadOnly="True" Width="15*" Binding="{Binding Sum}"/>
+                    <DataGridTextColumn Header="Ngày tạo" IsReadOnly="True" Width="20*" Binding="{Binding CreateDate}"/>
+                    <DataGridTextColumn Header="Ngày thanh toán" IsReadOnly="True" Width="20*" Binding="{Binding PayDate}"/>
+                    <DataGridTemplateColumn Header="Tùy chỉnh" IsReadOnly="True" Width="20*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Option" Background="#C0C9E8" Foreground="#161D36" BorderThickness="0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--DataGrid End-->
+        </Grid>
     </Border>
 </Page>
