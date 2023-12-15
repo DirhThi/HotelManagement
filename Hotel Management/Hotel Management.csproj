@@ -102,6 +102,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\QuanLyThuePhong\ChiTietPhong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\QuanLyThuePhong\QuanLyThuePhong.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +129,9 @@
     </Compile>
     <Compile Include="Pages\QuanLyNhanSu\QuanLyNhanSu.xaml.cs">
       <DependentUpon>QuanLyNhanSu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyThuePhong\ChiTietPhong.xaml.cs">
+      <DependentUpon>ChiTietPhong.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\QuanLyThuePhong\QuanLyThuePhong.xaml.cs">
       <DependentUpon>QuanLyThuePhong.xaml</DependentUpon>

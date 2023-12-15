@@ -13,27 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace Hotel_Management.Pages.QuanLyThuePhong
 {
     /// <summary>
-    /// Interaction logic for QuanLyThuePhong.xaml
+    /// Interaction logic for ChiTietPhong.xaml
     /// </summary>
-    public partial class QuanLyThuePhong : Page
+    public partial class ChiTietPhong : Page
     {
-        List<int> phongItems = new List<int>();
-        List<int> numberList = new List<int>() { 101, 102, 103, 201, 203, 301, 304, 401, 402, 403 };
-        public QuanLyThuePhong()
+        public ChiTietPhong(string maphong)
         {
             InitializeComponent();
-            phongtrongtang1IC.ItemsSource = numberList;
+            maphonglb.Text = maphong;
         }
 
-        private void Phong_click(object sender, RoutedEventArgs e)
+        private void Backbtn_Click(object sender, RoutedEventArgs e)
         {
-            var item = (Button)sender;
-            string maphong = "105";
-            quanlythuephong.NavigationService.Navigate(new ChiTietPhong(maphong));
+            chitietphong.NavigationService.GoBack();
         }
     }
 }
