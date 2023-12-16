@@ -4,12 +4,59 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hotel_Management.Pages.QuanLyBaoCao"
+      xmlns:wf="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuanLyBaoCao">
 
     <Border CornerRadius="10" Background="#edf3ff">
-        <TextBlock Text="Báo cáo" FontSize="30"  FontWeight="Bold"
-                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="80*"/>
+            </Grid.RowDefinitions>
+            <!--Filter Buttons Start-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="DayGross" Height="60" Content="Doanh thu phòng" Margin="15 0 15 0" Background="#C0C9E8" Foreground="#161D36" BorderThickness="0" Click="Button_Click"/>
+                <Button x:Name="ServiceGross" Height="60" Content="Doanh thu dịch vụ" Margin="15 0 15 0" Background="#C0C9E8" Foreground="#161D36" BorderThickness="0" Grid.Column="1" Click="Button_Click_1"/>
+                <Button x:Name="TotalGross" Height="60" Content="Tổng doanh thu" Margin="15 0 15 0" Background="#C0C9E8" Foreground="#161D36" BorderThickness="0" Grid.Column="2" Click="Button_Click_2"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="10" BorderThickness="10" BorderBrush="#C0C9E8" Padding="10" Background="White" Margin="5">
+                    <WindowsFormsHost>
+                        <wf:Chart x:Name="ColumnChart">
+                            <wf:Chart.Series>
+                                <wf:Series ChartType="Column"/>
+                            </wf:Chart.Series>
+                            <wf:Chart.ChartAreas>
+                                <wf:ChartArea/>
+                            </wf:Chart.ChartAreas>
+                        </wf:Chart>
+                    </WindowsFormsHost>
+                </Border>
+                <Border CornerRadius="10" BorderThickness="10" BorderBrush="#C0C9E8" Padding="10" Background="White" Grid.Column="1" Margin="5">
+                    <WindowsFormsHost>
+                        <wf:Chart x:Name="PieChart">
+                            <wf:Chart.Series>
+                                <wf:Series ChartType="Pie"/>
+                            </wf:Chart.Series>
+                            <wf:Chart.ChartAreas>
+                                <wf:ChartArea/>
+                            </wf:Chart.ChartAreas>
+                        </wf:Chart>
+                    </WindowsFormsHost>
+                </Border>
+            </Grid>
+
+        </Grid>
     </Border>
 </Page>
