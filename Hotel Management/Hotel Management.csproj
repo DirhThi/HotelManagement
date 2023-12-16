@@ -86,6 +86,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\QuanLyCacPhong\SuaLoaiPhong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyCacPhong\SuaPhong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyCacPhong\ThemLoaiPhong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyCacPhong\ThemPhong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyCacPhong\ThemTang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\QuanLyDichVu\QuanLyDichVu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +133,22 @@
     </Compile>
     <Compile Include="Pages\QuanLyCacPhong\QuanLyCacPhong.xaml.cs">
       <DependentUpon>QuanLyCacPhong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyCacPhong\Room.cs" />
+    <Compile Include="Pages\QuanLyCacPhong\SuaLoaiPhong.xaml.cs">
+      <DependentUpon>SuaLoaiPhong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyCacPhong\SuaPhong.xaml.cs">
+      <DependentUpon>SuaPhong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyCacPhong\ThemLoaiPhong.xaml.cs">
+      <DependentUpon>ThemLoaiPhong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyCacPhong\ThemPhong.xaml.cs">
+      <DependentUpon>ThemPhong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyCacPhong\ThemTang.xaml.cs">
+      <DependentUpon>ThemTang.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\QuanLyDichVu\QuanLyDichVu.xaml.cs">
       <DependentUpon>QuanLyDichVu.xaml</DependentUpon>
