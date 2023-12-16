@@ -25,18 +25,18 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             InitializeComponent();
 
             List<bill> users = new List<bill>();
-            users.Add(new bill() { Number = 1, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013"});
-            users.Add(new bill() { Number = 2, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { Number = 3, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
-            users.Add(new bill() { Number = 4, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { Number = 5, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { Number = 6, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
-            users.Add(new bill() { Number = 7, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { Number = 8, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { Number = 9, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
-            users.Add(new bill() { Number = 10, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { Number = 11, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { Number = 12, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
+            users.Add(new bill() { ID = 1, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013"});
+            users.Add(new bill() { ID = 2, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { ID = 3, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
+            users.Add(new bill() { ID = 4, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { ID = 5, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { ID = 6, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
+            users.Add(new bill() { ID = 7, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { ID = 8, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { ID = 9, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
+            users.Add(new bill() { ID = 10, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { ID = 11, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { ID = 12, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
             GD_Hoa_Don.ItemsSource = users;
 
             
@@ -44,7 +44,7 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
 
         public class bill
         {
-            public int Number { get; set; }
+            public int ID { get; set; }
 
             public string Status { get; set; }
 
