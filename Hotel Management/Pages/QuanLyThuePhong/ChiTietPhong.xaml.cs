@@ -23,12 +23,70 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
         public ChiTietPhong(string maphong)
         {
             InitializeComponent();
-            maphonglb.Text = maphong;
+            FutureDatePicker.BlackoutDates.AddDatesInPast();
+            DatePicker1.BlackoutDates.AddDatesInPast();
+            DatePicker2.SelectedDate = DateTime.Now.AddDays(1);
+            DatePicker2.BlackoutDates.AddDatesInPast();
+            DatePicker2.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
+
         }
 
         private void Backbtn_Click(object sender, RoutedEventArgs e)
         {
             chitietphong.NavigationService.GoBack();
+        }
+
+        private void congbtnclick(object sender, RoutedEventArgs e)
+        {
+            int gio = Int32.Parse(giosudung.Text);
+            if (gio < 8)
+            {
+                gio++;
+                string gText = gio.ToString();
+                giosudung.Text = gText;
+            }
+        }
+
+        private void trubtnclick(object sender, RoutedEventArgs e)
+        {
+            int gio = Int32.Parse(giosudung.Text);
+            if (gio >1 )
+            {
+                gio--;
+                string gText = gio.ToString();
+                giosudung.Text = gText;
+            }
+        }
+
+        private void giocheck(object sender, RoutedEventArgs e)
+        {
+            if(radiobtngio.IsChecked==true)
+            {
+                bordergio.Visibility = Visibility.Visible;
+                borderngay.Visibility = Visibility.Hidden;
+                borderdem.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void ngaycheck(object sender, RoutedEventArgs e)
+        {
+            if (radiobtnngay.IsChecked == true)
+            {
+
+                borderngay.Visibility = Visibility.Visible;
+                bordergio.Visibility = Visibility.Hidden;
+                borderdem.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void demcheck(object sender, RoutedEventArgs e)
+        {
+            if (radiobtndem.IsChecked == true)
+            {
+                borderdem.Visibility = Visibility.Visible;
+                bordergio.Visibility = Visibility.Hidden;
+                borderngay.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
