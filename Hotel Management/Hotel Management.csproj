@@ -201,6 +201,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\aquafina.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\bunbo.png" />
+    <Resource Include="Assets\Images\cocacola.png" />
+    <Resource Include="Assets\Images\mily.png" />
+    <Resource Include="Assets\Images\redbull.png" />
+    <Resource Include="Assets\Images\sting.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\phobo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

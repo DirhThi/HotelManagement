@@ -21,19 +21,27 @@
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition  Width="3*"/>
             </Grid.ColumnDefinitions>
-            <Button BorderThickness="0" Foreground="#161d36"  HorizontalAlignment="Left" Background="Transparent" x:Name="Backbtn" Click="Backbtn_Click">
-                <Button.Content>
-                    <materialDesign:PackIcon Height="30" Width="30" Kind="KeyboardBackspace" />
-                </Button.Content>
-            </Button>
+            <StackPanel  Orientation="Horizontal">
+                <Button BorderThickness="0" Foreground="#161d36"  HorizontalAlignment="Left" Background="Transparent" x:Name="Backbtn" Click="Backbtn_Click">
+                    <Button.Content>
+                        <materialDesign:PackIcon Height="30" Width="30" Kind="KeyboardBackspace" />
+                    </Button.Content>
+                </Button>
+                <TextBlock FontSize="20" FontWeight="Medium" FontStyle="Italic"  VerticalAlignment="Center" x:Name="maphong">105  </TextBlock>
+                <TextBlock Margin="10,0" FontSize="20" FontWeight="Medium" FontStyle="Italic" VerticalAlignment="Center" x:Name="loaiphong">Standard</TextBlock>
+
+            </StackPanel>
+          
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition  Width="6*"/>
                 </Grid.ColumnDefinitions>
-                <Border Padding="20,15" CornerRadius="10" Margin="20,0" Background="White">
+                <Border Padding="20,0" CornerRadius="10" Margin="20,0" Background="White">
                     <StackPanel>
+                        <TextBlock FontWeight="Medium" Margin="0,10" FontSize="20" Text="Thông tin khách hàng"></TextBlock>
+
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Tên khách hàng *"></TextBlock>
                             <TextBox Height="32" FontSize="18"
@@ -61,18 +69,23 @@
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                <Border Grid.Column="1" Padding="15,15" CornerRadius="10" Margin="0,0" Background="White">
+                <Border Grid.Column="1" Padding="15,0,15,15" CornerRadius="10" Margin="0,0" Background="White">
+                    
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
+                            
                             <ColumnDefinition Width="4*"/>
                             <ColumnDefinition  Width="4*"/>
                             <ColumnDefinition  Width="4*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="7*"/>
                         </Grid.RowDefinitions>
-                        <RadioButton Name="radiobtngio" IsChecked="True" HorizontalAlignment="Center" Click="giocheck">
+                        <TextBlock FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,10" FontSize="20" Text="Thông tin đặt phòng"></TextBlock>
+
+                        <RadioButton  Grid.Row="1" Name="radiobtngio" IsChecked="True" HorizontalAlignment="Center" Click="giocheck">
                             <RadioButton.Content>
                                 <StackPanel>
                                     <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Theo giờ</TextBlock>
@@ -80,7 +93,7 @@
                                 </StackPanel>
                             </RadioButton.Content>
                         </RadioButton>
-                        <RadioButton Name="radiobtnngay" Grid.Column="1" HorizontalAlignment="Center" Click="ngaycheck">
+                        <RadioButton Name="radiobtnngay"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Click="ngaycheck">
                             <RadioButton.Content>
                                 <StackPanel>
                                     <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Cả ngày</TextBlock>
@@ -88,7 +101,7 @@
                                 </StackPanel>
                             </RadioButton.Content>
                         </RadioButton>
-                        <RadioButton Name="radiobtndem" Grid.Column="2" HorizontalAlignment="Center" Click="demcheck">
+                        <RadioButton Name="radiobtndem"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Click="demcheck">
                             <RadioButton.Content>
                                 <StackPanel>
                                     <TextBlock FontSize="18" FontWeight="Medium">Qua đêm</TextBlock>
@@ -96,7 +109,7 @@
                                 </StackPanel>
                             </RadioButton.Content>
                         </RadioButton>
-                        <Border  x:Name="bordergio" Padding="0,20" Grid.Row="1" CornerRadius="5" Grid.ColumnSpan="3" Background="Azure">
+                        <Border  x:Name="bordergio" Padding="0,20" Grid.Row="2" CornerRadius="5" Grid.ColumnSpan="3" Background="Azure">
                             <Grid  >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
@@ -132,7 +145,7 @@
                                                 <materialDesign:PackIcon Kind="Minus" />
                                             </Button.Content>
                                         </Button>
-                                        <TextBox x:Name="giosudung"  HorizontalContentAlignment="Center" Width="30" Height="32" FontSize="18"
+                                        <TextBox Focusable="False" x:Name="giosudung"  HorizontalContentAlignment="Center" Width="30" Height="32" FontSize="18"
                                         Text="1"/>
                                         <Button BorderThickness="0" Foreground="#161d36"  HorizontalAlignment="Left" Background="Transparent" x:Name="congbtn" Click="congbtnclick" >
                                             <Button.Content>
@@ -151,7 +164,7 @@
                                 </StackPanel>
                             </Grid>
                         </Border>
-                        <Border Visibility="Hidden" x:Name="borderngay" Padding="0,20" Grid.Row="1" CornerRadius="5" Grid.ColumnSpan="3" Background="Azure">
+                        <Border Visibility="Hidden" x:Name="borderngay"  Padding="0,20" Grid.Row="2" CornerRadius="5" Grid.ColumnSpan="3" Background="Azure">
                             <Grid  >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
@@ -179,7 +192,7 @@
                                     </DatePicker>
                                 </StackPanel>
                                 <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
-                                    <TextBlock Text="{Binding ElementName=DatePicker1, Path=SelectedDate, StringFormat=Giờ check-in : 14:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
+                                    <TextBlock Text="{Binding ElementName=DatePicker1, Path=SelectedDate, StringFormat=Giờ check-in : 12:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
 
                                     </TextBlock>
                                     <TextBlock Text="{Binding ElementName=DatePicker2, Path=SelectedDate, StringFormat=Giờ check-out : 14:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
@@ -188,12 +201,102 @@
                                 </StackPanel>
                             </Grid>
                         </Border>
-                        <Border Visibility="Hidden" x:Name="borderdem" Padding="0,20" Grid.Row="1" CornerRadius="5" Grid.ColumnSpan="3" Background="Azure">
+                        <Border Visibility="Hidden" x:Name="borderdem" Padding="0,20" Grid.Row="2" CornerRadius="5" Grid.ColumnSpan="3" Background="Azure">
+                            <Grid  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Margin="20">
+                                    <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Ngày vào</TextBlock>
+                                    <DatePicker 
+                                        HorizontalAlignment="Center"
+                                        FontSize="18"
+                                        SelectedDate="{x:Static sys:DateTime.Now}"
+                                        x:Name="DatePicker3"
+                                        Focusable="False">
+                                    </DatePicker>
+                                </StackPanel>
+                                <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
+                                    <TextBlock Text="{Binding ElementName=DatePicker3, Path=SelectedDate, StringFormat=Giờ check-in : 21:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
+
+                                    </TextBlock>
+                                    <TextBlock Text="Giờ check-out : 10:00 Ngày kế tiếp" Foreground="Gray" FontSize="16">
+
+                                    </TextBlock>
+                                </StackPanel>
+                            </Grid>
                         </Border>
                     </Grid>
                 </Border>
             </Grid>
-            <Border Grid.Row="2"  Padding="0,15" CornerRadius="10" Margin="20,20,0,20" Background="White">
+            <Border Grid.Row="2"  Padding="0,0" CornerRadius="10" Margin="20,20,0,20" Background="White">
+                <Grid >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontWeight="Medium" Grid.ColumnSpan="3" Margin="20,10" FontSize="20" Text="Dịch vụ"></TextBlock>
+
+                    <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelservice" HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="0" >
+                            <ItemsControl ItemsSource="{Binding ListService}" Name="serviceIC">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Width="120"  Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                            <Grid  Width="auto" Height="auto" Margin="0,0"   Grid.Row="0" Grid.Column="1"     >
+                                                <StackPanel Orientation="Vertical">
+                                                    <Border  CornerRadius="20" Margin="0,0,0,0" Width="120" Height="120" >
+                                                        <Border.Background>
+                                                            <LinearGradientBrush>
+                                                                <GradientStop Color="#C0C9E8" Offset="0"/>
+                                                            </LinearGradientBrush>
+                                                        </Border.Background>
+
+
+                                                        <StackPanel Margin="0,5,0,0" Orientation="Vertical">
+                                                            <Image Source="{Binding imagesource}"  Width="90" Height="90"/>
+                                                            <TextBlock HorizontalAlignment="Center" Text="{Binding name}" FontSize="16" FontWeight="Normal"></TextBlock>
+                                                        </StackPanel>
+
+
+
+                                                    </Border>
+                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding price}" FontSize="16" FontWeight="Normal"></TextBlock>
+
+                                                    <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal">
+                                                        <Button BorderThickness="0" Foreground="#161d36"  HorizontalAlignment="Left" Background="Transparent" x:Name="truservicebtn" Click="truservicebtn_Click" >
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Minus" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                        <TextBox Focusable="False" x:Name="soluong"  HorizontalContentAlignment="Center" Width="30" Height="32" FontSize="18"
+                                                        Text="{Binding quantity}"/>
+                                                        <Button BorderThickness="0" Foreground="#161d36"  HorizontalAlignment="Left" Background="Transparent" x:Name="congservicebtn" Click="congservicebtn_Click" >
+                                                            <Button.Content>
+                                                                <materialDesign:PackIcon Kind="Plus" />
+                                                            </Button.Content>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </StackPanel>
+
+                                            </Grid>
+
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </WrapPanel>
+                    </ScrollViewer>
+
+                </Grid>
             </Border>
             <Grid  Grid.RowSpan="2" Grid.Row="1" Grid.Column="2">
                 <Grid.RowDefinitions>
@@ -201,7 +304,7 @@
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Border Padding="20,15" CornerRadius="10" Margin="20,0" Background="White">
-                   
+                    
                 </Border>
                 <Border Grid.Row="1" Padding="0,15" CornerRadius="10" Margin="20,20" Background="White">
                 </Border>
