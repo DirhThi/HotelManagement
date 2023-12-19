@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 
+
 namespace Hotel_Management.Pages.QuanLyThuePhong
 {
     /// <summary>
@@ -23,30 +24,38 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
     {
         List<int> numberList = new List<int>() { 101, 102, 103, 201, 203, 301, 304, 401, 402, 403 };
         List<service> ServiceList = new List<service> {
-              new service {name="Nước suối",price="10.000",quantity=0,imagesource="/Assets/Images/aquafina.png"},
-              new service {name="Sting",price="15.000",quantity=0,imagesource="/Assets/Images/sting.jpg"},
-              new service {name="Cocacola",price="15.000",quantity=0,imagesource="/Assets/Images/cocacola.png"},
-              new service {name="Redbull",price="20.000",quantity=0,imagesource="/Assets/Images/redbull.png"},
-              new service {name="Mì ly",price="15.000",quantity=0,imagesource="/Assets/Images/mily.png"},
-              new service {name="Bún bò",price="40.000",quantity=0,imagesource="/Assets/Images/bunbo.png"},
-              new service {name="Phở bò",price="40.000",quantity=0,imagesource="/Assets/Images/phobo.png"},
+              new service {name="Nước suối",price=10000,quantity=0,imagesource="/Assets/Images/aquafina.png"},
+              new service {name="Sting",price=15000,quantity=0,imagesource="/Assets/Images/sting.jpg"},
+              new service {name="Cocacola",price=15000,quantity=0,imagesource="/Assets/Images/cocacola.png"},
+              new service {name="Redbull",price=20000,quantity=0,imagesource="/Assets/Images/redbull.png"},
+              new service {name="Mì ly",price=15000,quantity=0,imagesource="/Assets/Images/mily.png"},
+              new service {name="Bún bò",price=40000,quantity=0,imagesource="/Assets/Images/bunbo.png"},
+              new service {name="Phở bò",price=40000,quantity=0,imagesource="/Assets/Images/phobo.png"},
 
             };
+        List<serviceUsed> serviceUsedList = new List<serviceUsed> {
+            new serviceUsed() { stt = "Tổng", nameServiceUsed = "", price = "", soluong = 0, total = 0}
+        };
+        int totalServiceUsedPrice = 0;
+        int totalRoomPrice = 100000;
+         int totalBill;
 
-        
+       
         public ChiTietPhong(string maphong)
         {
             InitializeComponent();
+            totalBill = totalRoomPrice + totalServiceUsedPrice;
+            totalbilltext.Text = totalBill.ToString();
             FutureDatePicker.BlackoutDates.AddDatesInPast();
             DatePicker1.BlackoutDates.AddDatesInPast();
             DatePicker2.SelectedDate = DateTime.Now.AddDays(1);
             DatePicker2.BlackoutDates.AddDatesInPast();
             DatePicker2.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
             serviceIC.ItemsSource = ServiceList;
-
+            serviceusedDG.ItemsSource = serviceUsedList;
 
         }
-
+      
         private void Backbtn_Click(object sender, RoutedEventArgs e)
         {
             chitietphong.NavigationService.GoBack();
@@ -105,6 +114,33 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             }
         }
 
+        private void updateServiceUsed()
+        {
+            serviceUsedList.Clear();
+            int i = 0;
+            foreach (service item in ServiceList)
+            {
+                if (item.quantity > 0)
+                {
+                    i++;
+                    serviceUsedList.Add(new serviceUsed() { stt = i.ToString(), nameServiceUsed = item.name, price = item.price.ToString(), soluong = item.quantity, total = item.price * item.quantity });
+                }
+            }
+            if(serviceUsedList.Count()>0)
+            {
+                serviceUsedList.Add(new serviceUsed() { stt = "Tổng", nameServiceUsed ="" , price = "", soluong = serviceUsedList.Sum(l=>l.soluong), total = serviceUsedList.Sum(l => l.total) });
+                totalServiceUsedPrice = serviceUsedList.Last().total;
+            }
+            else
+            {
+                serviceUsedList.Add(new serviceUsed() { stt = "Tổng", nameServiceUsed = "", price = "", soluong = 0, total = 0});
+                totalServiceUsedPrice = 0;
+            }
+            totalBill = totalRoomPrice + totalServiceUsedPrice;
+            totalbilltext.Text = totalBill.ToString();
+            serviceusedDG.Items.Refresh();
+        }
+
         private void truservicebtn_Click(object sender, RoutedEventArgs e)
         {
             service Service = (sender as Button).DataContext as service;
@@ -115,7 +151,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 Service.quantity = temp;
             }
             serviceIC.Items.Refresh();
-
+            updateServiceUsed();
         }
 
 
@@ -126,14 +162,25 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             temp++;
             Service.quantity = temp;
             serviceIC.Items.Refresh();
-
+            updateServiceUsed();
         }
     }
     public  class service 
     {
         public string name { get; set; }
-        public string price { get; set; }
+        public int price { get; set; }
         public int quantity { get; set; }
         public string imagesource { get; set; }
     }
+
+    public class serviceUsed
+    {
+        public string stt { get; set; }
+        public string nameServiceUsed { get; set; }
+        public string price { get; set; }
+        public int soluong { get; set; }
+        public int total { get; set; }
+
+    }
+
 }

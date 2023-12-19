@@ -6,8 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_Management"
         mc:Ignorable="d" 
-        Title="MainWindow"  Height="650" Width="1000"
+        Title="MainWindow"  
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Background="Transparent" Loaded="loaded">
     <Border Background="#c0c9e8"
             CornerRadius="0">

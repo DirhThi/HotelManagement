@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hotel_Management.Pages.QuanLyThuePhong"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
+      xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -192,10 +194,10 @@
                                     </DatePicker>
                                 </StackPanel>
                                 <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
-                                    <TextBlock Text="{Binding ElementName=DatePicker1, Path=SelectedDate, StringFormat=Giờ check-in : 12:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
+                                    <TextBlock Text="{Binding ElementName=DatePicker1, Path=SelectedDate, StringFormat=Giờ nhận phòng : 12:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
 
                                     </TextBlock>
-                                    <TextBlock Text="{Binding ElementName=DatePicker2, Path=SelectedDate, StringFormat=Giờ check-out : 14:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
+                                    <TextBlock Text="{Binding ElementName=DatePicker2, Path=SelectedDate, StringFormat=Giờ trả phòng : 14:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
                                        
                                     </TextBlock>
                                 </StackPanel>
@@ -218,10 +220,10 @@
                                     </DatePicker>
                                 </StackPanel>
                                 <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
-                                    <TextBlock Text="{Binding ElementName=DatePicker3, Path=SelectedDate, StringFormat=Giờ check-in : 21:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
+                                    <TextBlock Text="{Binding ElementName=DatePicker3, Path=SelectedDate, StringFormat=Giờ nhận phòng : 21:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
 
                                     </TextBlock>
-                                    <TextBlock Text="Giờ check-out : 10:00 Ngày kế tiếp" Foreground="Gray" FontSize="16">
+                                    <TextBlock Text="Giờ trả phòng : 10:00 Ngày kế tiếp" Foreground="Gray" FontSize="16">
 
                                     </TextBlock>
                                 </StackPanel>
@@ -303,8 +305,89 @@
                     <RowDefinition Height="8*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Border Padding="20,15" CornerRadius="10" Margin="20,0" Background="White">
-                    
+                <Border Padding="0,0" CornerRadius="10" Margin="20,0" Background="White">
+                    <ScrollViewer   VerticalScrollBarVisibility="Auto">
+                        <Grid  Grid.RowSpan="2" Grid.Row="1" Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock FontWeight="Medium" Grid.ColumnSpan="3" Margin="20,10" FontSize="20" Text="Hóa đơn tạm tính"></TextBlock>
+                            <Border Padding="15,0" Margin="15,0,15,15" BorderThickness="1" BorderBrush="Black" Background="Azure" Grid.Row="1">
+                                <StackPanel>
+                                    <TextBlock HorizontalAlignment="Center" FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="18" Text="Khách sạn UIT"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" FontWeight="Normal" Grid.ColumnSpan="3"  FontSize="14" Text="Khu phố 6, P Linh Trung,TP Thủ Đức"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" FontWeight="Normal" Grid.ColumnSpan="3"  FontSize="14" Text="Hotline - 19001009"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="18" Text="Hóa đơn thanh toán"></TextBlock>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Thời gian tạo : "></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Phòng :"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Tên nhân viên : "></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Tên khách hàng : "></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Dịch vụ thuê : "></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Nhận phòng :"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Trả phòng : "></TextBlock>
+                                            <TextBlock HorizontalAlignment="Left" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Tiền phòng : "></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="{Binding Source={x:Static system:DateTime.Now}}"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="105 - Standard"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="NV1"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Nguyễn Đình Thi"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="Theo giờ"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="00:00 1/1/2023"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="00:00 1/1/2023"></TextBlock>
+                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="16" Text="100.000 đ"></TextBlock>
+
+                                        </StackPanel>
+                                    </Grid>
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" Margin="5" FontSize="18" Text="Dịch vụ "></TextBlock>
+                                    <DataGrid  Focusable="False" x:Name="serviceusedDG" IsReadOnly="True"  GridLinesVisibility="None" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" CanUserAddRows="False"  >
+                                        <DataGrid.Resources>
+                                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                                <Setter Property="Background" Value="Azure"/>
+                                                <Setter Property="Foreground" Value="Black"/>
+
+                                            </Style>
+                                            <Style TargetType="{x:Type DataGridRow}">
+                                                <Setter Property="Focusable" Value="False"/>
+                                                <Setter Property="Foreground" Value="Black"/>
+
+                                            </Style>
+                                            <Style TargetType="{x:Type DataGridCell}">
+                                                <Setter Property="Focusable" Value="False"/>
+                                                <Setter Property="Background" Value="Azure"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                            </Style>
+                                        </DataGrid.Resources>
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Header="" IsReadOnly="True" Width="10*" Binding="{Binding stt}"/>
+                                            <DataGridTextColumn Header="Tên" IsReadOnly="True" Width="20*" Binding="{Binding nameServiceUsed}" />
+                                            <DataGridTextColumn Header="Đơn giá" IsReadOnly="True" Width="15*" Binding="{Binding price}" />
+                                            <DataGridTextColumn Header="SL" IsReadOnly="True" Width="10*" Binding="{Binding soluong}" />
+                                            <DataGridTextColumn Header="Thành tiền" IsReadOnly="True" Width="15*" Binding="{Binding total}" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock HorizontalAlignment="Left" FontWeight="Medium"  Margin="5,15" FontSize="20" Text="Tổng tiền : "></TextBlock>
+                                        <TextBlock x:Name="totalbilltext" HorizontalAlignment="Right" FontWeight="Medium" Grid.Column="1"  Margin="5,15" FontSize="20" Text="0"></TextBlock>
+
+                                    </Grid>
+                                    <TextBlock HorizontalAlignment="Center" FontWeight="Normal" Grid.Column="1"  Margin="5,15" FontSize="16" Text="Xin chân thành cảm ơn quý khách !"></TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </ScrollViewer>
                 </Border>
                 <Border Grid.Row="1" Padding="0,15" CornerRadius="10" Margin="20,20" Background="White">
                 </Border>
