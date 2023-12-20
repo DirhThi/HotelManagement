@@ -8,67 +8,330 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuanLyThuePhong" Name="quanlythuephong">
-    
-    <Border x:Name="border" CornerRadius="10" Background="#edf3ff">
-        <Grid >
-            <TabControl x:Name="tabcontrolcontry"  Margin="10" BorderThickness="0" Background="LightGray">
-                <TabItem Style="{StaticResource tabbarExplore }"  Header="Phòng trống">
-                    <Border Margin="10 10" Background="White" CornerRadius="10" >
-                        <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
-                            <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelPlaylist" HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
-                                <ItemsControl Name="phongtrongtang1IC">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="250" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
-                                                <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
-                                                    <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
-                                                        <Border.Background>
-                                                            <LinearGradientBrush>
-                                                                <GradientStop Color="#0096C7" Offset="0"/>
-                                                                <GradientStop Color="#C0C9E8" Offset="1"/>
-                                                            </LinearGradientBrush>
-                                                        </Border.Background>
-                                                        <Border.Effect>
-                                                            <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#0096C7"/>
-                                                        </Border.Effect>
-                                                        <StackPanel Margin="15,10,0,0" Orientation="Vertical">
-                                                            <TextBlock Text="{Binding }" FontSize="30" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
-                                                            <TextBlock Text="Standard" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+    <materialDesign:DialogHost
+        x:Name="Dialog"
+  CloseOnClickAway="False"
+  HorizontalAlignment="Stretch"
+  VerticalAlignment="Stretch">
+        <materialDesign:DialogHost.DialogContent>
+            <Border Height="auto" Width="auto" Grid.Column="1" Padding="15,0,15,15" CornerRadius="10" Margin="0,0" Background="White">
 
-                                                        </StackPanel>
-                                                    </Border>
-                                                </Button>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
 
-                                                
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </WrapPanel>
-                        </ScrollViewer>
-                    </Border>
-                </TabItem>
-                <TabItem Style="{StaticResource tabbarExplore }" Header="Phòng đang thuê">
-                    <Grid  Margin="10 10" Background="Blue">
-
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition  Width="4*"/>
+                        <ColumnDefinition  Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="20" Text="Thay đổi trạng thái phòng"></TextBlock>
+                    <RadioButton  Grid.Row="1" Name="radiobtnsansang" IsChecked="True" HorizontalAlignment="Center">
+                        <RadioButton.Content>
+                            <StackPanel>
+                                <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Sẵn sàng hoạt động</TextBlock>
+                            </StackPanel>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Name="radiobtndondep"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" >
+                        <RadioButton.Content>
+                            <StackPanel>
+                                <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Đang dọn dẹp</TextBlock>
+                            </StackPanel>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Name="radiobtnbaotri"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+                        <RadioButton.Content>
+                            <StackPanel>
+                                <TextBlock FontSize="18" FontWeight="Medium">Đang bảo trì</TextBlock>
+                            </StackPanel>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <Grid Margin="0,40,0,0" Grid.Row="2" Grid.ColumnSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border  Style="{StaticResource secondButton}">
+                            <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                Hủy
+                            </Button>
+                        </Border>
+                        <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                            <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                Xác nhận
+                            </Button>
+                        </Border>
                     </Grid>
-                </TabItem>
-                <TabItem Style="{StaticResource tabbarExplore }" Header="Phòng đã đặt" >
-                    <Grid  Margin="10 10" Background="Purple">
+                </Grid>
+            </Border>
+        </materialDesign:DialogHost.DialogContent>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border  x:Name="border" CornerRadius="10" Background="#edf3ff">
+            <Grid >
 
-                    </Grid>
-                </TabItem>
-                <TabItem Style="{StaticResource tabbarExplore }" Header="Đang bảo trì" >
-                    <Grid  Margin="10 10" Background="Purple">
+                <TabControl x:Name="tabcontrolcontry"  Margin="10" BorderThickness="0" Background="LightGray">
+                    <TabItem Style="{StaticResource tabbarExplore }"  Header="Phòng trống">
+                        <Border Margin="10 10" Background="White" CornerRadius="10" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Button Foreground="#00bbf9" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Click="sortphongtrong_click">
+                                    <Button.Content>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                            <materialDesign:PackIcon Height="30" Width="30" Margin="10,0" VerticalAlignment="Center"  Kind="Sort" />
+                                            <TextBlock x:Name="sortphongtrongtb"  FontSize="18" Text="Mã phòng"></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
 
-                    </Grid>
-                </TabItem>
-            </TabControl>
+                                </Button>
+                                <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelPlaylist" HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                        <ItemsControl Name="phongtrongIC">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                        <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
+                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                                <Border.Background>
+                                                                    <LinearGradientBrush>
+                                                                        <GradientStop Color="#0096C7" Offset="0"/>
+                                                                        <GradientStop Color="#C0C9E8" Offset="1"/>
+                                                                    </LinearGradientBrush>
+                                                                </Border.Background>
+                                                                <Border.Effect>
+                                                                    <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#0096C7"/>
+                                                                </Border.Effect>
+                                                                <StackPanel Margin="15,10,0,0" Orientation="Vertical">
+                                                                    <TextBlock Text="{Binding maphong }" FontSize="30" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+                                                                    <TextBlock Text="{Binding loaiphong}" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </Button>
+
+
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </Grid>
+
+                        </Border>
+                    </TabItem>
+                    <TabItem Style="{StaticResource tabbarExplore }" Header="Phòng đang thuê">
+                        <Border Margin="10 10" Background="White" CornerRadius="10" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Button Foreground="#00bbf9" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Click="sortphongthue_click">
+                                    <Button.Content>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                            <materialDesign:PackIcon Height="30" Width="30" Margin="10,0" VerticalAlignment="Center"  Kind="Sort" />
+                                            <TextBlock x:Name="sortphongthuetb"  FontSize="18" Text="Mã phòng"></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+
+                                </Button>
+                                <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                        <ItemsControl Name="phongthueIC">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                        <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
+                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                                <Border.Background>
+                                                                    <LinearGradientBrush>
+                                                                        <GradientStop Color="Coral" Offset="0"/>
+                                                                        <GradientStop Color="#ffd166" Offset="1"/>
+                                                                    </LinearGradientBrush>
+                                                                </Border.Background>
+                                                                <Border.Effect>
+                                                                    <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="Coral"/>
+                                                                </Border.Effect>
+                                                                    <StackPanel Margin="15,10,0,0" >
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding loaiphong}" Margin="10,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        </StackPanel>
+                                                                        <TextBlock Text="{Binding tenkhachhang }"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        <TextBlock Text="{Binding sodienthoai}"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                        </Button>
+
+
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </Grid>
+
+                        </Border>
+
+                    </TabItem>
+                    <TabItem Style="{StaticResource tabbarExplore }" Header="Phòng đã đặt" >
+                        <Border Margin="10 10" Background="White" CornerRadius="10" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Button Foreground="#00bbf9" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Click="sortphongdat_click">
+                                    <Button.Content>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                            <materialDesign:PackIcon Height="30" Width="30" Margin="10,0" VerticalAlignment="Center"  Kind="Sort" />
+                                            <TextBlock x:Name="sortphongdattb"  FontSize="18" Text="Mã phòng"></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+
+                                </Button>
+                                <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                        <ItemsControl Name="phongdatIC">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                        <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
+                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                                <Border.Background>
+                                                                    <LinearGradientBrush>
+                                                                        <GradientStop Color="#a5be00" Offset="0"/>
+                                                                        <GradientStop Color="#aad576" Offset="1"/>
+                                                                    </LinearGradientBrush>
+                                                                </Border.Background>
+                                                                <Border.Effect>
+                                                                    <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#a5be00"/>
+                                                                </Border.Effect>
+                                                                    <StackPanel Margin="15,10,0,0" >
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding loaiphong}" Margin="10,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        </StackPanel>
+                                                                        <TextBlock Text="{Binding tenkhachhang }"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        <TextBlock Text="{Binding sodienthoai}"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                    </StackPanel>
+
+                                                                </Border>
+                                                        </Button>
+
+
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </Grid>
+
+                        </Border>
+
+                    </TabItem>
+                    <TabItem Style="{StaticResource tabbarExplore }" Header="Đang bảo trì" >
+                        <Border Margin="10 10" Background="White" CornerRadius="10" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Button Foreground="#00bbf9" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Click="sortphongbaotri_click">
+                                    <Button.Content>
+                                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                            <materialDesign:PackIcon Height="30" Width="30" Margin="10,0" VerticalAlignment="Center"  Kind="Sort" />
+                                            <TextBlock x:Name="sortphongbaotritb"  FontSize="18" Text="Mã phòng"></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+
+                                </Button>
+                                <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                        <ItemsControl Name="phongbaotriIC">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                            <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phongbaotri_click"  >
+                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                                <Border.Background>
+                                                                    <LinearGradientBrush>
+                                                                        <GradientStop Color="#6c757d" Offset="0"/>
+                                                                        <GradientStop Color="#c9ada7" Offset="1"/>
+                                                                    </LinearGradientBrush>
+                                                                </Border.Background>
+                                                                <Border.Effect>
+                                                                    <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#6c757d"/>
+                                                                </Border.Effect>
+                                                                    <StackPanel Margin="15,10,0,0" >
+                                                                        <StackPanel Orientation="Horizontal">
+                                                                            <TextBlock Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding loaiphong}" Margin="10,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        </StackPanel>
+                                                                        <TextBlock Text="{Binding tenkhachhang }"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        <TextBlock Text="{Binding sodienthoai}"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                        </Button>
+
+
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </WrapPanel>
+                                </ScrollViewer>
+                            </Grid>
+
+                        </Border>
+
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Border> 
         </Grid>
-    </Border>
+     
+    </materialDesign:DialogHost>
+
 </Page>

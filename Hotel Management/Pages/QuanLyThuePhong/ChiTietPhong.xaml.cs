@@ -41,7 +41,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
          int totalBill;
 
        
-        public ChiTietPhong(string maphong)
+        public ChiTietPhong(string maphong, string loaiphong, string trangthai,string loaithue)
         {
             InitializeComponent();
             totalBill = totalRoomPrice + totalServiceUsedPrice;
@@ -53,7 +53,20 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             DatePicker2.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
             serviceIC.ItemsSource = ServiceList;
             serviceusedDG.ItemsSource = serviceUsedList;
-
+            maphongtb.Text = maphong;
+            loaiphongtb.Text = loaiphong;
+            if(trangthai=="phongtrong")
+            {
+                phongtrongoption.Visibility = Visibility.Visible;
+            }
+            if (trangthai == "phongthue")
+            {
+                phongthueoption.Visibility = Visibility.Visible;
+            }
+            if (trangthai == "phongdat")
+            {
+                phongdatoption.Visibility = Visibility.Visible;
+            }
         }
       
         private void Backbtn_Click(object sender, RoutedEventArgs e)
