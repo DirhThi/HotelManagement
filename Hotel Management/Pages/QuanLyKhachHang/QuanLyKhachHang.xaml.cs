@@ -20,37 +20,48 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
     /// </summary>
     public partial class QuanLyKhachHang : Page
     {
+        List<Khachhang> users = new List<Khachhang> {
+             new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+             new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+             new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
+
+
+            };
         public QuanLyKhachHang()
         {
             InitializeComponent();
-
-            List<bill> users = new List<bill>();
-            users.Add(new bill() { ID = 1, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { ID = 2, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { ID = 3, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
-            users.Add(new bill() { ID = 4, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { ID = 5, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { ID = 6, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
-            users.Add(new bill() { ID = 7, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { ID = 8, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { ID = 9, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
-            users.Add(new bill() { ID = 10, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { ID = 11, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
-            users.Add(new bill() { ID = 12, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
-            GD_Hoa_Don.ItemsSource = users;
+            DGKhachhang.ItemsSource = users;
+            autoorder();
         }
 
-        public class bill
+        private void autoorder()
         {
-            public int ID { get; set; }
+            int t = 1;
+            for (int i = 0; i < users.Count; i++)
+            {
+                users[i].stt = t;
+                t++;
+            }
+        }
 
-            public string Status { get; set; }
+        public class Khachhang
+        {
+            public int stt { get; set; }
+            public string TenKH { get; set; }
+            public string Sodienthoai { get; set; }
+            public string CCCD { get; set; }
+            public string Ngaysinh { get; set; }
+            public string Email { get; set; }
 
-            public int Sum { get; set; }
-
-            public string CreateDate { get; set; }
-
-            public string PayDate { get; set; }
         }
     }
 }

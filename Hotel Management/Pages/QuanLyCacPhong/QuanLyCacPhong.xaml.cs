@@ -19,7 +19,6 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         
         void LoadRoom()
         {
-            SPListRoom.Children.Clear();
             List<Room> listRoom = GetListRoom();
             foreach (int floor in listRoom.Select(room => room.Floor).Distinct())
             {
@@ -52,7 +51,6 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 floorGrid.Children.Add(floorStackPanel);
                 floorGrid.Children.Add(roomStackPanel);
 
-                SPListRoom.Children.Add(floorGrid);
             }
         }
 
