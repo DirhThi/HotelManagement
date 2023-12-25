@@ -24,6 +24,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
     /// </summary>
     public partial class ChiTietPhong : Page
     {
+        public static event Action OnNewGuestAdded;
         MongoHandler handler = MongoHandler.GetInstance();
         List<int> numberList = new List<int>() { 101, 102, 103, 201, 203, 301, 304, 401, 402, 403 };
         List<service> ServiceList = new List<service> {
@@ -47,9 +48,31 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
         public ChiTietPhong(string maphong, string loaiphong, string trangthai,string loaithue)
         {
             InitializeComponent();
-            maphonglb.Text = maphong;
+            totalBill = totalRoomPrice + totalServiceUsedPrice;
+            totalbilltext.Text = totalBill.ToString();
+            FutureDatePicker.BlackoutDates.AddDatesInPast();
+            DatePicker1.BlackoutDates.AddDatesInPast();
+            DatePicker2.SelectedDate = DateTime.Now.AddDays(1);
+            DatePicker2.BlackoutDates.AddDatesInPast();
+            DatePicker2.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
+            serviceIC.ItemsSource = ServiceList;
+            serviceusedDG.ItemsSource = serviceUsedList;
+            maphongtb.Text = maphong;
+            loaiphongtb.Text = loaiphong;
+            if(trangthai=="phongtrong")
+            {
+                phongtrongoption.Visibility = Visibility.Visible;
+            }
+            if (trangthai == "phongthue")
+            {
+                phongthueoption.Visibility = Visibility.Visible;
+            }
+            if (trangthai == "phongdat")
+            {
+                phongdatoption.Visibility = Visibility.Visible;
+            }
         }
-
+      
         private void Backbtn_Click(object sender, RoutedEventArgs e)
         {
             chitietphong.NavigationService.GoBack();
@@ -198,5 +221,51 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 }
             }
         }
+
+        private void ButtonConfirmClick(object sender, RoutedEventArgs e)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("Customer");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument customer in documents)
+                {
+                    string idNumber = customer["idNumber"].AsString;
+                    if (idNumber == CustomerIdNumber.Text)
+                    {
+                        return;
+                    }
+                }
+                var newDoc = new BsonDocument
+                {
+                    {"customerName", CustomerName.Text},
+                    {"phoneNumber", CustomerPhoneNumber.Text },
+                    { "idNumber", CustomerIdNumber.Text},
+                    {"dateOfBirth", CustomerBirth.Text},
+                    {"email", CustomerEmail.Text},
+               
+                };
+                collection.InsertOne(newDoc);
+                StaticEvents.StaticEventHandler.OnCustomerUpdatedEvent();
+            }
+        }
     }
+    public  class service 
+    {
+        public string name { get; set; }
+        public int price { get; set; }
+        public int quantity { get; set; }
+        public string imagesource { get; set; }
+    }
+
+    public class serviceUsed
+    {
+        public string stt { get; set; }
+        public string nameServiceUsed { get; set; }
+        public string price { get; set; }
+        public int soluong { get; set; }
+        public int total { get; set; }
+
+    }
+
 }

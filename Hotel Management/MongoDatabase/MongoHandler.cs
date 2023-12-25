@@ -14,7 +14,6 @@ namespace Hotel_Management.MongoDatabase
         private static MongoHandler instance;
         static MongoClient MongoClient;
         static IMongoDatabase _database;
-
         MongoHandler() {
             var settings = MongoClientSettings.FromConnectionString(connectionString);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
