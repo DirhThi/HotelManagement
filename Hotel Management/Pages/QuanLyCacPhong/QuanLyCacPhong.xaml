@@ -3,32 +3,145 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Hotel_Management.Pages.QuanLyCacPhong"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuanLyCacPhong">
     <Border CornerRadius="10" Background="#edf3ff">
-        
-        <Grid Grid.Row="1">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <!--Filter Buttons Start-->
+            <Border Margin="10" Background="White"     CornerRadius="10 ">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="10"  VerticalAlignment="Center" Orientation="Horizontal">
 
-            <StackPanel Orientation="Horizontal">
-                <Border Grid.Column="1"  Style="{StaticResource mainButton}">
-                    <Button
+                        <TextBlock HorizontalAlignment="Right" Margin="15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Tìm kiếm</TextBlock>
+                        <Border HorizontalAlignment="Right" Padding="5,0" CornerRadius="5" BorderThickness="2" BorderBrush="LightSkyBlue" Background="AliceBlue" Width="200" Height="36">
+                            <TextBox     FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập mã phòng" ></TextBox>
+                        </Border>
+
+                        <Button HorizontalAlignment="Right" Grid.Column="1"
                                 Background="Transparent"
-                                Foreground="#161d36"
+                                Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
+                            VerticalContentAlignment="Center"
                                 >
-                        Trả phòng
-                    </Button>
-                </Border>
-            </StackPanel>
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Height="24" Width="24" Kind="PlusBox" />
+                                    <TextBlock>Thêm phòng</TextBlock>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button HorizontalAlignment="Right" Grid.Column="1"
+                                Background="Transparent"
+                                Foreground="#00bbf9"
+                                BorderThickness="0"
+                                FontSize="18"
+                            VerticalContentAlignment="Center"
+                                >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Height="24" Width="24" Kind="PencilBox" />
+                                    <TextBlock>Sửa loại phòng</TextBlock>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                    
+
+                </Grid>
+            </Border>
+
+            <!--Filter Buttons End-->
+            <!--DataGrid Start-->
+            <Border Margin="10,0,10,10" Background="White"  Grid.Row="1"    CornerRadius="10 ">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        
+                                <StackPanel Margin="20,0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="#00bbf9" Height="30" Width="30" Margin="10,0" VerticalAlignment="Center"  Kind="Sort" />
+                                <ComboBox SelectionChanged="ComboBox_SelectionChanged"
+                                    FontSize="18"
+                                    Foreground="#00bbf9"
+                                    FontWeight="Medium"
+                                    Background="Transparent" 
+                                    Width="120"
+                                          Name="sortCB"
+                                        materialDesign:HintAssist.Hint="Sắp xếp">
+                                    
+                                     <ComboBoxItem >
+                                        Mã phòng
+                                    </ComboBoxItem>
+                                <ComboBoxItem >
+                                        Loại phòng
+                                    </ComboBoxItem>
+                                <ComboBoxItem >
+                                        Trạng thái
+                                    </ComboBoxItem>
+                                
+                                </ComboBox>
+                        </StackPanel>
+                         
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                            <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelPlaylist" HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                <ItemsControl Name="phongIC">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
+                                                    <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                        <Border.Background>
+                                                            <LinearGradientBrush>
+                                                                <GradientStop Color="#0096C7" Offset="0"/>
+                                                                <GradientStop Color="#C0C9E8" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Border.Background>
+                                                        <Border.Effect>
+                                                            <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#0096C7"/>
+                                                        </Border.Effect>
+                                                        <StackPanel Margin="15,10,0,0" Orientation="Vertical">
+                                                            <TextBlock Text="{Binding maphong }" FontSize="30" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+                                                            <TextBlock Text="{Binding loaiphong}" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+                                                            <TextBlock Text="{Binding trangthai}" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Button>
+
+
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </Grid>
+
+                </Grid>
+            </Border>
+            <!--DataGrid End-->
         </Grid>
-
-
     </Border>
 </Page>
