@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using System.IO;
+using System.Windows.Controls.Primitives;
 
 
 namespace Hotel_Management.Pages.QuanLyCacPhong
@@ -182,6 +183,20 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                     MessageBox.Show("Đã tồn tại CSVC");
                 }    
             }    
+        }
+
+        private void tooltips_ME(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+
+            Popup.PlacementTarget = tooltipsThemtepphong;
+            Popup.Placement = PlacementMode.Right;
+            Popup.IsOpen = true;
+        }
+
+        private void tooltips_ML(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Popup.Visibility = Visibility.Collapsed;
+            Popup.IsOpen = false;
         }
     }
 

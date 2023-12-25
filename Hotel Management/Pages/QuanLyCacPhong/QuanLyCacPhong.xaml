@@ -143,7 +143,27 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="70"/>
                         </Grid.RowDefinitions>
-                        <TextBlock FontWeight="Medium"  Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="20" Text="Thêm tệp phòng"></TextBlock>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" FontWeight="Medium"  Grid.ColumnSpan="3"  FontSize="20" Text="Thêm tệp phòng"></TextBlock>
+                            <materialDesign:PackIcon x:Name="tooltipsThemtepphong"   VerticalAlignment="Center" Height="20" Width="20" Margin="5,0"   Foreground="Gray" Kind="CommentQuestionOutline" MouseEnter="tooltips_ME" MouseLeave="tooltips_ML" />
+                        </StackPanel>
+                        <Popup Style="{StaticResource PopupStyle}" x:Name="Popup"  AllowsTransparency="True"  HorizontalOffset="0" VerticalOffset="10">
+                            <Grid>
+                                <!-- Start: Popup User Control -->
+                                <Border x:Name="Conatiner" CornerRadius="5" Width="Auto" Height="Auto" Margin="10 0 0 0" Background="#bde0fe" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <!-- Star: Reusable Text -->
+                                    <StackPanel>
+                                        <TextBlock TextWrapping="Wrap" FontSize="14" FontWeight="Regular" Panel.ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5 10 5">
+                                         Nhập file .txt có định dạng<LineBreak /> [Mã phòng]/[Loại phòng],<LineBreak /> mỗi phòng trên một hàng .<LineBreak />
+                                         Ví dụ :
+                                        </TextBlock>
+                                        <Image Source="/Assets/Images/DemoListPhong.png"  />
+                                    </StackPanel>
+                                    <!-- Star: Reusable Text -->
+                                </Border>
+                                <!-- End: Popup User Control -->
+                            </Grid>
+                        </Popup>
                         <Button Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="2"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
