@@ -24,44 +24,35 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
         {
             InitializeComponent();
 
-            List<Bill> users = new List<Bill> {
-             new Bill() { ID=123456,   Phong="101",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=234561,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=334551,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=412358,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=512479,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=684212,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=711144,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=851251,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=994573,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=108235,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=113463,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=199564,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=242322, Phong="102",LoaiThue="Theo giờ",Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=379655, Phong="102",LoaiThue="Theo giờ",Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=464647,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=535389,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=607554,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=737831,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=881238,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=935125,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-
-            };
-
-            DGHoadon.ItemsSource = users;
+            List<bill> users = new List<bill>();
+            users.Add(new bill() { Number = 1, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013"});
+            users.Add(new bill() { Number = 2, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { Number = 3, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
+            users.Add(new bill() { Number = 4, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { Number = 5, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { Number = 6, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
+            users.Add(new bill() { Number = 7, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { Number = 8, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { Number = 9, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
+            users.Add(new bill() { Number = 10, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { Number = 11, Status = "Đã thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "1/1/2013" });
+            users.Add(new bill() { Number = 12, Status = "Chưa thanh toán", Sum = 500000, CreateDate = "12/12/2012", PayDate = "null" });
+            GD_Hoa_Don.ItemsSource = users;
 
             
         }
 
-        public class Bill
+        public class bill
         {
-            public int ID { get; set; }
-            public string Phong { get; set; }
-            public string LoaiThue { get; set; }
-            public string Total { get; set; }
+            public int Number { get; set; }
+
+            public string Status { get; set; }
+
+            public int Sum { get; set; }
+
             public string CreateDate { get; set; }
-            public string nameCustomer { get; set; }
-            public string nameStaff { get; set; }
+
+            public string PayDate { get; set; }
         }
     }
 }
