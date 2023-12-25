@@ -50,28 +50,14 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             CBtrangthai.ItemsSource = trangthaiPhongList;
             CSVCChips.ItemsSource = ListCSVChientai;
             AllCSVCChips.ItemsSource = ListCSVC;
+            suaCSVC.ItemsSource = ListCSVC;
         }
 
-       /* private void sortphong_click(object sender, RoutedEventArgs e)
-        {
-            if (sortphongtb.Text == "Mã phòng")
-            {
-                sortphongtb.Text = "Loại phòng";
-                phongList.Sort((left, right) => left.loaiphong.CompareTo(right.loaiphong));
-                phongIC.Items.Refresh();
-            }
-            else
-            {
-                sortphongtb.Text = "Mã phòng";
-                phongList.Sort((left, right) => left.maphong.CompareTo(right.maphong));
-                phongIC.Items.Refresh();
-            }
-        }*/
+       
 
         private void Phong_click(object sender, RoutedEventArgs e)
         {
             Phong PhongDuocChon = (sender as Button).DataContext as Phong;
-           // Lấy dữ liệu của phòng thôn qua item.maphong sau đó gán mã phòng,trạng thái nếu phòng đã đặt hoặc dã thuê phải có thông tin thuê, thiếu gì tự thêm vào
             string maphong = PhongDuocChon.maphong;
             string loaiphong = PhongDuocChon.loaiphong;
             string trangthai = PhongDuocChon.trangthai;
@@ -85,10 +71,10 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         {
            
             Dialog.IsOpen = false;
-            dialogSuaPhong.Visibility = Visibility.Hidden;
-            dialogThemphong.Visibility = Visibility.Hidden;
-            dialogThemTepphong.Visibility = Visibility.Hidden;
-            dialogSualoaiphong.Visibility = Visibility.Hidden;
+            dialogSuaPhong.Visibility = Visibility.Collapsed;
+            dialogThemphong.Visibility = Visibility.Collapsed;
+            dialogThemTepphong.Visibility = Visibility.Collapsed;
+            dialogSualoaiphong.Visibility = Visibility.Collapsed;
 
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -166,6 +152,36 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 CSVCChips.Items.Refresh();
 
             }
+        }
+
+        private void CSVC_DeleteClick(object sender, RoutedEventArgs e)
+        {
+            string CSVC = (sender as MaterialDesignThemes.Wpf.Chip).DataContext as string;
+            ListCSVC.Remove(CSVC);
+            suaCSVC.Items.Refresh();
+        }
+
+        private void QlyCSVC_Click(object sender, RoutedEventArgs e)
+        {
+            dialogSuaCSVC.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
+        }
+
+        private void ThemCSVC_click(object sender, RoutedEventArgs e)
+        {
+            if(TenCSVC_TB.Text.Length>0)
+            {
+                if (ListCSVC.IndexOf(TenCSVC_TB.Text) == -1)
+                {
+                    ListCSVC.Add(TenCSVC_TB.Text);
+                    suaCSVC.Items.Refresh();
+                    TenCSVC_TB.Text = null;
+                }
+                else
+                {
+                    MessageBox.Show("Đã tồn tại CSVC");
+                }    
+            }    
         }
     }
 
