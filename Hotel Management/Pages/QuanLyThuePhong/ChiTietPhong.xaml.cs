@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
-
+using Hotel_Management.MongoDatabase;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace Hotel_Management.Pages.QuanLyThuePhong
 {
@@ -22,6 +24,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
     /// </summary>
     public partial class ChiTietPhong : Page
     {
+        MongoHandler handler = MongoHandler.GetInstance();
         List<int> numberList = new List<int>() { 101, 102, 103, 201, 203, 301, 304, 401, 402, 403 };
         List<service> ServiceList = new List<service> {
               new service {name="Nước suối",price=10000,quantity=0,imagesource="/Assets/Images/aquafina.png"},
@@ -176,6 +179,46 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             Service.quantity = temp;
             serviceIC.Items.Refresh();
             updateServiceUsed();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("Customer");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument customer in documents)
+                {
+                    string idNumber = customer["idNumber"].AsString;
+                    if (idNumber == CustomerIdNumber.Text)
+                    {
+                        CustomerName.Text = customer["customerName"].AsString;
+                        CustomerBirth.Text = customer["dateOfBirth"].AsString;
+                        CustomerPhoneNumber.Text = customer["phoneNumber"].AsString;
+                        CustomerEmail.Text = customer["email"].AsString;
+                    }
+                }
+            }
+        }
+
+        private void CustomerPhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("Customer");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument customer in documents)
+                {
+                    string idNumber = customer["phoneNumber"].AsString;
+                    if (idNumber == CustomerPhoneNumber.Text)
+                    {
+                        CustomerName.Text = customer["customerName"].AsString;
+                        CustomerBirth.Text = customer["dateOfBirth"].AsString;
+                        CustomerIdNumber.Text = customer["idNumber"].AsString;
+                        CustomerEmail.Text = customer["email"].AsString;
+                    }
+                }
+            }
         }
     }
     public  class service 

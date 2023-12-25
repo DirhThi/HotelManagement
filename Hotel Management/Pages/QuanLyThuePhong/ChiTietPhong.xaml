@@ -13,7 +13,7 @@
       Title="ChiTietPhong" Name="chitietphong">
    
     <Border  CornerRadius="10" Background="#edf3ff">
-        <Grid IsEnabled="False">
+        <Grid IsEnabled="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="5.5*"/>
@@ -46,27 +46,27 @@
 
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Tên khách hàng *"></TextBlock>
-                            <TextBox Height="32" FontSize="18"
+                            <TextBox x:Name="CustomerName" Height="32" FontSize="18"
                         materialDesign:HintAssist.Hint="Nhập tên khách hàng"/>
                         </StackPanel>
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
-                            <TextBox  Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu"/>
+                            <TextBox x:Name="CustomerIdNumber"  Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" TextChanged="TextBox_TextChanged"/>
                         </StackPanel>
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
-                            <TextBox Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập số điện thoại"/>
+                            <TextBox x:Name="CustomerPhoneNumber" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số điện thoại" TextChanged="CustomerPhoneNumber_TextChanged"/>
                         </StackPanel>
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Email"></TextBlock>
-                            <TextBox Height="32" FontSize="18"
+                            <TextBox x:Name="CustomerEmail" Height="32" FontSize="18"
                         materialDesign:HintAssist.Hint="Nhập email"/>
                         </StackPanel>
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Ngày sinh"></TextBlock>
-                            <TextBox Height="32" FontSize="18"
+                            <TextBox x:Name="CustomerBirth" Height="32" FontSize="18"
                         materialDesign:HintAssist.Hint="Nhập ngày sinh"/>
                         </StackPanel>
                     </StackPanel>
