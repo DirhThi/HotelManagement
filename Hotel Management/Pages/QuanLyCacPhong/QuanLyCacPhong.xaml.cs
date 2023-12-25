@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
+using System.IO;
+
 
 namespace Hotel_Management.Pages.QuanLyCacPhong
 {
@@ -10,9 +13,15 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
     /// </summary>
     public partial class QuanLyCacPhong : Page
     {
+        List<string> QLloaiPhongList = new List<string> { "Thêm phòng mới"};
+        List<string> loaiPhongList = new List<string> { "Standard", "Deluxe", "Vip" };
+        List<string> trangthaiPhongList = new List<string> { "Phòng trống", "Đang dọn dẹp", "Đang bảo trì" };
+        List<string> ListCSVC = new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" };
+        List<string> ListCSVChientai = new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi" };
+
         List<Phong> phongList = new List<Phong> {
            new Phong() { maphong = "101", loaiphong = "Standard",trangthai = "Phòng trống"},
-            new Phong() { maphong = "102", loaiphong = "Standard",trangthai = "Phòng trống"},
+            new Phong() { maphong = "102", loaiphong = "Standard",trangthai = "Đang bảo trì"},
             new Phong() { maphong = "104", loaiphong = "Deluxe",trangthai = "Phòng trống"},
             new Phong() { maphong = "201", loaiphong = "Standard",trangthai = "Phòng trống"},
             new Phong() { maphong = "203", loaiphong = "Standard",trangthai = "Phòng trống"},
@@ -30,7 +39,17 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         {
             InitializeComponent();
             phongIC.ItemsSource = phongList;
+            CBLoaiPhong.ItemsSource = loaiPhongList;
+            CBLoaiPhong2.ItemsSource = loaiPhongList;
+            foreach (var item in loaiPhongList)
+            {
+                QLloaiPhongList.Add(item);
+            }    
+            CBLoaiPhong3.ItemsSource = QLloaiPhongList;
 
+            CBtrangthai.ItemsSource = trangthaiPhongList;
+            CSVCChips.ItemsSource = ListCSVChientai;
+            AllCSVCChips.ItemsSource = ListCSVC;
         }
 
        /* private void sortphong_click(object sender, RoutedEventArgs e)
@@ -52,13 +71,26 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         private void Phong_click(object sender, RoutedEventArgs e)
         {
             Phong PhongDuocChon = (sender as Button).DataContext as Phong;
-            // Lấy dữ liệu của phòng thôn qua item.maphong sau đó gán mã phòng,trạng thái nếu phòng đã đặt hoặc dã thuê phải có thông tin thuê, thiếu gì tự thêm vào
+           // Lấy dữ liệu của phòng thôn qua item.maphong sau đó gán mã phòng,trạng thái nếu phòng đã đặt hoặc dã thuê phải có thông tin thuê, thiếu gì tự thêm vào
             string maphong = PhongDuocChon.maphong;
             string loaiphong = PhongDuocChon.loaiphong;
-            string trangthai = "phongthue";
-            string loaithue = "";
+            string trangthai = PhongDuocChon.trangthai;
+            titleDialogPhong.Text = $"Chỉnh sửa phòng {maphong}";
+            CBLoaiPhong.SelectedItem = loaiphong;
+            CBtrangthai.SelectedItem = trangthai;
+            dialogSuaPhong.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
         }
+        private void CancelDialog(object sender, RoutedEventArgs e)
+        {
+           
+            Dialog.IsOpen = false;
+            dialogSuaPhong.Visibility = Visibility.Hidden;
+            dialogThemphong.Visibility = Visibility.Hidden;
+            dialogThemTepphong.Visibility = Visibility.Hidden;
+            dialogSualoaiphong.Visibility = Visibility.Hidden;
 
+        }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sortCB.SelectedIndex==0)
@@ -77,6 +109,62 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             {
                 phongList.Sort((left, right) => left.trangthai.CompareTo(right.trangthai));
                 phongIC.Items.Refresh();
+            }
+        }
+
+        private void themphong_click(object sender, RoutedEventArgs e)
+        {
+            dialogThemphong.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
+        }
+
+        private void openfiledialog_click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text files (*.txt)|*.txt";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                tbfilename.Text = Path.GetFileName(openFileDialog.FileName);
+                List<Phong> PhongMoi = new List<Phong>();
+                foreach (string line in File.ReadLines(openFileDialog.FileName))
+                {
+                    string[] parts = line.Split('/');
+                    PhongMoi.Add(new Phong() {maphong=parts[0],loaiphong=parts[1]});
+                }
+                phongmoiDG.ItemsSource = PhongMoi;
+            }  
+            
+        }
+
+        private void themtepphong_click(object sender, RoutedEventArgs e)
+        {
+           
+            dialogThemTepphong.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
+        }
+
+        private void QLloaiphong_click(object sender, RoutedEventArgs e)
+        {
+            dialogSualoaiphong.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
+        }
+
+        private void CSVCLoaiphong_DeleteClick(object sender, RoutedEventArgs e)
+        {
+        
+            string CSVC = (sender as MaterialDesignThemes.Wpf.Chip).DataContext as string;
+            ListCSVChientai.Remove(CSVC);
+            CSVCChips.Items.Refresh();
+        }
+
+        private void AllChipsServiceClick(object sender, RoutedEventArgs e)
+        {
+            string CSVC = (sender as MaterialDesignThemes.Wpf.Chip).DataContext as string;
+            if (ListCSVChientai.IndexOf(CSVC) == -1)
+            {
+                ListCSVChientai.Add(CSVC);
+                CSVCChips.Items.Refresh();
+
             }
         }
     }

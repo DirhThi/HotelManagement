@@ -21,7 +21,6 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
     /// </summary>
     public partial class QuanLyThuePhong : Page
     {
-         List<string> ListCSVC = new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh" };
         List<int> phongItems = new List<int>();
         List<Phong> phongtrongList = new List<Phong> {
             new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" } },

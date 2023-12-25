@@ -8,75 +8,430 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuanLyCacPhong">
-    <Border CornerRadius="10" Background="#edf3ff">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <!--Filter Buttons Start-->
-            <Border Margin="10" Background="White"     CornerRadius="10 ">
+    <materialDesign:DialogHost
+        x:Name="Dialog"
+  CloseOnClickAway="False"
+  HorizontalAlignment="Stretch"
+  VerticalAlignment="Stretch">
+        <materialDesign:DialogHost.DialogContent>
+            <Border Height="auto" Width="auto" Grid.Column="1" Padding="15,0,15,15" CornerRadius="10" Margin="0,0" Background="White">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Margin="10"  VerticalAlignment="Center" Orientation="Horizontal">
+                    <Grid x:Name="dialogSuaPhong" Visibility="Hidden" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
 
-                        <TextBlock HorizontalAlignment="Right" Margin="15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Tìm kiếm</TextBlock>
-                        <Border HorizontalAlignment="Right" Padding="5,0" CornerRadius="5" BorderThickness="2" BorderBrush="LightSkyBlue" Background="AliceBlue" Width="200" Height="36">
-                            <TextBox     FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập mã phòng" ></TextBox>
-                        </Border>
-
-                        <Button HorizontalAlignment="Right" Grid.Column="1"
-                                Background="Transparent"
-                                Foreground="#00bbf9"
-                                BorderThickness="0"
-                                FontSize="18"
-                            VerticalContentAlignment="Center"
-                                >
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Height="24" Width="24" Kind="PlusBox" />
-                                    <TextBlock>Thêm phòng</TextBlock>
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                        <Button HorizontalAlignment="Right" Grid.Column="1"
-                                Background="Transparent"
-                                Foreground="#00bbf9"
-                                BorderThickness="0"
-                                FontSize="18"
-                            VerticalContentAlignment="Center"
-                                >
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Height="24" Width="24" Kind="PencilBox" />
-                                    <TextBlock>Sửa loại phòng</TextBlock>
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                    </StackPanel>
-                    
-
-                </Grid>
-            </Border>
-
-            <!--Filter Buttons End-->
-            <!--DataGrid Start-->
-            <Border Margin="10,0,10,10" Background="White"  Grid.Row="1"    CornerRadius="10 ">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition  Width="4*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="3*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Medium" Name="titleDialogPhong" Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="20" Text=""></TextBlock>
+                        <StackPanel Margin="20,0" Grid.Row="1">
+                            <TextBlock FontWeight="Medium"  Margin="0,10,0,0" FontSize="18" Text="Loại phòng"></TextBlock>
+                            <ComboBox
+                            FontSize="16"
+                            Name="CBLoaiPhong"
+                        materialDesign:HintAssist.Hint="Chọn loại phòng">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding }"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="20,0"  Grid.Row="1" Grid.Column="1">
+                            <TextBlock FontWeight="Medium"  Margin="0,10,0,0" FontSize="18" Text="Trạng thái"></TextBlock>
+                            <ComboBox
+                            FontSize="16"
+                           Name="CBtrangthai"
+                        materialDesign:HintAssist.Hint="Chọn trạng thái">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding }"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        <Grid Margin="0,40,0,0" Grid.Row="2" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  Style="{StaticResource secondButton}">
+                                <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                    Hủy
+                                </Button>
+                            </Border>
+                            <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                                <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                    Xác nhận
+                                </Button>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="dialogThemphong" Visibility="Hidden" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition  Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Medium"  Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="20" Text="Thêm phòng"></TextBlock>
+                        <StackPanel Margin="20,0" Grid.Row="1">
+                            <TextBlock FontWeight="Medium"  Margin="0,10,0,0" FontSize="18" Text="Mã phòng"></TextBlock>
+                            <TextBox
+                            FontSize="16"
+                            Name="TBMaPhong"
+                             materialDesign:HintAssist.Hint="Nhập mã phòng">
+
+                            </TextBox>
+                        </StackPanel>
+                        <StackPanel Margin="20,0"  Grid.Row="1" Grid.Column="1">
+                            <TextBlock FontWeight="Medium"  Margin="0,10,0,0" FontSize="18" Text="Loại phòng"></TextBlock>
+                            <ComboBox
+                            FontSize="16"
+                            Name="CBLoaiPhong2"
+                             materialDesign:HintAssist.Hint="Chọn loại phòng">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding }"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        <Grid Margin="0,40,0,0" Grid.Row="2" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  Style="{StaticResource secondButton}">
+                                <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                    Hủy
+                                </Button>
+                            </Border>
+                            <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                                <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                    Xác nhận
+                                </Button>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="dialogThemTepphong" Visibility="Hidden" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="70"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Medium"  Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="20" Text="Thêm tệp phòng"></TextBlock>
+                        <Button Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="2"
+                                Background="Transparent"
+                                Foreground="#00bbf9"
+                                BorderThickness="0"
+                                FontSize="18"
+                            VerticalContentAlignment="Center" Click="openfiledialog_click"
+                                
+                                >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Height="24" Width="24" Kind="FilePlus" />
+                                    <TextBlock x:Name="tbfilename">Chọn tệp</TextBlock>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <DataGrid Grid.Row="2" Foreground="Black"  HorizontalAlignment="Center" x:Name="phongmoiDG" IsReadOnly="False"  GridLinesVisibility="None" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" CanUserAddRows="False"  >
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    <Setter Property="Background" Value="Azure"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                </Style>
+                                <Style TargetType="{x:Type DataGridRow}">
+                                    <Setter Property="Focusable" Value="False"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Style.Triggers>
+                                        
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Trigger>
+                                        
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="Focusable" Value="False"/>
+                                    <Setter Property="Background" Value="Azure"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns >
+                                <DataGridTextColumn Header="#" IsReadOnly="True" Width="10" Binding="{Binding stt}"/>
+                                <DataGridTextColumn MinWidth="100" Header="Mã Phòng" IsReadOnly="False" Width="*" Binding="{Binding maphong}" />
+                                <DataGridTextColumn  MinWidth="100" Header="Loại phòng" IsReadOnly="False" Width="*" Binding="{Binding loaiphong}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Margin="0,15,0,0" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  Style="{StaticResource secondButton}">
+                                <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                    Hủy
+                                </Button>
+                            </Border>
+                            <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                                <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                    Xác nhận
+                                </Button>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="dialogSualoaiphong" Visibility="Hidden" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="70"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Medium"  Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="20" Text="Quản lý loại phòng"></TextBlock>
+                        <StackPanel Grid.Row="1">
+                            <TextBlock FontWeight="Medium"  Margin="0,10,0,0" FontSize="18" Text="Loại phòng"></TextBlock>
+                            <ComboBox                              
+                            FontSize="16"
+                            Name="CBLoaiPhong3"
+                            materialDesign:HintAssist.Hint="Chọn loại phòng">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding }"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBlock VerticalAlignment="Center" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold">Tên loại phòng</TextBlock>
+                            <TextBox VerticalAlignment="Center" materialDesign:HintAssist.Hint="Nhập tên loại phòng"  FontSize="18" ></TextBox>
+                            <TextBlock VerticalAlignment="Center" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold">Điều chỉnh giá</TextBlock>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="*"/>
+                                    <ColumnDefinition  Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="0,0,0,10">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Width="115" FontSize="18" FontWeight="SemiBold">Giá theo giờ </TextBlock>
+                                        <TextBox VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Width="115" FontSize="18" FontWeight="SemiBold">Giá theo ngày</TextBlock>
+                                        <TextBox VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel  Margin="20,10,0,10" Grid.Column="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Width="115" FontSize="18" FontWeight="SemiBold">Giá giờ sau</TextBlock>
+                                        <TextBox VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
+                                    </StackPanel>
+                                    <StackPanel  Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center" Width="115" FontSize="18" FontWeight="SemiBold">Giá qua đêm</TextBlock>
+                                        <TextBox VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock VerticalAlignment="Center" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold">Điều chỉnh CSVC</TextBlock>
+                            <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold">Danh sách CSVC</TextBlock>
+                            <WrapPanel ItemHeight="auto" ItemWidth="auto" x:Name="panelservice" HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="0" >
+                                <ItemsControl  Name="CSVCChips">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <materialDesign:Chip
+                                              Content="{Binding}"
+                                              IsDeletable="True"
+                                              DeleteClick="CSVCLoaiphong_DeleteClick"
+                                             />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </WrapPanel>
+                            <Separator Margin="20" Background="#22223B"/>
+                            <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="0" >
+                                <ItemsControl  Name="AllCSVCChips">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <materialDesign:Chip
+                                              Content="{Binding}"
+                                               Click="AllChipsServiceClick"
+                                             />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </WrapPanel>
+                        </StackPanel>
                         
-                                <StackPanel Margin="20,0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
-                            <materialDesign:PackIcon Foreground="#00bbf9" Height="30" Width="30" Margin="10,0" VerticalAlignment="Center"  Kind="Sort" />
+                        <Grid Margin="0,15,0,0" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  Style="{StaticResource secondButton}">
+                                <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                    Hủy
+                                </Button>
+                            </Border>
+                            <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                                <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                    Xác nhận
+                                </Button>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </materialDesign:DialogHost.DialogContent>
+        <Border CornerRadius="10" Background="#edf3ff">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Filter Buttons Start-->
+                <Border Margin="10" Background="White"     CornerRadius="10 ">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="10"  VerticalAlignment="Center" Orientation="Horizontal">
+
+                            <TextBlock HorizontalAlignment="Right" Margin="15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Tìm kiếm</TextBlock>
+                            <Border HorizontalAlignment="Right" Padding="5,0" CornerRadius="5" BorderThickness="2" BorderBrush="LightSkyBlue" Background="AliceBlue" Width="200" Height="36">
+                                <TextBox     FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập mã phòng" ></TextBox>
+                            </Border>
+
+                            <Button HorizontalAlignment="Right" Grid.Column="1"
+                                Background="Transparent"
+                                Foreground="#00bbf9"
+                                BorderThickness="0"
+                                FontSize="18"
+                            VerticalContentAlignment="Center" Click="themphong_click"
+                                >
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Height="24" Width="24" Kind="PlusBox" />
+                                        <TextBlock>Thêm phòng</TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button HorizontalAlignment="Right" Grid.Column="1"
+                                Background="Transparent"
+                                Foreground="#00bbf9"
+                                BorderThickness="0"
+                                FontSize="18"
+                            VerticalContentAlignment="Center" Click="themtepphong_click"
+                                >
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Height="24" Width="24" Kind="FilePlus" />
+                                        <TextBlock>Thêm tệp phòng</TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button HorizontalAlignment="Right" Grid.Column="1"
+                                Background="Transparent"
+                                Foreground="#00bbf9"
+                                BorderThickness="0"
+                                FontSize="18"
+                            VerticalContentAlignment="Center" Click="QLloaiphong_click"
+                                >
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Height="24" Width="24" Kind="PencilBox" />
+                                        <TextBlock>Quản lý loại phòng</TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button HorizontalAlignment="Right" Grid.Column="1"
+                                Background="Transparent"
+                                Foreground="#00bbf9"
+                                BorderThickness="0"
+                                FontSize="18"
+                            VerticalContentAlignment="Center"
+                                >
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Height="24" Width="24" Kind="TagPlus" />
+                                        <TextBlock>Quản lý CSVC</TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+
+                    </Grid>
+                </Border>
+
+                <!--Filter Buttons End-->
+                <!--DataGrid Start-->
+                <Border Margin="10,0,10,10" Background="White"  Grid.Row="1"    CornerRadius="10 ">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Margin="20,0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                                <materialDesign:PackIcon Foreground="#00bbf9" Height="30" Width="30" Margin="10,0" VerticalAlignment="Center"  Kind="Sort" />
                                 <ComboBox SelectionChanged="ComboBox_SelectionChanged"
                                     FontSize="18"
                                     Foreground="#00bbf9"
@@ -85,63 +440,64 @@
                                     Width="120"
                                           Name="sortCB"
                                         materialDesign:HintAssist.Hint="Sắp xếp">
-                                    
-                                     <ComboBoxItem >
+
+                                    <ComboBoxItem >
                                         Mã phòng
                                     </ComboBoxItem>
-                                <ComboBoxItem >
+                                    <ComboBoxItem >
                                         Loại phòng
                                     </ComboBoxItem>
-                                <ComboBoxItem >
+                                    <ComboBoxItem >
                                         Trạng thái
                                     </ComboBoxItem>
-                                
+
                                 </ComboBox>
-                        </StackPanel>
-                         
-                        <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
-                            <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelPlaylist" HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
-                                <ItemsControl Name="phongIC">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
-                                                <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
-                                                    <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
-                                                        <Border.Background>
-                                                            <LinearGradientBrush>
-                                                                <GradientStop Color="#0096C7" Offset="0"/>
-                                                                <GradientStop Color="#C0C9E8" Offset="1"/>
-                                                            </LinearGradientBrush>
-                                                        </Border.Background>
-                                                        <Border.Effect>
-                                                            <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#0096C7"/>
-                                                        </Border.Effect>
-                                                        <StackPanel Margin="15,10,0,0" Orientation="Vertical">
-                                                            <TextBlock Text="{Binding maphong }" FontSize="30" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
-                                                            <TextBlock Text="{Binding loaiphong}" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
-                                                            <TextBlock Text="{Binding trangthai}" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+                            </StackPanel>
 
-                                                        </StackPanel>
-                                                    </Border>
-                                                </Button>
+                            <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                                <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelPlaylist" HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                    <ItemsControl Name="phongIC">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                    <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
+                                                        <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                            <Border.Background>
+                                                                <LinearGradientBrush>
+                                                                    <GradientStop Color="#0096C7" Offset="0"/>
+                                                                    <GradientStop Color="#C0C9E8" Offset="1"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+                                                            <Border.Effect>
+                                                                <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#0096C7"/>
+                                                            </Border.Effect>
+                                                            <StackPanel Margin="15,10,0,0" Orientation="Vertical">
+                                                                <TextBlock Text="{Binding maphong }" FontSize="30" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+                                                                <TextBlock Text="{Binding loaiphong}" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+                                                                <TextBlock Text="{Binding trangthai}" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
+
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </Button>
 
 
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </WrapPanel>
-                        </ScrollViewer>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </WrapPanel>
+                            </ScrollViewer>
+                        </Grid>
+
                     </Grid>
-
-                </Grid>
-            </Border>
-            <!--DataGrid End-->
-        </Grid>
-    </Border>
+                </Border>
+                <!--DataGrid End-->
+            </Grid>
+        </Border>
+    </materialDesign:DialogHost>
 </Page>
