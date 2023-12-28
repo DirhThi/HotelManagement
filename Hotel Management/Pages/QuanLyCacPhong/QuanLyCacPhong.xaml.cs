@@ -20,7 +20,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         List<string> ListCSVC = new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" };
         List<string> ListCSVChientai = new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi" };
 
-        List<Phong> phongList = new List<Phong> {
+       /* List<Phong> phongList = new List<Phong> {
            new Phong() { maphong = "101", loaiphong = "Standard",trangthai = "Phòng trống"},
             new Phong() { maphong = "102", loaiphong = "Standard",trangthai = "Đang bảo trì"},
             new Phong() { maphong = "104", loaiphong = "Deluxe",trangthai = "Phòng trống"},
@@ -34,12 +34,12 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             new Phong() { maphong = "502", loaiphong = "Vip",trangthai = "Phòng trống"},
             new Phong() { maphong = "503", loaiphong = "Vip",trangthai = "Phòng trống"},
             new Phong() { maphong = "504", loaiphong = "Vip",trangthai = "Phòng trống"},
-        };
+        };*/
 
         public QuanLyCacPhong()
         {
             InitializeComponent();
-            phongIC.ItemsSource = phongList;
+           // phongIC.ItemsSource = phongList;
             CBLoaiPhong.ItemsSource = loaiPhongList;
             CBLoaiPhong2.ItemsSource = loaiPhongList;
             foreach (var item in loaiPhongList)
@@ -59,10 +59,10 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
 
         private void Phong_click(object sender, RoutedEventArgs e)
         {
-            Phong PhongDuocChon = (sender as Button).DataContext as Phong;
-            string maphong = PhongDuocChon.maphong;
-            string loaiphong = PhongDuocChon.loaiphong;
-            string trangthai = PhongDuocChon.trangthai;
+            Room PhongDuocChon = (sender as Button).DataContext as Room;
+            int maphong = PhongDuocChon.Id;
+            string loaiphong = PhongDuocChon.Type;
+            string trangthai = PhongDuocChon.Status;
             titleDialogPhong.Text = $"Chỉnh sửa phòng {maphong}";
             CBLoaiPhong.SelectedItem = loaiphong;
             CBtrangthai.SelectedItem = trangthai;
@@ -173,11 +173,11 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             if (openFileDialog.ShowDialog() == true)
             {
                 tbfilename.Text = Path.GetFileName(openFileDialog.FileName);
-                List<Phong> PhongMoi = new List<Phong>();
+                List<Room> PhongMoi = new List<Room>();
                 foreach (string line in File.ReadLines(openFileDialog.FileName))
                 {
                     string[] parts = line.Split('/');
-                    PhongMoi.Add(new Phong() {maphong=parts[0],loaiphong=parts[1]});
+                 //   PhongMoi.Add(new Room() {Id=System.Convert.ToInt32(parts[0]),Type=parts[1]});
                 }
                 phongmoiDG.ItemsSource = PhongMoi;
             }  
@@ -259,7 +259,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
-    }
+    
 
         private void EditRoomTypeClick(object sender, RoutedEventArgs e)
         {
