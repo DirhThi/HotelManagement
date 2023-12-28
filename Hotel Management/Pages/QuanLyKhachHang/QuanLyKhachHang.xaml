@@ -95,7 +95,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontSize="18" FontWeight="SemiBold" Margin="10,0">Số lượng : 10</TextBlock>
                             </StackPanel>
-                            <TextBlock Margin="10,0" FontSize="14" FontWeight="Normal"  Foreground="Gray"    FontStyle="Italic" Grid.Column="1" HorizontalAlignment="Right">Giữ ctrl để chọn nhiều khách hàng</TextBlock>
+                            <TextBlock Margin="10,0" FontSize="14" FontWeight="Normal"  Foreground="Gray"    FontStyle="Italic" Grid.Column="1" HorizontalAlignment="Right">Giữ ctrl để chọn nhiều hóa đơn</TextBlock>
                         </Grid>
                     </Border>
                 </Grid>
