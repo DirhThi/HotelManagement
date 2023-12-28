@@ -80,7 +80,7 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding stt}"/>
-                            <DataGridTextColumn Width="*"  Header="Tên khách hàng" Binding="{Binding TenNV }" IsReadOnly="True"/>
+                            <DataGridTextColumn Width="*"  Header="Tên nhân sự" Binding="{Binding TenNV }" IsReadOnly="True"/>
                             <DataGridTextColumn MinWidth="150"  Header="Số điện thoại" Binding="{Binding Sodienthoai }" IsReadOnly="True" Width="*"/>
                             <DataGridTextColumn MinWidth="150"  Header="Số căn cước công dân" Binding="{Binding CCCD }" IsReadOnly="True" Width="*"/>
                             <DataGridTextColumn MinWidth="100"   Header="Ngày sinh" Binding="{Binding Ngaysinh}" IsReadOnly="True" />

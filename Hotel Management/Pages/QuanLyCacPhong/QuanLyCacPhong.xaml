@@ -254,15 +254,30 @@
                             <ComboBox                              
                             FontSize="16"
                             Name="CBLoaiPhong3"
-                            materialDesign:HintAssist.Hint="Chọn loại phòng">
+                            materialDesign:HintAssist.Hint="Chọn loại phòng"
+                                >
+                                
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding }"></TextBlock>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <TextBlock VerticalAlignment="Center" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold">Tên loại phòng</TextBlock>
-                            <TextBox VerticalAlignment="Center" materialDesign:HintAssist.Hint="Nhập tên loại phòng"  FontSize="18" ></TextBox>
+                            <StackPanel >
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=CBLoaiPhong3, Path=SelectedIndex}" Value="0">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <TextBlock VerticalAlignment="Center" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold">Tên loại phòng</TextBlock>
+                                <TextBox VerticalAlignment="Center" materialDesign:HintAssist.Hint="Nhập tên loại phòng"  FontSize="18" ></TextBox>
+
+                            </StackPanel>
                             <TextBlock VerticalAlignment="Center" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold">Điều chỉnh giá</TextBlock>
                             <Grid >
                                 <Grid.ColumnDefinitions>
