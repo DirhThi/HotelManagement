@@ -297,6 +297,12 @@
     <Content Include="mongocrypt.dll" />
     <Resource Include="Assets\Images\DemoListPhong.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="mongocrypt.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
