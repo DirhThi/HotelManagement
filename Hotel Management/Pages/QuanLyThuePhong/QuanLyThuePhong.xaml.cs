@@ -223,7 +223,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 roomNumber = room["roomName"].AsString;
                 roomType = room["roomType"].AsString;
                 LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                phongtrongList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture });
+                phongtrongList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, /*ListCsvc = roomFurniture,*/ });
             }
 
         }
@@ -265,7 +265,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                         break;
                     }
                 }
-                phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
+                phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, /*ListCsvc = roomFurniture,*/ tenkhachhang = customerName, sodienthoai = customerPhone });
             }
 
         }
@@ -307,7 +307,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                         break;
                     }
                 }
-                phongdatList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
+                phongdatList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, /*ListCsvc = roomFurniture,*/ tenkhachhang = customerName, sodienthoai = customerPhone });
             }
 
         }
@@ -327,7 +327,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 roomType = room["roomType"].AsString;
                 roomState = room["roomState"].AsString;
                 LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                phongbaotriList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = roomState });
+                phongbaotriList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, /*ListCsvc = roomFurniture,*/ tenkhachhang = roomState });
             }
 
         }
