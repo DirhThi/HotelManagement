@@ -182,6 +182,8 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                 if(result == MessageBoxResult.Yes)
                 {
                     List<Bill> items = DGHoadon.SelectedItems.Cast<Bill>().ToList();
+                    
+                    //comment đến.....
                     foreach (Bill item in items)
                     {
                         receiptList.Remove(item);
@@ -193,9 +195,29 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                     {
                         tongTienNgay += receiptList[i].Total;
                     }
+                    //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
+
+
+                    /* Xóa dữ liệu trong db
+                    XoaHoaDon(collectionReceipt, items);
+                    LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
+                    */
+
+
+                    DGHoadon.ItemsSource = receiptList;
+                    textSoLuong.Text = "Số lượng: " + receiptList.Count.ToString();
                     textTongTien.Text = "Tổng tiền: " + tongTienNgay.ToString();
                     DGHoadon.Items.Refresh();
+
                 }
+            }
+        }
+
+        public void XoaHoaDon(IMongoCollection<BsonDocument> collectionReceipt, List<Bill> items)
+        {
+            foreach(Bill item in items)
+            {
+                collectionReceipt.DeleteOne(x => x["idCode"] == item.ID);
             }
         }
     }
