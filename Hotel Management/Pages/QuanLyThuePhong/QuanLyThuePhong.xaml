@@ -67,6 +67,8 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                Name="ConfirmButton"
+                                Click="ConfirmButton_Click"
                                 >
                                 Xác nhận
                             </Button>

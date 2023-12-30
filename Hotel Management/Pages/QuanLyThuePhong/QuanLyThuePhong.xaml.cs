@@ -1,20 +1,10 @@
-using System;
+using Hotel_Management.MongoDatabase;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using MongoDB.Driver;
-using MongoDB.Bson;
 
 
 namespace Hotel_Management.Pages.QuanLyThuePhong
@@ -115,18 +105,18 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             string trangthai = "phongthue";
             string loaithue = "";
 
-            quanlythuephong.NavigationService.Navigate(new ChiTietPhong(maphong,loaiphong,trangthai, loaithue));
+            quanlythuephong.NavigationService.Navigate(new ChiTietPhong(maphong, loaiphong, trangthai, loaithue));
         }
 
         private void Phongbaotri_click(object sender, RoutedEventArgs e)
         {
-
+            ConfirmButton.Tag = ((Phong)((sender as Button).DataContext)).maphong;
             Dialog.IsOpen = true;
         }
 
         private void sortphongtrong_click(object sender, RoutedEventArgs e)
         {
-            if(sortphongtrongtb.Text=="Mã phòng")
+            if (sortphongtrongtb.Text == "Mã phòng")
             {
                 sortphongtrongtb.Text = "Loại phòng";
                 phongtrongList.Sort((left, right) => left.loaiphong.CompareTo(right.loaiphong));
@@ -248,14 +238,14 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 roomNumber = room["roomName"].AsString;
                 roomType = room["roomType"].AsString;
                 LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                foreach(BsonDocument receipt in documentsReceipt)
+                foreach (BsonDocument receipt in documentsReceipt)
                 {
-                    if(roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
+                    if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
                     {
                         customerId = receipt["customerId"].AsObjectId;
-                        foreach(BsonDocument customer in documentsCustomer)
+                        foreach (BsonDocument customer in documentsCustomer)
                         {
-                            if(customerId == customer["_id"].AsObjectId)
+                            if (customerId == customer["_id"].AsObjectId)
                             {
                                 customerName = customer["customerName"].AsString;
                                 customerPhone = customer["phoneNumber"].AsString;
@@ -331,6 +321,37 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             }
 
         }
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            string maphong = (string)(sender as Button).Tag;
+
+            IMongoCollection<BsonDocument> collection = MongoHandler.GetInstance().GetCollection("Room");
+            var filter = Builders<BsonDocument>.Filter.Eq(r => r["_id"], maphong);
+            string currentStatus = (collection.Find(filter).FirstOrDefault())["Status"].ToString();
+            string newStatus;
+            if (radiobtnsansang.IsChecked == true)
+            {
+                newStatus = "Available";
+            }
+            else if (radiobtndondep.IsChecked == true)
+            {
+                newStatus = "Cleaning";
+            }
+            else
+            {
+                newStatus = "Under maintenance";
+            }
+
+            if (currentStatus != newStatus)
+            {
+                var update = Builders<BsonDocument>.Update.Set(r => r["Status"], newStatus);
+                collection.UpdateOne(filter, update);
+
+                // cập nhập list phòng 
+
+            }
+
+        }
     }
 
     public class Phong
@@ -339,7 +360,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
         public string loaiphong { get; set; }
         public string tenkhachhang { get; set; }
         public string sodienthoai { get; set; }
-
+        public List<string> ListCsvc { get; set; }
 
     }
 
