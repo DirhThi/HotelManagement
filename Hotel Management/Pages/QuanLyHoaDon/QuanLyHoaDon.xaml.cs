@@ -78,7 +78,7 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             string customerName;
             ObjectId userId;
             string userName;
-            var filterReceiptByDate = Builders<BsonDocument>.Filter.Where(x => x["receiptState"] == "Đã thanh toán") & Builders<BsonDocument>.Filter.Gte("createDate", today) & Builders<BsonDocument>.Filter.Lt("createDate", tomorrow);
+            var filterReceiptByDate = Builders<BsonDocument>.Filter.Where(x => x["receiptState"] == "Đã thanh toán") & Builders<BsonDocument>.Filter.Gte("checkOut", today) & Builders<BsonDocument>.Filter.Lt("checkOut", tomorrow);
             List<BsonDocument> documentsReceipt = collectionReceipt.Find(filterReceiptByDate).ToList();
             receiptList.Clear();
             foreach(BsonDocument receipt in documentsReceipt)
