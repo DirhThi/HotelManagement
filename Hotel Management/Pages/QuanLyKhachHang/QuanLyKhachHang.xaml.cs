@@ -43,9 +43,10 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
         public QuanLyKhachHang()
         {
             InitializeComponent();
-            textSoLuong.Text = "Số lượng: " + customerList.Count.ToString();
+            
             LayKhachHang(collectionCustomer);
             DGKhachhang.ItemsSource = customerList;
+            textSoLuong.Text = "Số lượng: " + customerList.Count.ToString();
             //SyncData();
             //StaticEventHandler.OnCustomerUpdated += UpdateData;
             autoorder();
