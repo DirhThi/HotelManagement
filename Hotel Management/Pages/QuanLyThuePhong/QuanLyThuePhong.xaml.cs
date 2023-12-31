@@ -1,6 +1,7 @@
 using Hotel_Management.MongoDatabase;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -110,7 +111,22 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
 
         private void Phongbaotri_click(object sender, RoutedEventArgs e)
         {
-            ConfirmButton.Tag = ((Phong)((sender as Button).DataContext)).maphong;
+            ConfirmStateButton.Tag = ((Phong)((sender as Button).DataContext)).maphong;
+
+             var filter = Builders<BsonDocument>.Filter.Eq("roomName", ((Phong)((sender as Button).DataContext)).maphong);
+            BsonDocument room= MongoHandler.GetInstance().GetCollection("Room").Find(filter).FirstOrDefault();
+            if(room!=null)
+            {
+                if (room["roomState"] == "Đang dọn dẹp")
+                {
+                    radiobtndondep.IsChecked = true;
+                }    
+                else if (room["roomState"] == "Đang bảo trì")
+                {
+                    radiobtnbaotri.IsChecked = true;
+                }    
+            }    
+
             Dialog.IsOpen = true;
         }
 
@@ -308,7 +324,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             string roomType;
             string roomState;
             List<string> roomFurniture = new List<string>();
-            var filterEmptyRoom = Builders<BsonDocument>.Filter.Where(x => x["roomState"] == "Bảo trì" || x["roomState"] == "Dọn dẹp");
+            var filterEmptyRoom = Builders<BsonDocument>.Filter.Where(x => x["roomState"] == "Đang bảo trì" || x["roomState"] == "Đang dọn dẹp");
             List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
             List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
             foreach (BsonDocument room in documentsEmptyRoom)
@@ -321,31 +337,31 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             }
 
         }
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private void XacNhanSuaTrangThai_Click(object sender, RoutedEventArgs e)
         {
             string maphong = (string)(sender as Button).Tag;
 
-            IMongoCollection<BsonDocument> collection = MongoHandler.GetInstance().GetCollection("Room");
-            var filter = Builders<BsonDocument>.Filter.Eq(r => r["_id"], maphong);
-            string currentStatus = (collection.Find(filter).FirstOrDefault())["Status"].ToString();
+            IMongoCollection<BsonDocument> roomCollection = MongoHandler.GetInstance().GetCollection("Room");
+            var filter = Builders<BsonDocument>.Filter.Eq(r => r["roomName"], maphong);
+            string currentStatus = (roomCollection.Find(filter).FirstOrDefault())["roomState"].AsString;
             string newStatus;
             if (radiobtnsansang.IsChecked == true)
             {
-                newStatus = "Available";
+                newStatus = "Trống";
             }
             else if (radiobtndondep.IsChecked == true)
             {
-                newStatus = "Cleaning";
+                newStatus = "Đang dọn dẹp";
             }
             else
             {
-                newStatus = "Under maintenance";
+                newStatus = "Đang bảo trì";
             }
 
             if (currentStatus != newStatus)
             {
-                var update = Builders<BsonDocument>.Update.Set(r => r["Status"], newStatus);
-                collection.UpdateOne(filter, update);
+                var update = Builders<BsonDocument>.Update.Set(r => r["roomState"], newStatus);
+                roomCollection.UpdateOne(filter, update);
 
                 // cập nhập list phòng 
 
