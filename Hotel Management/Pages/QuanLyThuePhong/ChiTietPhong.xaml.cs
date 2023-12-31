@@ -16,6 +16,9 @@ using System.ComponentModel;
 using Hotel_Management.MongoDatabase;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using Amazon.Runtime.SharedInterfaces;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Hotel_Management.Pages.QuanLyThuePhong
 {
@@ -42,9 +45,9 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
         };
         int totalServiceUsedPrice = 0;
         int totalRoomPrice = 100000;
-         int totalBill;
+        int totalBill;
 
-       
+
         public ChiTietPhong(string maphong, string loaiphong, string trangthai,string loaithue)
         {
             InitializeComponent();
@@ -59,20 +62,241 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             serviceusedDG.ItemsSource = serviceUsedList;
             maphongtb.Text = maphong;
             loaiphongtb.Text = loaiphong;
-            if(trangthai=="phongtrong")
+            ValidateRoomInfomation();
+        }
+        public void ValidateRoomInfomation()
+        {
+            if (handler != null)
             {
-                phongtrongoption.Visibility = Visibility.Visible;
-            }
-            if (trangthai == "phongthue")
-            {
-                phongthueoption.Visibility = Visibility.Visible;
-            }
-            if (trangthai == "phongdat")
-            {
-                phongdatoption.Visibility = Visibility.Visible;
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("Room");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument room in documents)
+                {
+                    string roomNumber = room["roomName"].AsString;
+                    if (roomNumber==maphongtb.Text)
+                    {
+                        if (room["roomState"]=="Đang thuê" || room["roomState"]=="Đã đặt")
+                        {
+                            UserInfo.IsEnabled = false;
+                            roomInfo.IsEnabled = false;
+                            UpdateFunctionButton(room["roomState"].AsString);
+                            BsonDocument receipt = GetCurrentReceipt(room["receiptId"].AsObjectId);
+                            GetCurrentGuestInfo(receipt["customerId"].AsObjectId);
+                            GetRoomInfo(room["receiptId"].AsObjectId);
+                            GetCurrentServiceInfo(receipt["serviceId"].AsBsonArray);
+
+                        }
+                    }
+                }
             }
         }
-      
+
+
+        public BsonDocument GetCurrentReceipt(ObjectId ObjectID)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("Receipt");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument document in documents)
+                {
+                    ObjectId receipt = document["_id"].AsObjectId;
+                    if (receipt == ObjectID)
+                    {        
+                        
+                        return document;
+                    }
+                }
+            }
+            return null;
+        }
+        public BsonDocument GetService(ObjectId objectId)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("Service");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument document in documents)
+                {
+                    ObjectId receipt = document["_id"].AsObjectId;
+                    if (receipt == objectId)
+                    {
+                        return document;
+                    }
+                }
+            }
+            return null;
+        }
+        public void GetRoomInfo(ObjectId ObjectID)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("Receipt");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument document in documents)
+                {
+                    ObjectId receipt = document["_id"].AsObjectId;
+                    if (receipt == ObjectID)
+                    {
+                        CreatedDate.Text = document["createDate"].AsDateTime.ToString();
+                        RoomName.Text = maphongtb.Text + " - " + loaiphongtb.Text;
+                        BsonDocument user = GetUser(document["userId"].AsBsonArray[0].AsObjectId);
+                        if (user != null)
+                        {
+                            Receiptionist.Text = user["userName"].AsString;
+                        }
+                        CustomerNameOnReceipt.Text = CustomerName.Text;
+                        ServiceType.Text = document["receiptType"].AsString;
+                        DateReceived.Text = document["checkIn"].AsDateTime.ToString();
+                        DateReturned.Text = document["checkOut"].AsDateTime.ToString();
+                        if (document["receiptType"].AsString == "Theo ngày")
+                        {
+                            ButtonNgayCheck();
+                            DatePicker1.SelectedDate = document["checkIn"].AsDateTime;
+                            DatePicker2.SelectedDate = document["checkOut"].AsDateTime;
+                        }
+                        else
+
+                            if (document["receiptType"].AsString == "Theo giờ")
+                        {
+                            ButtonGioCheck();
+                            FutureDatePicker.SelectedDate = document["checkIn"].AsDateTime;
+                            PresetTimePicker.SelectedTime = document["checkIn"].AsDateTime;
+                            TimeSpan TotalUse = document["checkOut"].AsDateTime.Subtract(document["checkIn"].AsDateTime);
+                            giosudung.Text = TotalUse.TotalHours.ToString();
+                        }
+                        else
+                        if (document["receiptType"].AsString == "Qua đêm")
+                        {
+                            ButtonDemCheck();
+                            DatePicker3.SelectedDate = document["checkIn"].AsDateTime;
+                        }
+                        totalRoomPrice = document["roomCost"].AsInt32;
+                        RoomCost.Text = document["roomCost"].AsInt32.ToString();
+                    }
+                }
+            }
+        }
+
+        public void ButtonNgayCheck()
+        {
+            radiobtnngay.IsChecked = true;
+            bordergio.Visibility = Visibility.Hidden;
+            borderngay.Visibility = Visibility.Visible;
+            borderdem.Visibility = Visibility.Hidden;
+
+        }
+        public void ButtonGioCheck()
+        {
+            radiobtngio.IsChecked = true;
+            bordergio.Visibility = Visibility.Visible;
+            borderngay.Visibility = Visibility.Hidden;
+            borderdem.Visibility = Visibility.Hidden;
+
+        }
+        public void ButtonDemCheck()
+        {
+            radiobtndem.IsChecked = true;
+            bordergio.Visibility = Visibility.Hidden;
+            borderngay.Visibility = Visibility.Hidden;
+            borderdem.Visibility = Visibility.Visible;
+
+        }
+
+        public BsonDocument GetUser(ObjectId UserId)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("User");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument document in documents)
+                {
+                    ObjectId user = document["_id"].AsObjectId;
+                    if (user == UserId)
+                    {
+                        return document;
+                    }
+                }
+            }
+            return null;
+        }
+        public void GetCurrentGuestInfo(ObjectId ObjectID)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("Customer");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonDocument document in documents)
+                {
+                    ObjectId id = document["_id"].AsObjectId;
+                    if (id == ObjectID)
+                    {
+                        CustomerName.Text = document["customerName"].AsString;
+                        CustomerBirth.Text = document["dateOfBirth"].AsString;
+                        CustomerPhoneNumber.Text = document["phoneNumber"].AsString;
+                        CustomerEmail.Text = document["email"].AsString;
+                        CustomerIdNumber.Text = document["idNumber"].AsString;
+                    }
+                }
+            }
+        }
+
+        public void GetCurrentServiceInfo(BsonArray serviceList)
+        {
+            if (handler != null)
+            {
+                IMongoCollection<BsonDocument> collection = handler.GetCollection("ServiceUsed");
+                List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
+                foreach (BsonValue service in serviceList)
+                {
+                    foreach (BsonDocument document in documents)
+                    {
+                        if (service.AsObjectId == document["_id"].AsObjectId)
+                        {
+                            BsonDocument Service = GetService(document["serviceId"].AsObjectId);
+                            UpdateService(Service["serviceName"].AsString, document["serviceQuantity"].AsInt32);
+                        }
+                    }
+                }
+            }
+        }
+        public void UpdateFunctionButton(string roomState)
+        {
+            switch (roomState)
+            {
+                case "Đang dọn dẹp":
+                case "Trống":
+                    phongtrongoption.Visibility = Visibility.Visible;
+                    phongdatoption.Visibility = Visibility.Hidden;
+                    phongthueoption.Visibility = Visibility.Hidden;
+                    break;
+                case "Đang thuê":
+                    phongtrongoption.Visibility = Visibility.Hidden;
+                    phongdatoption.Visibility = Visibility.Hidden;
+                    phongthueoption.Visibility = Visibility.Visible;
+                    break;
+                case "Đã đặt":
+                    phongtrongoption.Visibility = Visibility.Hidden;
+                    phongdatoption.Visibility = Visibility.Visible;
+                    phongthueoption.Visibility = Visibility.Hidden;
+                    break;
+                
+
+            }
+        }
+
+        public void UpdateService(string serviceName, int quantity)
+        {
+            foreach (service service in  ServiceList)
+            {
+                if(service.name==serviceName)
+                {
+                    service.quantity = quantity;
+                }
+            }
+            updateServiceUsed();
+        }
+
         private void Backbtn_Click(object sender, RoutedEventArgs e)
         {
             chitietphong.NavigationService.GoBack();
@@ -222,7 +446,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             }
         }
 
-        private void ButtonConfirmClick(object sender, RoutedEventArgs e)
+        private void AddCustomer()
         {
             if (handler != null)
             {

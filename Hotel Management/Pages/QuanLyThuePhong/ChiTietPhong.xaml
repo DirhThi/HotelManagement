@@ -41,7 +41,7 @@
                     <ColumnDefinition  Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <Border Padding="20,0" CornerRadius="10" Margin="20,0" Background="White">
-                    <StackPanel>
+                    <StackPanel x:Name="UserInfo" IsEnabled="True">
                         <TextBlock FontWeight="Medium" Margin="0,10" FontSize="20" Text="Thông tin khách hàng"></TextBlock>
 
                         <StackPanel Margin="0,0,0,15">
@@ -73,7 +73,7 @@
                 </Border>
                 <Border Grid.Column="1" Padding="15,0,15,15" CornerRadius="10" Margin="0,0" Background="White">
                     
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" x:Name="roomInfo">
                         <Grid.ColumnDefinitions>
                             
                             <ColumnDefinition Width="4*"/>
@@ -336,14 +336,14 @@
                                             <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Tiền phòng : "></TextBlock>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1">
-                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="{Binding Source={x:Static system:DateTime.Now}}"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="105 - Standard"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="NV1"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Nguyễn Đình Thi"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Theo giờ"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
-                                            <TextBlock HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="100.000 đ"></TextBlock>
+                                            <TextBlock x:Name="CreatedDate" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="{Binding Source={x:Static system:DateTime.Now}}"></TextBlock>
+                                            <TextBlock x:Name="RoomName" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="105 - Standard"></TextBlock>
+                                            <TextBlock x:Name="Receiptionist" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="NV1"></TextBlock>
+                                            <TextBlock x:Name="CustomerNameOnReceipt" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Nguyễn Đình Thi"></TextBlock>
+                                            <TextBlock x:Name="ServiceType" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Theo giờ"></TextBlock>
+                                            <TextBlock x:Name="DateReceived" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
+                                            <TextBlock x:Name="DateReturned" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
+                                            <TextBlock x:Name="RoomCost" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="100.000 đ"></TextBlock>
 
                                         </StackPanel>
                                     </Grid>
@@ -392,13 +392,13 @@
                 
                 <Border Grid.Row="1" Padding="5" CornerRadius="10" Margin="20,20" Background="White">
                     <Grid>
-                        <Grid Visibility="Hidden" x:Name="phongtrongoption">
+                        <Grid Visibility="Visible" x:Name="phongtrongoption">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border  Style="{StaticResource secondButton}">
-                                <Button
+                                <Button x:Name="datphongbtn"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
@@ -408,7 +408,7 @@
                                 </Button>
                             </Border>
                             <Border Grid.Column="1"  Style="{StaticResource mainButton}">
-                                <Button
+                                <Button x:Name="nhanphongbtn"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
@@ -424,7 +424,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border  Style="{StaticResource secondButton}">
-                                <Button
+                                <Button x:Name="huyphongbtn"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
@@ -454,7 +454,7 @@
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
-                                FontSize="18" Click="ButtonConfirmClick"
+                                FontSize="18"
                                 >
                                     Xác nhận
                                 </Button>
