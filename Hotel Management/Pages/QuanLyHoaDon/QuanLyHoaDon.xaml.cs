@@ -148,7 +148,7 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                 LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
                 DGHoadon.ItemsSource = receiptListDisplay;
                 textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();
-                textTongTien.Text = "Tổng tiền: " + receiptListDisplay.ToString();
+                textTongTien.Text = "Tổng tiền: " + tongTienNgay.ToString();
                 DGHoadon.Items.Refresh();
                 dateTimeChange = FutureDatePicker.SelectedDate.Value;
             }
