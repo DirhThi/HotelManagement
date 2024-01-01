@@ -28,35 +28,23 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
         IMongoCollection<BsonDocument> collectionEmployee = database.GetCollection<BsonDocument>("User");
         List<NhanVien> employeeList = new List<NhanVien>();/* {
              new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-             new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-             new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-            new Khachhang() { TenNV="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com", Role = "Nhân Viên"},
-
-
             };*/
+        List<NhanVien> employeeListDisplay = new List<NhanVien>();
         public QuanLyNhanSu()
         {
             InitializeComponent();
             LayNhanVien(collectionEmployee);
-            textSoLuong.Text = "Số lượng: " + employeeList.Count.ToString();
-            DGNhanVien.ItemsSource = employeeList;
+            textSoLuong.Text = "Số lượng: " + employeeListDisplay.Count.ToString();
+            DGNhanVien.ItemsSource = employeeListDisplay;
             autoorder();
         }
 
         private void autoorder()
         {
             int t = 1;
-            for (int i = 0; i < employeeList.Count; i++)
+            for (int i = 0; i < employeeListDisplay.Count; i++)
             {
-                employeeList[i].stt = t;
+                employeeListDisplay[i].stt = t;
                 t++;
             }
         }
@@ -71,6 +59,8 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
             string employeeRole;
             List<BsonDocument> documentsEmployee = collectionEmployee.Find(new BsonDocument()).ToList();
             employeeList.Clear();
+            employeeListDisplay.Clear();
+
             foreach (BsonDocument employee in documentsEmployee)
             {
                 employeeName = employee["userName"].AsString;
@@ -80,6 +70,8 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                 employeeEmail = employee["email"].AsString;
                 employeeRole = employee["userRole"].AsString;
                 employeeList.Add(new NhanVien() { TenNV = employeeName, Sodienthoai = employeePhone, CCCD = employeeId, Ngaysinh = employeeDoB, Email = employeeEmail, Role = employeeRole });
+                employeeListDisplay.Add(new NhanVien() { TenNV = employeeName, Sodienthoai = employeePhone, CCCD = employeeId, Ngaysinh = employeeDoB, Email = employeeEmail, Role = employeeRole });
+
             }
 
         }
@@ -111,8 +103,10 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                     foreach (NhanVien item in items)
                     {
                         employeeList.Remove(item);
+                        employeeListDisplay.Remove(item);
+
                     }
-                    DGNhanVien.ItemsSource = employeeList;
+                    DGNhanVien.ItemsSource = employeeListDisplay;
                     //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
 
 
@@ -121,8 +115,8 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                     LayNhanVien(collectionEmployee);
                     */
 
-                    textSoLuong.Text = "Số lượng: " + employeeList.Count.ToString();
-                    DGNhanVien.ItemsSource = employeeList;
+                    textSoLuong.Text = "Số lượng: " + employeeListDisplay.Count.ToString();
+                    DGNhanVien.ItemsSource = employeeListDisplay;
                     autoorder();
                     DGNhanVien.Items.Refresh();
                 }
@@ -149,7 +143,8 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
 
                 //comment đến.....
                 employeeList.Remove(item);
-                DGNhanVien.ItemsSource = employeeList;
+                employeeListDisplay.Remove(item);
+                DGNhanVien.ItemsSource = employeeListDisplay;
                 //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
 
                 /* Xóa dữ liệu trong db
@@ -157,12 +152,28 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                 LayNhanVien(collectionEmployee);
                 */
 
-                textSoLuong.Text = "Số lượng: " + employeeList.Count.ToString();
-                DGNhanVien.ItemsSource = employeeList;
+                textSoLuong.Text = "Số lượng: " + employeeListDisplay.Count.ToString();
+                DGNhanVien.ItemsSource = employeeListDisplay;
                 autoorder();
                 DGNhanVien.Items.Refresh();
 
             }
+        }
+
+        private void searchbox_textchanged(object sender, TextChangedEventArgs e)
+        {
+            employeeListDisplay.Clear();
+            int count = employeeList.Count();
+            string text = searchbox.Text;
+            foreach (NhanVien P in employeeList)
+            {
+                if (P.TenNV.Contains(text))
+                {
+                    employeeListDisplay.Add(P);
+                }
+            }
+            autoorder();
+            DGNhanVien.Items.Refresh();
         }
     }
 }

@@ -28,25 +28,15 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
         IMongoCollection<BsonDocument> collectionCustomer = handler.GetCollection("Customer");
         List<Khachhang> customerList = new List<Khachhang>(); /*{
             new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
-            new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
         };*/
+        List<Khachhang> customerListDisplay = new List<Khachhang>();
         public QuanLyKhachHang()
         {
             InitializeComponent();
             
             LayKhachHang(collectionCustomer);
-            DGKhachhang.ItemsSource = customerList;
-            textSoLuong.Text = "Số lượng: " + customerList.Count.ToString();
+            DGKhachhang.ItemsSource = customerListDisplay;
+            textSoLuong.Text = "Số lượng: " + customerListDisplay.Count.ToString();
             //SyncData();
             //StaticEventHandler.OnCustomerUpdated += UpdateData;
             autoorder();
@@ -73,6 +63,14 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                         Ngaysinh = customer["dateOfBirth"].AsString,
                         Email = customer["email"].AsString,
                     });
+                    customerListDisplay.Add(new Khachhang()
+                    {
+                        TenKH = customer["customerName"].AsString,
+                        Sodienthoai = customer["phoneNumber"].AsString,
+                        CCCD = customer["idNumber"].AsString,
+                        Ngaysinh = customer["dateOfBirth"].AsString,
+                        Email = customer["email"].AsString,
+                    });
                 }
             }
         }
@@ -80,9 +78,9 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
         private void autoorder()
         {
             int t = 1;
-            for (int i = 0; i < customerList.Count; i++)
+            for (int i = 0; i < customerListDisplay.Count; i++)
             {
-                customerList[i].stt = t;
+                customerListDisplay[i].stt = t;
                 t++;
             }
         }
@@ -105,6 +103,8 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                 customerEmail = customer["email"].AsString;
 
                 customerList.Add(new Khachhang() { TenKH = customerName, Sodienthoai = customerPhone, CCCD = customerId, Ngaysinh = customerDoB, Email = customerEmail });
+                customerListDisplay.Add(new Khachhang() { TenKH = customerName, Sodienthoai = customerPhone, CCCD = customerId, Ngaysinh = customerDoB, Email = customerEmail });
+
             }
 
         }
@@ -134,8 +134,10 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                     foreach (Khachhang item in items)
                     {
                         customerList.Remove(item);
+                        customerListDisplay.Remove(item);
+
                     }
-                    DGKhachhang.ItemsSource = customerList;
+                    DGKhachhang.ItemsSource = customerListDisplay;
                     //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
                     
 
@@ -144,8 +146,8 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                     LayKhachHang(collectionCustomer);
                     */
 
-                    textSoLuong.Text = "Số lượng: " + customerList.Count.ToString();
-                    DGKhachhang.ItemsSource = customerList;
+                    textSoLuong.Text = "Số lượng: " + customerListDisplay.Count.ToString();
+                    DGKhachhang.ItemsSource = customerListDisplay;
                     autoorder();
                     DGKhachhang.Items.Refresh();
 
@@ -172,7 +174,8 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
 
                 //comment đến.....
                 customerList.Remove(item);
-                DGKhachhang.ItemsSource = customerList;
+                customerListDisplay.Remove(item);
+                DGKhachhang.ItemsSource = customerListDisplay;
                 //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
 
                 /* Xóa dữ liệu trong db
@@ -180,12 +183,28 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                 LayKhachHang(collectionCustomer);
                 */
 
-                textSoLuong.Text = "Số lượng: " + customerList.Count.ToString();
-                DGKhachhang.ItemsSource = customerList;
+                textSoLuong.Text = "Số lượng: " + customerListDisplay.Count.ToString();
+                DGKhachhang.ItemsSource = customerListDisplay;
                 autoorder();
                 DGKhachhang.Items.Refresh();
 
             }
+        }
+
+        private void searchbox_textchanged(object sender, TextChangedEventArgs e)
+        {
+            customerListDisplay.Clear();
+            int count = customerList.Count();
+            string text = searchbox.Text;
+            foreach (Khachhang P in customerList)
+            {
+                if (P.TenKH.Contains(text))
+                {
+                    customerListDisplay.Add(P);
+                }
+            }
+            autoorder();
+            DGKhachhang.Items.Refresh();
         }
     }
 }

@@ -24,6 +24,8 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         List<string> loaiPhongList = new List<string>();
         List<string> ListCSVC = new List<string>();
         List<Phong> phongList = new List<Phong>();
+        List<Phong> phongListDisplay = new List<Phong>();
+
         List<string> ListCSVChientai = new List<string>();
 
         /*
@@ -54,7 +56,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             GetListPhong();
             GetLoaiPhongList();
             GetListCSVC();
-            phongIC.ItemsSource = phongList;
+            phongIC.ItemsSource = phongListDisplay;
             CBLoaiPhong.ItemsSource = loaiPhongList;
             CBLoaiPhong2.ItemsSource = loaiPhongList;
             foreach (var item in loaiPhongList)
@@ -260,6 +262,8 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 string loaiphong = room["roomType"].AsString;
                 string trangthai = room["roomState"].AsString;
                 phongList.Add(new Phong { maphong = maphong, loaiphong = loaiphong, trangthai = trangthai });
+                phongListDisplay.Add(new Phong { maphong = maphong, loaiphong = loaiphong, trangthai = trangthai });
+
             }
             phongIC.Items.Refresh();
         }
@@ -474,6 +478,23 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 roomCollection.InsertOne(new BsonDocument { {"roomName",phong.maphong },{"roomType",phong.loaiphong },{ "roomState","Trống"} });
             }
             GetListPhong();
+        }
+
+
+        private void Searchbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            phongListDisplay.Clear();
+            int count = phongList.Count();
+            string text = serchbox.Text;
+            foreach(Phong P in phongList)
+            {
+                if(P.maphong.StartsWith(text))
+                {
+                    phongListDisplay.Add(P);
+                }    
+            }    
+            phongIC.Items.Refresh();
+
         }
     }
     public class Phong
