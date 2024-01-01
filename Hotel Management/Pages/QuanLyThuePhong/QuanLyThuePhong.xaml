@@ -358,7 +358,7 @@
                                                                                     <TextBlock Margin="0,-2" HorizontalAlignment="Right" FontWeight="Normal" FontSize="12"  Text="{Binding }"  />
                                                                                 </DataTemplate>
                                                                             </ListBox.ItemTemplate>
-                                                                        </ListBox>s
+                                                                        </ListBox>
                                                                     </StackPanel>
                                                                 </Border>
                                                         </Button>

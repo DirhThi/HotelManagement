@@ -337,6 +337,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             }
 
         }
+
         private void XacNhanSuaTrangThai_Click(object sender, RoutedEventArgs e)
         {
             string maphong = (string)(sender as Button).Tag;
