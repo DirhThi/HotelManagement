@@ -103,7 +103,7 @@
 
                                 </Button>
                                 <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
-                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelPlaylist" HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelPlaylist" HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
                                         <ItemsControl Name="phongtrongIC">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -112,9 +112,9 @@
                                             </ItemsControl.ItemsPanel>
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                    <StackPanel Width="250" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
                                                         <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
-                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="250" Height="120" >
                                                                 <Border.Background>
                                                                     <LinearGradientBrush>
                                                                         <GradientStop Color="#0096C7" Offset="0"/>
@@ -124,12 +124,25 @@
                                                                 <Border.Effect>
                                                                     <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#0096C7"/>
                                                                 </Border.Effect>
-                                                                <StackPanel Margin="15,10,0,0" Orientation="Vertical">
-                                                                    <TextBlock Text="{Binding maphong }" FontSize="30" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
-                                                                    <TextBlock Text="{Binding loaiphong}" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
-
-                                                                </StackPanel>
-                                                            </Border>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <StackPanel Width="160" Margin="10,0,0,0" >
+                                                                            <TextBlock Margin="0,0,0,-8" Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding loaiphong}" Margin="0,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        </StackPanel>
+                                                                        <ListBox VerticalAlignment="Center" ItemsSource="{Binding ListCsvc}" IsEnabled="False"  ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="LBCSVC" HorizontalContentAlignment="Stretch"   >
+                                                                            <ListBox.ItemContainerStyle>
+                                                                                <Style TargetType="{x:Type ListBoxItem}">
+                                                                                    <Setter Property="Focusable" Value="False"/>
+                                                                                </Style>
+                                                                            </ListBox.ItemContainerStyle>
+                                                                            <ListBox.ItemTemplate>
+                                                                                <DataTemplate>
+                                                                                    <TextBlock Margin="0,-2" HorizontalAlignment="Right" FontWeight="Normal" FontSize="12"  Text="{Binding }"  />
+                                                                                </DataTemplate>
+                                                                            </ListBox.ItemTemplate>
+                                                                        </ListBox>
+                                                                    </StackPanel>
+                                                                </Border>
                                                         </Button>
 
 
@@ -160,7 +173,7 @@
 
                                 </Button>
                                 <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
-                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
                                         <ItemsControl Name="phongthueIC">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -169,9 +182,9 @@
                                             </ItemsControl.ItemsPanel>
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                    <StackPanel Width="250" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
                                                         <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
-                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="250" Height="120" >
                                                                 <Border.Background>
                                                                     <LinearGradientBrush>
                                                                         <GradientStop Color="Coral" Offset="0"/>
@@ -181,13 +194,25 @@
                                                                 <Border.Effect>
                                                                     <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="Coral"/>
                                                                 </Border.Effect>
-                                                                    <StackPanel Margin="15,10,0,0" >
-                                                                        <StackPanel Orientation="Horizontal">
-                                                                            <TextBlock Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
-                                                                            <TextBlock Text="{Binding loaiphong}" Margin="10,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <StackPanel Width="160" Margin="10,0,0,0" >
+                                                                            <TextBlock Margin="0,0,0,-8" Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding loaiphong}" Margin="0,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding tenkhachhang }"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding sodienthoai}"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
                                                                         </StackPanel>
-                                                                        <TextBlock Text="{Binding tenkhachhang }"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
-                                                                        <TextBlock Text="{Binding sodienthoai}"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        <ListBox VerticalAlignment="Center" ItemsSource="{Binding ListCsvc}" IsEnabled="False"  ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="LBCSVC" HorizontalContentAlignment="Stretch"   >
+                                                                            <ListBox.ItemContainerStyle>
+                                                                                <Style TargetType="{x:Type ListBoxItem}">
+                                                                                    <Setter Property="Focusable" Value="False"/>
+                                                                                </Style>
+                                                                            </ListBox.ItemContainerStyle>
+                                                                            <ListBox.ItemTemplate>
+                                                                                <DataTemplate>
+                                                                                    <TextBlock Margin="0,-2" HorizontalAlignment="Right" FontWeight="Normal" FontSize="12"  Text="{Binding }"  />
+                                                                                </DataTemplate>
+                                                                            </ListBox.ItemTemplate>
+                                                                        </ListBox>
                                                                     </StackPanel>
                                                                 </Border>
                                                         </Button>
@@ -221,7 +246,7 @@
 
                                 </Button>
                                 <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
-                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
                                         <ItemsControl Name="phongdatIC">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -230,9 +255,9 @@
                                             </ItemsControl.ItemsPanel>
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                    <StackPanel Width="250" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
                                                         <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
-                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="250" Height="120" >
                                                                 <Border.Background>
                                                                     <LinearGradientBrush>
                                                                         <GradientStop Color="#a5be00" Offset="0"/>
@@ -242,15 +267,26 @@
                                                                 <Border.Effect>
                                                                     <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#a5be00"/>
                                                                 </Border.Effect>
-                                                                    <StackPanel Margin="15,10,0,0" >
-                                                                        <StackPanel Orientation="Horizontal">
-                                                                            <TextBlock Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
-                                                                            <TextBlock Text="{Binding loaiphong}" Margin="10,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <StackPanel Width="160" Margin="10,0,0,0" >
+                                                                            <TextBlock Margin="0,0,0,-8" Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding loaiphong}" Margin="0,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding tenkhachhang }"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding sodienthoai}"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
                                                                         </StackPanel>
-                                                                        <TextBlock Text="{Binding tenkhachhang }"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
-                                                                        <TextBlock Text="{Binding sodienthoai}"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        <ListBox VerticalAlignment="Center" ItemsSource="{Binding ListCsvc}" IsEnabled="False"  ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="LBCSVC" HorizontalContentAlignment="Stretch"   >
+                                                                            <ListBox.ItemContainerStyle>
+                                                                                <Style TargetType="{x:Type ListBoxItem}">
+                                                                                    <Setter Property="Focusable" Value="False"/>
+                                                                                </Style>
+                                                                            </ListBox.ItemContainerStyle>
+                                                                            <ListBox.ItemTemplate>
+                                                                                <DataTemplate>
+                                                                                    <TextBlock Margin="0,-2" HorizontalAlignment="Right" FontWeight="Normal" FontSize="12"  Text="{Binding }"  />
+                                                                                </DataTemplate>
+                                                                            </ListBox.ItemTemplate>
+                                                                        </ListBox>
                                                                     </StackPanel>
-
                                                                 </Border>
                                                         </Button>
 
@@ -283,7 +319,7 @@
 
                                 </Button>
                                 <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
-                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Center" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
+                                    <WrapPanel  ItemHeight="auto" ItemWidth="auto"  HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="8 8" >
                                         <ItemsControl Name="phongbaotriIC">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -292,9 +328,9 @@
                                             </ItemsControl.ItemsPanel>
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                    <StackPanel Width="250" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
                                                             <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phongbaotri_click"  >
-                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                            <Border CornerRadius="20" Margin="0,0,0,0" Width="250" Height="120" >
                                                                 <Border.Background>
                                                                     <LinearGradientBrush>
                                                                         <GradientStop Color="#6c757d" Offset="0"/>
@@ -304,13 +340,23 @@
                                                                 <Border.Effect>
                                                                     <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#6c757d"/>
                                                                 </Border.Effect>
-                                                                    <StackPanel Margin="15,10,0,0" >
-                                                                        <StackPanel Orientation="Horizontal">
-                                                                            <TextBlock Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
-                                                                            <TextBlock Text="{Binding loaiphong}" Margin="10,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <StackPanel Width="160" Margin="10,0,0,0" >
+                                                                            <TextBlock Margin="0,0,0,-8" Text="{Binding maphong }" VerticalAlignment="Center" FontSize="30" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                            <TextBlock Text="{Binding loaiphong}" Margin="0,0"  VerticalAlignment="Center" FontStyle="Italic" FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
                                                                         </StackPanel>
-                                                                        <TextBlock Text="{Binding tenkhachhang }"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
-                                                                        <TextBlock Text="{Binding sodienthoai}"  FontSize="20" FontWeight="Normal" Foreground="White"></TextBlock>
+                                                                        <ListBox VerticalAlignment="Center" ItemsSource="{Binding ListCsvc}" IsEnabled="False"  ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="LBCSVC" HorizontalContentAlignment="Stretch"   >
+                                                                            <ListBox.ItemContainerStyle>
+                                                                                <Style TargetType="{x:Type ListBoxItem}">
+                                                                                    <Setter Property="Focusable" Value="False"/>
+                                                                                </Style>
+                                                                            </ListBox.ItemContainerStyle>
+                                                                            <ListBox.ItemTemplate>
+                                                                                <DataTemplate>
+                                                                                    <TextBlock Margin="0,-2" HorizontalAlignment="Right" FontWeight="Normal" FontSize="12"  Text="{Binding }"  />
+                                                                                </DataTemplate>
+                                                                            </ListBox.ItemTemplate>
+                                                                        </ListBox>s
                                                                     </StackPanel>
                                                                 </Border>
                                                         </Button>

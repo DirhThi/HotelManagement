@@ -577,9 +577,9 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                <StackPanel Width="250" Margin="13,13" HorizontalAlignment="Left" Orientation="Vertical">
                                                     <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
-                                                        <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                        <Border CornerRadius="20" Margin="0,0,0,0" Width="250" Height="120" >
                                                             <Border.Background>
                                                                 <LinearGradientBrush>
                                                                     <GradientStop Color="#0096C7" Offset="0"/>

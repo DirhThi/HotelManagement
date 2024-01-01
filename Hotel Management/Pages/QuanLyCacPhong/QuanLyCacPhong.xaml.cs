@@ -20,7 +20,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         List<string> ListCSVC = new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" };
         List<string> ListCSVChientai = new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi" };
 
-       /* List<Phong> phongList = new List<Phong> {
+        List<Phong> phongList = new List<Phong> {
            new Phong() { maphong = "101", loaiphong = "Standard",trangthai = "Phòng trống"},
             new Phong() { maphong = "102", loaiphong = "Standard",trangthai = "Đang bảo trì"},
             new Phong() { maphong = "104", loaiphong = "Deluxe",trangthai = "Phòng trống"},
@@ -34,12 +34,12 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             new Phong() { maphong = "502", loaiphong = "Vip",trangthai = "Phòng trống"},
             new Phong() { maphong = "503", loaiphong = "Vip",trangthai = "Phòng trống"},
             new Phong() { maphong = "504", loaiphong = "Vip",trangthai = "Phòng trống"},
-        };*/
+        };
 
         public QuanLyCacPhong()
         {
             InitializeComponent();
-           // phongIC.ItemsSource = phongList;
+            phongIC.ItemsSource = phongList;
             CBLoaiPhong.ItemsSource = loaiPhongList;
             CBLoaiPhong2.ItemsSource = loaiPhongList;
             foreach (var item in loaiPhongList)
@@ -47,7 +47,6 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 QLloaiPhongList.Add(item);
             }    
             CBLoaiPhong3.ItemsSource = QLloaiPhongList;
-            LoadRoom();
 
             CBtrangthai.ItemsSource = trangthaiPhongList;
             CSVCChips.ItemsSource = ListCSVChientai;
@@ -70,42 +69,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             Dialog.IsOpen = true;
         }
         
-        void LoadRoom()
-        {
-            List<Room> listRoom = GetListRoom();
-            foreach (int floor in listRoom.Select(room => room.Floor).Distinct())
-            {
-                Grid floorGrid = new Grid() { Margin=new Thickness(10)};
-
-                floorGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-                floorGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-
-                StackPanel floorStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
-
-                TextBlock textBlock = new TextBlock() { Text = $"Tầng {floor}", VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5, 0, 5, 0), FontSize = 20, FontWeight = FontWeights.SemiBold };         
-                Button newRoom = new Button() { Width = 20, Height = 20, Margin = new Thickness(5, 0, 0, 0), HorizontalAlignment = HorizontalAlignment.Left };
-                newRoom.Click += NewRoomInFloorClick;
-
-                floorStackPanel.Children.Add(textBlock);
-                floorStackPanel.Children.Add(newRoom);
-
-                StackPanel roomStackPanel = new StackPanel() { Orientation = Orientation.Horizontal };
-
-                foreach (Room room in listRoom.Where(room => room.Floor == floor))
-                {
-                    Button btnRoom = new Button() { Content = room.Name,Tag=room.Id };
-                    btnRoom.Click += EditRoomClick;
-                    roomStackPanel.Children.Add(btnRoom);
-                }
-
-                Grid.SetRow(floorStackPanel, 0);
-                Grid.SetRow(roomStackPanel, 1);
-
-                floorGrid.Children.Add(floorStackPanel);
-                floorGrid.Children.Add(roomStackPanel);
-
-            }
-        }
+      
         private void CancelDialog(object sender, RoutedEventArgs e)
         {
            
@@ -118,7 +82,23 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            if (sortCB.SelectedIndex == 0)
+            {
+                phongList.Sort((left, right) => left.maphong.CompareTo(right.maphong));
+                phongIC.Items.Refresh();
+
+
+            }
+            if (sortCB.SelectedIndex == 1)
+            {
+                phongList.Sort((left, right) => left.loaiphong.CompareTo(right.loaiphong));
+                phongIC.Items.Refresh();
+            }
+            if (sortCB.SelectedIndex == 2)
+            {
+                phongList.Sort((left, right) => left.trangthai.CompareTo(right.trangthai));
+                phongIC.Items.Refresh();
+            }
         }
         List<Room> GetListRoom()
         {
@@ -134,31 +114,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             return list;
         }
 
-        private void EditRoomClick(object sender, RoutedEventArgs e)
-        {                    
-            SuaPhong f = new SuaPhong((int)(sender as Button).Tag);
-            if ((bool)f.ShowDialog())
-            {
-                LoadRoom();
-            }
-
-        }
-        private void NewRoomInFloorClick(object sender, RoutedEventArgs e)
-        {
-            ThemPhong f = new ThemPhong();
-            if ((bool)f.ShowDialog())
-            {
-                LoadRoom();
-            }
-
-        }
-        private void AddNewRoomTypeClick(object sender, RoutedEventArgs e)
-        {
-            ThemLoaiPhong f = new ThemLoaiPhong();
-            if ((bool)f.ShowDialog())
-            {
-            }
-        }
+        
 
         private void themphong_click(object sender, RoutedEventArgs e)
         {
@@ -177,7 +133,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 foreach (string line in File.ReadLines(openFileDialog.FileName))
                 {
                     string[] parts = line.Split('/');
-                 //   PhongMoi.Add(new Room() {Id=System.Convert.ToInt32(parts[0]),Type=parts[1]});
+                    //PhongMoi.Add(new Room() {Id=System.Convert.ToInt32(parts[0]),Type=parts[1]});
                 }
                 phongmoiDG.ItemsSource = PhongMoi;
             }  
@@ -261,20 +217,15 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         }
     
 
-        private void EditRoomTypeClick(object sender, RoutedEventArgs e)
-        {
-            SuaLoaiPhong f = new SuaLoaiPhong();
-            if ((bool)f.ShowDialog())
-            {
-            }
-        }
+       
 
-        private void AddNewFloorClick(object sender, RoutedEventArgs e)
-        {
-            ThemTang f = new ThemTang();
-            if ((bool)f.ShowDialog())
-            {
-            }
-        }
     }
+    public class Phong
+    {
+        public string maphong { get; set; }
+        public string loaiphong { get; set; }
+        public string trangthai { get; set; }
+
+    }
+
 }

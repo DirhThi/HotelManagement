@@ -63,7 +63,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             maphongtb.Text = maphong;
             loaiphongtb.Text = loaiphong;
             ValidateRoomInfomation();
-        }
+        }   
         public void ValidateRoomInfomation()
         {
             if (handler != null)

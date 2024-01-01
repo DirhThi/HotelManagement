@@ -471,6 +471,34 @@
                                 </Button>
                             </Border>
                         </Grid>
+                        <Grid     x:Name="hoadonoption" Visibility="Hidden">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  Style="{StaticResource secondButton}"> 
+                                <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                    Xóa hóa đơn
+                                </Button>
+                            </Border>
+                            <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                                <Button
+                                    IsEnabled="True"
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                    In hóa đơn
+                                </Button>
+                            </Border>
+                        </Grid>
+
                     </Grid>
                    
                     
