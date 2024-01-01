@@ -141,6 +141,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\QuanLyCacPhong\Room.cs" />
     <Compile Include="StaticEvents\StaticEventHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -195,7 +196,6 @@
     <Compile Include="Pages\QuanLyCacPhong\QuanLyCacPhong.xaml.cs">
       <DependentUpon>QuanLyCacPhong.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\QuanLyCacPhong\Room.cs" />
     <Compile Include="Pages\QuanLyDichVu\QuanLyDichVu.xaml.cs">
       <DependentUpon>QuanLyDichVu.xaml</DependentUpon>
     </Compile>
