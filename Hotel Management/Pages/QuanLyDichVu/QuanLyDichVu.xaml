@@ -9,93 +9,162 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuanLyDichVu">
 
-    <Border CornerRadius="10" Background="#edf3ff">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <!--Filter Buttons Start-->
-            <Border Margin="10" Background="White"     CornerRadius="10 ">
+    <materialDesign:DialogHost
+        x:Name="Dialog"
+  CloseOnClickAway="False"
+  HorizontalAlignment="Stretch"
+  VerticalAlignment="Stretch">
+        <materialDesign:DialogHost.DialogContent>
+            <Border Height="auto" Width="auto" Grid.Column="1" Padding="15" CornerRadius="10" Margin="0,0" Background="White">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Margin="10"  VerticalAlignment="Center" Orientation="Horizontal">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontWeight="Medium"  Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" Text="Thêm dịch vụ"></TextBlock>
+                    <Border Grid.RowSpan="2" Grid.Row="1"  Height="180" Width="180" CornerRadius="10" Background="#C0C9E8">
+                        <Button Background="Transparent" BorderThickness="0">
+                            <Image Source="/Assets/Images/addImage.png" >
+                            </Image>
+                        </Button>
+                    </Border>
+                    <StackPanel Margin="15,0,0,0"  Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+                        <StackPanel Margin="0,0,0,15">
+                            <TextBlock FontWeight="Medium"  Margin="0,0,0,0" FontSize="18" Text="Tên dịch vụ"></TextBlock>
+                            <TextBox
+                            FontSize="16"
+                             materialDesign:HintAssist.Hint="Nhập tên dịch vụ">
 
-                        <TextBlock HorizontalAlignment="Right" Margin="15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Tìm kiếm</TextBlock>
-                        <Border HorizontalAlignment="Right" Padding="5,0" CornerRadius="5" BorderThickness="2" BorderBrush="LightSkyBlue" Background="AliceBlue" Width="300" Height="36">
-                            <TextBox     FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập tên dịch vụ" ></TextBox>
+                            </TextBox>
+                        </StackPanel>
+                        <StackPanel >
+                            <TextBlock FontWeight="Medium"  Margin="0,0,0,0" FontSize="18" Text="Giá tiền"></TextBlock>
+                            <TextBox
+                            FontSize="16"
+                             materialDesign:HintAssist.Hint="Nhập giá tiền">
+
+                            </TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid Margin="10,5,0,0" Grid.Row="2" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border  Style="{StaticResource secondButton}">
+                            <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                Hủy
+                            </Button>
                         </Border>
-                        <Button HorizontalAlignment="Left" Grid.Column="0"
+                        <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                            <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                Xác nhận
+                            </Button>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+        </materialDesign:DialogHost.DialogContent>
+        <Border CornerRadius="10" Background="#edf3ff">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Filter Buttons Start-->
+                <Border Margin="10" Background="White"     CornerRadius="10 ">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="10"  VerticalAlignment="Center" Orientation="Horizontal">
+
+                            <TextBlock HorizontalAlignment="Right" Margin="15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Tìm kiếm</TextBlock>
+                            <Border HorizontalAlignment="Right" Padding="5,0" CornerRadius="5" BorderThickness="2" BorderBrush="LightSkyBlue" Background="AliceBlue" Width="300" Height="36">
+                                <TextBox     FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập tên dịch vụ" ></TextBox>
+                            </Border>
+                            <Button HorizontalAlignment="Left" Grid.Column="0"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
-                            VerticalContentAlignment="Center"
+                            VerticalContentAlignment="Center" Click="themDV_Click"
+                                       
                                 >
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Height="24" Width="24" Kind="PlusOutline" />
-                                    <TextBlock>Thêm dịch vụ</TextBlock>
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                    </StackPanel>
-                    
-
-                </Grid>
-            </Border>
-
-            <!--Filter Buttons End-->
-            <!--DataGrid Start-->
-            <Border Margin="10,0,10,10" Background="White"  Grid.Row="1"    CornerRadius="10 ">
-                <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelservice" HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="0" >
-                        <ItemsControl ItemsSource="{Binding ListService}" Name="serviceIC">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Width="120"  Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
-                                        <Grid  Width="auto" Height="auto" Margin="0,0"   Grid.Row="0" Grid.Column="1"     >
-                                            <StackPanel Orientation="Vertical">
-                                                <Border  CornerRadius="20" Margin="0,0,0,0" Width="120" Height="120" >
-                                                    <Border.Background>
-                                                        <LinearGradientBrush>
-                                                            <GradientStop Color="#C0C9E8" Offset="0"/>
-                                                        </LinearGradientBrush>
-                                                    </Border.Background>
-
-
-                                                    <StackPanel Margin="0,5,0,0" Orientation="Vertical">
-                                                        <Image Source="{Binding imagesource}"  Width="90" Height="90"/>
-                                                        <TextBlock HorizontalAlignment="Center" Text="{Binding name}" FontSize="16" FontWeight="Normal"></TextBlock>
-                                                    </StackPanel>
-
-
-
-                                                </Border>
-                                                <TextBlock HorizontalAlignment="Center" Text="{Binding price}" FontSize="16" FontWeight="Normal"></TextBlock>
-
-                                                
-                                            </StackPanel>
-
-                                        </Grid>
-
-
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Height="24" Width="24" Kind="PlusOutline" />
+                                        <TextBlock>Thêm dịch vụ</TextBlock>
                                     </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </WrapPanel>
-                </ScrollViewer>
-            </Border>
-            <!--DataGrid End-->
-        </Grid>
-    </Border>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+
+                    </Grid>
+                </Border>
+
+                <!--Filter Buttons End-->
+                <!--DataGrid Start-->
+                <Border Margin="10,0,10,10" Background="White"  Grid.Row="1"    CornerRadius="10 ">
+                    <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelservice" HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="0" >
+                            <ItemsControl ItemsSource="{Binding ListService}" Name="serviceIC">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Width="120"  Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                            <Grid  Width="auto" Height="auto" Margin="0,0"   Grid.Row="0" Grid.Column="1"     >
+                                                <StackPanel Orientation="Vertical">
+                                                    <Border  CornerRadius="20" Margin="0,0,0,0" Width="120" Height="120" >
+                                                        <Border.Background>
+                                                            <LinearGradientBrush>
+                                                                <GradientStop Color="#C0C9E8" Offset="0"/>
+                                                            </LinearGradientBrush>
+                                                        </Border.Background>
+
+
+                                                        <StackPanel Margin="0,5,0,0" Orientation="Vertical">
+                                                            <Image Source="{Binding imagesource}"  Width="90" Height="90"/>
+                                                            <TextBlock HorizontalAlignment="Center" Text="{Binding name}" FontSize="16" FontWeight="Normal"></TextBlock>
+                                                        </StackPanel>
+
+
+
+                                                    </Border>
+                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding price}" FontSize="16" FontWeight="Normal"></TextBlock>
+
+
+                                                </StackPanel>
+
+                                            </Grid>
+
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </WrapPanel>
+                    </ScrollViewer>
+                </Border>
+                <!--DataGrid End-->
+            </Grid>
+        </Border>
+    </materialDesign:DialogHost>
 </Page>

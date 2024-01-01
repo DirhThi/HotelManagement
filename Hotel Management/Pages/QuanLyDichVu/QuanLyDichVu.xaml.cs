@@ -36,6 +36,17 @@ namespace Hotel_Management.Pages.QuanLyDichVu
             serviceIC.ItemsSource = ServiceList;
 
         }
+
+        private void themDV_Click(object sender, RoutedEventArgs e)
+        {
+            Dialog.IsOpen = true;
+        }
+
+        private void CancelDialog(object sender, RoutedEventArgs e)
+        {
+            Dialog.IsOpen = false;
+
+        }
     }
 
     public class service
