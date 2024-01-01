@@ -1,20 +1,11 @@
+using Hotel_Management.MongoDatabase;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using MongoDB.Driver;
-using MongoDB.Bson;
 
 
 namespace Hotel_Management.Pages.QuanLyThuePhong
@@ -115,18 +106,33 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             string trangthai = "phongthue";
             string loaithue = "";
 
-            quanlythuephong.NavigationService.Navigate(new ChiTietPhong(maphong,loaiphong,trangthai, loaithue));
+            quanlythuephong.NavigationService.Navigate(new ChiTietPhong(maphong, loaiphong, trangthai, loaithue));
         }
 
         private void Phongbaotri_click(object sender, RoutedEventArgs e)
         {
+            ConfirmStateButton.Tag = ((Phong)((sender as Button).DataContext)).maphong;
+
+             var filter = Builders<BsonDocument>.Filter.Eq("roomName", ((Phong)((sender as Button).DataContext)).maphong);
+            BsonDocument room= MongoHandler.GetInstance().GetCollection("Room").Find(filter).FirstOrDefault();
+            if(room!=null)
+            {
+                if (room["roomState"] == "Đang dọn dẹp")
+                {
+                    radiobtndondep.IsChecked = true;
+                }    
+                else if (room["roomState"] == "Đang bảo trì")
+                {
+                    radiobtnbaotri.IsChecked = true;
+                }    
+            }    
 
             Dialog.IsOpen = true;
         }
 
         private void sortphongtrong_click(object sender, RoutedEventArgs e)
         {
-            if(sortphongtrongtb.Text=="Mã phòng")
+            if (sortphongtrongtb.Text == "Mã phòng")
             {
                 sortphongtrongtb.Text = "Loại phòng";
                 phongtrongList.Sort((left, right) => left.loaiphong.CompareTo(right.loaiphong));
@@ -248,14 +254,14 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 roomNumber = room["roomName"].AsString;
                 roomType = room["roomType"].AsString;
                 LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                foreach(BsonDocument receipt in documentsReceipt)
+                foreach (BsonDocument receipt in documentsReceipt)
                 {
-                    if(roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
+                    if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
                     {
                         customerId = receipt["customerId"].AsObjectId;
-                        foreach(BsonDocument customer in documentsCustomer)
+                        foreach (BsonDocument customer in documentsCustomer)
                         {
-                            if(customerId == customer["_id"].AsObjectId)
+                            if (customerId == customer["_id"].AsObjectId)
                             {
                                 customerName = customer["customerName"].AsString;
                                 customerPhone = customer["phoneNumber"].AsString;
@@ -318,7 +324,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             string roomType;
             string roomState;
             List<string> roomFurniture = new List<string>();
-            var filterEmptyRoom = Builders<BsonDocument>.Filter.Where(x => x["roomState"] == "Bảo trì" || x["roomState"] == "Dọn dẹp");
+            var filterEmptyRoom = Builders<BsonDocument>.Filter.Where(x => x["roomState"] == "Đang bảo trì" || x["roomState"] == "Đang dọn dẹp");
             List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
             List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
             foreach (BsonDocument room in documentsEmptyRoom)
@@ -331,6 +337,37 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             }
 
         }
+        private void XacNhanSuaTrangThai_Click(object sender, RoutedEventArgs e)
+        {
+            string maphong = (string)(sender as Button).Tag;
+
+            IMongoCollection<BsonDocument> roomCollection = MongoHandler.GetInstance().GetCollection("Room");
+            var filter = Builders<BsonDocument>.Filter.Eq(r => r["roomName"], maphong);
+            string currentStatus = (roomCollection.Find(filter).FirstOrDefault())["roomState"].AsString;
+            string newStatus;
+            if (radiobtnsansang.IsChecked == true)
+            {
+                newStatus = "Trống";
+            }
+            else if (radiobtndondep.IsChecked == true)
+            {
+                newStatus = "Đang dọn dẹp";
+            }
+            else
+            {
+                newStatus = "Đang bảo trì";
+            }
+
+            if (currentStatus != newStatus)
+            {
+                var update = Builders<BsonDocument>.Update.Set(r => r["roomState"], newStatus);
+                roomCollection.UpdateOne(filter, update);
+
+                // cập nhập list phòng 
+
+            }
+
+        }
     }
 
     public class Phong
@@ -339,7 +376,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
         public string loaiphong { get; set; }
         public string tenkhachhang { get; set; }
         public string sodienthoai { get; set; }
-
+        public List<string> ListCsvc { get; set; }
 
     }
 
