@@ -7,7 +7,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:local="clr-namespace:Hotel_Management.Pages.QuanLyBaoCao"
-      xmlns:wf="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+      xmlns:uc="clr-namespace:Hotel_Management.Pages.QuanLyBaoCao"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuanLyBaoCao">
@@ -52,7 +52,27 @@
                             <ColumnDefinition Width="7*"/>
                             <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <Border  Margin="0,20,20,20" Grid.RowSpan="2" Grid.Column="1" Background="Beige"></Border>
+                    <Border  Margin="0,15,15,15" Grid.RowSpan="2" Padding="10" CornerRadius="10" Grid.Column="1" Background="AliceBlue">
+                        <StackPanel>
+                            <TextBlock  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Thống kê sử dụng dịch vụ" >
+
+                            </TextBlock>
+                            <DataGrid  Grid.Row="0" MinRowHeight="40"  SelectionMode="Single" CanUserResizeColumns="False" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle0}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
+                Margin="0"
+                        
+                       x:Name="DGdichvu"
+                   
+                                Foreground="#22223B"
+                                 >
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="auto" MinWidth="110"  Header="Tên DV" Binding="{Binding TenDV }" IsReadOnly="True"/>
+                                    <DataGridTextColumn Width="auto" MinWidth="50"   Header="SL" Binding="{Binding SL}" IsReadOnly="True" />
+                                    <DataGridTextColumn Width="auto" MinWidth="110"  Header="Tổng tiền" Binding="{Binding Total }" IsReadOnly="True" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Border>
 
                     <Grid Margin="10,10,10,0">
                         <Grid.ColumnDefinitions>
@@ -63,7 +83,7 @@
                         </Grid.ColumnDefinitions>
                         <Border Margin="5" CornerRadius="10" Padding="10" Background="AliceBlue">
                             <StackPanel>
-                                <TextBlock  Foreground="#161d36" FontSize="22" FontWeight="Medium" Text="Số lượng đặt" >
+                                <TextBlock  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Số lượng đặt" >
                                     
                                 </TextBlock>
                                 <StackPanel Margin="20,10" Orientation="Horizontal">
@@ -76,7 +96,7 @@
                         </Border>
                         <Border Margin="5" Grid.Column="1" CornerRadius="10" Padding="10,10,0,10" Background="AliceBlue">
                             <StackPanel>
-                                <TextBlock  Foreground="#161d36" FontSize="22" FontWeight="Medium" Text="Doanh thu phòng" >
+                                <TextBlock  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Doanh thu phòng" >
 
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
@@ -89,7 +109,7 @@
                         </Border>
                         <Border Margin="5" Grid.Column="2" CornerRadius="10" Padding="10,10,0,10" Background="AliceBlue">
                             <StackPanel>
-                                <TextBlock  Foreground="#161d36" FontSize="22" FontWeight="Medium" Text="Doanh thu dịch vụ" >
+                                <TextBlock  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Doanh thu dịch vụ" >
 
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
@@ -102,7 +122,7 @@
                         </Border>
                         <Border Margin="5" Grid.Column="3" CornerRadius="10" Padding="10,10,0,10" Background="AliceBlue">
                             <StackPanel>
-                                <TextBlock  Foreground="#161d36" FontSize="22" FontWeight="Medium" Text="Tổng doanh thu" >
+                                <TextBlock  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Tổng doanh thu" >
 
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
@@ -120,9 +140,66 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Border Margin="5" CornerRadius="10" Background="AliceBlue">
-                           
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Margin="10,10,0,0" Orientation="Horizontal">
+                                   <TextBlock VerticalAlignment="Top"  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Biểu đồ loại thuê" />
+                                    <Button  
+                                        Background="Transparent"
+                                        Foreground="#00bbf9"
+                                        BorderThickness="0"
+                                        VerticalAlignment="Bottom" 
+                                        Click="Button_Click"
+                                        >
+                                        <Button.Content>
+                                                <materialDesign:PackIcon VerticalAlignment="Center"  Height="30" Width="30" Kind="Rotate3dVariant" />
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+
+
+                                <Grid Grid.Row="1">
+                                   
+                                    <uc:ChartSoLuongLoaiThue x:Name="ChartSoLuongLoaiThue" Visibility="Collapsed"/>
+                                    <uc:ChartDoanhThuLoaiThue x:Name="ChartDoanhThuLoaiThue" Visibility="Collapsed"/>
+                                </Grid>
+                               
+
+                            </Grid>
+
                         </Border>
-                        <Border Margin="5" Grid.Column="1" CornerRadius="10" Background="AliceBlue"></Border>
+                        <Border Margin="5" Grid.Column="1" CornerRadius="10" Background="AliceBlue">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Margin="10,10,0,0" Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Top"  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Biểu đồ loại phòng" />
+                                    <Button  
+                                        Background="Transparent"
+                                        Foreground="#00bbf9"
+                                        BorderThickness="0"
+                                        VerticalAlignment="Bottom" 
+                                        Click="Button1_Click"
+                                        >
+                                        <Button.Content>
+                                            <materialDesign:PackIcon VerticalAlignment="Center"  Height="30" Width="30" Kind="Rotate3dVariant" />
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+
+                                <Grid Grid.Row="1">
+                                    <uc:ChartSoLuongLoaiPhong x:Name="ChartSoLuongLoaiPhong" Visibility="Collapsed"/>
+                                    <uc:ChartDoanhThuLoaiPhong x:Name="ChartDoanhThuLoaiPhong" Visibility="Collapsed"/>
+                                </Grid>
+
+
+                            </Grid>
+                        </Border>
 
                     </Grid>
                 </Grid>
