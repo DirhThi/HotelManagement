@@ -47,6 +47,11 @@ namespace Hotel_Management.Pages.QuanLyDichVu
             Dialog.IsOpen = false;
 
         }
+
+        private void editService_Click(object sender, RoutedEventArgs e)
+        {
+            Dialog.IsOpen = true;
+        }
     }
 
     public class service

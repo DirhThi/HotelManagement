@@ -28,8 +28,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock FontWeight="Medium"  Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" Text="Thêm dịch vụ"></TextBlock>
                     <Border Grid.RowSpan="2" Grid.Row="1"  Height="180" Width="180" CornerRadius="10" Background="#C0C9E8">
-                        <Button Background="Transparent" BorderThickness="0">
-                            <Image Source="/Assets/Images/addImage.png" >
+                        <Button Height="180" Width="180" Background="Transparent" BorderThickness="0">
+                            <Image  Source="/Assets/Images/addImage.png" >
                             </Image>
                         </Button>
                     </Border>
@@ -105,8 +105,8 @@
                                 >
                                 <Button.Content>
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Height="24" Width="24" Kind="PlusOutline" />
-                                        <TextBlock>Thêm dịch vụ</TextBlock>
+                                        <materialDesign:PackIcon Height="24" Width="24" Kind="PlusBox" />
+                                        <TextBlock Margin="10,0">Thêm dịch vụ</TextBlock>
                                     </StackPanel>
                                 </Button.Content>
                             </Button>
@@ -120,7 +120,7 @@
                 <!--DataGrid Start-->
                 <Border Margin="10,0,10,10" Background="White"  Grid.Row="1"    CornerRadius="10 ">
                     <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                        <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelservice" HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="0" >
+                        <WrapPanel  ItemHeight="auto" ItemWidth="auto" x:Name="panelservice" HorizontalAlignment="Left" Orientation="Horizontal" Background="Transparent"  Margin="0,10" >
                             <ItemsControl ItemsSource="{Binding ListService}" Name="serviceIC">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -129,10 +129,11 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Width="120"  Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                        <Button  BorderThickness="0" Background="Transparent" Foreground="Black" Width="auto" Height="auto" Click="editService_Click">
+                                        <StackPanel Width="auto"  HorizontalAlignment="Center" Orientation="Vertical">
                                             <Grid  Width="auto" Height="auto" Margin="0,0"   Grid.Row="0" Grid.Column="1"     >
                                                 <StackPanel Orientation="Vertical">
-                                                    <Border  CornerRadius="20" Margin="0,0,0,0" Width="120" Height="120" >
+                                                    <Border  CornerRadius="20" Margin="0,0,0,0" Width="170" Height="170" >
                                                         <Border.Background>
                                                             <LinearGradientBrush>
                                                                 <GradientStop Color="#C0C9E8" Offset="0"/>
@@ -141,22 +142,15 @@
 
 
                                                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">
-                                                            <Image Source="{Binding imagesource}"  Width="90" Height="90"/>
-                                                            <TextBlock HorizontalAlignment="Center" Text="{Binding name}" FontSize="16" FontWeight="Normal"></TextBlock>
+                                                            <Image Source="{Binding imagesource}"  Width="140" Height="140"/>
+                                                            <TextBlock HorizontalAlignment="Center" Text="{Binding name}" FontSize="18" FontWeight="Normal"></TextBlock>
                                                         </StackPanel>
-
-
-
                                                     </Border>
-                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding price}" FontSize="16" FontWeight="Normal"></TextBlock>
-
-
-                                                </StackPanel>
-
+                                                    <TextBlock HorizontalAlignment="Center" Text="{Binding price}" FontSize="20" FontWeight="Medium"></TextBlock>
+                                                </StackPanel> 
                                             </Grid>
-
-
                                         </StackPanel>
+                                        </Button>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

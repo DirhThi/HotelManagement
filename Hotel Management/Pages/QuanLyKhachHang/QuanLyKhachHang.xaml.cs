@@ -30,6 +30,18 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
             new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
         };*/
         List<Khachhang> customerListDisplay = new List<Khachhang>();
+
+        List<Bill> receiptList = new List<Bill>() { 
+             new Bill() { ID="123456",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
+             new Bill() { ID="123341",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
+                new Bill() { ID="123456",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
+             new Bill() { ID="123341",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
+   new Bill() { ID="123456",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
+             new Bill() { ID="123341",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
+   new Bill() { ID="123456",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
+             new Bill() { ID="123341",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
+
+            };
         public QuanLyKhachHang()
         {
             InitializeComponent();
@@ -37,6 +49,7 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
             LayKhachHang(collectionCustomer);
             DGKhachhang.ItemsSource = customerListDisplay;
             textSoLuong.Text = "Số lượng: " + customerListDisplay.Count.ToString();
+            DGHoadonkhachhang.ItemsSource = receiptList;
             //SyncData();
             //StaticEventHandler.OnCustomerUpdated += UpdateData;
             autoorder();
@@ -119,6 +132,18 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
             public string Email { get; set; }
 
         }
+
+        public class Bill
+        {
+            public string ID { get; set; }
+            public string Phong { get; set; }
+            public string LoaiThue { get; set; }
+            public int Total { get; set; }
+            public string nameCustomer { get; set; }
+            public string nameStaff { get; set; }
+            public string CreateDate { get; set; }
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -205,6 +230,23 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
             }
             autoorder();
             DGKhachhang.Items.Refresh();
+        }
+
+        private void EditCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            Dialog.IsOpen = true;
+        }
+
+        private void CancelDialog(object sender, RoutedEventArgs e)
+        {
+            Dialog.IsOpen = false;
+
+        }
+
+        private void DGHoadonkhachhang_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show("navigate tới hóa đơn chi tiết");
+
         }
     }
 }

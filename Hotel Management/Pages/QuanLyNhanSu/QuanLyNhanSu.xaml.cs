@@ -175,5 +175,30 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
             autoorder();
             DGNhanVien.Items.Refresh();
         }
+
+        private void EditStaff_Click(object sender, RoutedEventArgs e)
+        {
+            bordersuanhanvien.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
+
+        }
+        private void AddStaff_Click(object sender, RoutedEventArgs e)
+        {
+            borderthemnhanvien.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
+        }
+
+        private void CancelDialog(object sender, RoutedEventArgs e)
+        {
+            bordersuanhanvien.Visibility = Visibility.Collapsed;
+            borderthemnhanvien.Visibility = Visibility.Collapsed;
+            Dialog.IsOpen = false;
+        }
+
+        private void DGHoadonnhanvien_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show("navigate tới hóa đơn chi tiết");
+        }
+
     }
 }
