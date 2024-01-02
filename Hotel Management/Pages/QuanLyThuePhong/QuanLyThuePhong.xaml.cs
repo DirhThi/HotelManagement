@@ -224,12 +224,13 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             var filterEmptyRoom = Builders<BsonDocument>.Filter.Eq("roomState", "Trống");
             List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
             List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
+            phongtrongList.Clear();
             foreach (BsonDocument room in documentsEmptyRoom)
             {
                 roomNumber = room["roomName"].AsString;
                 roomType = room["roomType"].AsString;
                 LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                phongtrongList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, /*ListCsvc = roomFurniture,*/ });
+                phongtrongList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, });
             }
 
         }
@@ -248,6 +249,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
             List<BsonDocument> documentsReceipt = collectionReceipt.Find(new BsonDocument()).ToList();
             List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
+            phongthueList.Clear();
             foreach (BsonDocument room in documentsEmptyRoom)
             {
                 roomId = room["_id"].AsObjectId;
@@ -271,7 +273,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                         break;
                     }
                 }
-                phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, /*ListCsvc = roomFurniture,*/ tenkhachhang = customerName, sodienthoai = customerPhone });
+                phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
             }
 
         }
@@ -290,6 +292,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
             List<BsonDocument> documentsReceipt = collectionReceipt.Find(new BsonDocument()).ToList();
             List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
+            phongdatList.Clear();
             foreach (BsonDocument room in documentsEmptyRoom)
             {
                 roomId = room["_id"].AsObjectId;
@@ -313,7 +316,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                         break;
                     }
                 }
-                phongdatList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, /*ListCsvc = roomFurniture,*/ tenkhachhang = customerName, sodienthoai = customerPhone });
+                phongdatList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
             }
 
         }
@@ -327,13 +330,14 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             var filterEmptyRoom = Builders<BsonDocument>.Filter.Where(x => x["roomState"] == "Đang bảo trì" || x["roomState"] == "Đang dọn dẹp");
             List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
             List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
+            phongbaotriList.Clear();
             foreach (BsonDocument room in documentsEmptyRoom)
             {
                 roomNumber = room["roomName"].AsString;
                 roomType = room["roomType"].AsString;
                 roomState = room["roomState"].AsString;
                 LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                phongbaotriList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, /*ListCsvc = roomFurniture,*/ tenkhachhang = roomState });
+                phongbaotriList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = roomState });
             }
 
         }
