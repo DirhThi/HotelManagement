@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:local="clr-namespace:Hotel_Management.Pages.QuanLyBaoCao"
       xmlns:wf="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       mc:Ignorable="d" 
@@ -17,9 +18,9 @@
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <!--Filter Buttons Start-->
+           
             <Border Margin="10" Background="White"     CornerRadius="10 ">
-                <Grid>
+               
                     <StackPanel Margin="10"  VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Margin="0,0,15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Ngày bắt đầu</TextBlock>
                         <DatePicker 
@@ -38,17 +39,21 @@
                                         Focusable="False">
                         </DatePicker>
                     </StackPanel>
-                </Grid>
             </Border>
 
-            <!--Filter Buttons End-->
-            <!--DataGrid Start-->
+            
             <Border Margin="10,0,10,10" Background="White"  Grid.Row="1"    CornerRadius="10 ">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border  Margin="0,20,20,20" Grid.RowSpan="2" Grid.Column="1" Background="Beige"></Border>
+
                     <Grid Margin="10,10,10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -56,20 +61,68 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Border Margin="10" Background="Beige"></Border>
-                        <Border Margin="10" Grid.Column="1" Background="Beige"></Border>
-                        <Border Margin="10" Grid.Column="2" Background="Beige"></Border>
-                        <Border Margin="10" Grid.Column="3" Background="Beige"></Border>
+                        <Border Margin="5" CornerRadius="10" Padding="10" Background="AliceBlue">
+                            <StackPanel>
+                                <TextBlock  Foreground="#161d36" FontSize="22" FontWeight="Medium" Text="Số lượng đặt" >
+                                    
+                                </TextBlock>
+                                <StackPanel Margin="20,10" Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="AccountCashOutline" />
+                                    <TextBlock VerticalAlignment="Center" Margin="25,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37" >
+
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" CornerRadius="10" Padding="10,10,0,10" Background="AliceBlue">
+                            <StackPanel>
+                                <TextBlock  Foreground="#161d36" FontSize="22" FontWeight="Medium" Text="Doanh thu phòng" >
+
+                                </TextBlock>
+                                <StackPanel Margin="10,10" Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="BlueViolet" Height="55" Width="55" Kind="HomePercentOutline" />
+                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="5" Grid.Column="2" CornerRadius="10" Padding="10,10,0,10" Background="AliceBlue">
+                            <StackPanel>
+                                <TextBlock  Foreground="#161d36" FontSize="22" FontWeight="Medium" Text="Doanh thu dịch vụ" >
+
+                                </TextBlock>
+                                <StackPanel Margin="10,10" Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="FoodOutline" />
+                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="5" Grid.Column="3" CornerRadius="10" Padding="10,10,0,10" Background="AliceBlue">
+                            <StackPanel>
+                                <TextBlock  Foreground="#161d36" FontSize="22" FontWeight="Medium" Text="Tổng doanh thu" >
+
+                                </TextBlock>
+                                <StackPanel Margin="10,10" Orientation="Horizontal">
+                                    <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="CashMultiple" />
+                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
                     </Grid>
                     <Grid Grid.Row="1" Margin="10,0,10,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Border Margin="10" Background="Beige"></Border>
-                        <Border Margin="10" Grid.Column="1" Background="Beige"></Border>
-                        <Border Margin="10" Grid.Column="2" Background="Beige"></Border>
+                        <Border Margin="5" CornerRadius="10" Background="AliceBlue">
+                           
+                        </Border>
+                        <Border Margin="5" Grid.Column="1" CornerRadius="10" Background="AliceBlue"></Border>
 
                     </Grid>
                 </Grid>

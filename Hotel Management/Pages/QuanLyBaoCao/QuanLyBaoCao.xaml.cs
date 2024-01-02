@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms.DataVisualization;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace Hotel_Management.Pages.QuanLyBaoCao
 {
@@ -26,10 +28,10 @@ namespace Hotel_Management.Pages.QuanLyBaoCao
         {
             InitializeComponent();
            
-
+           
         }
+      
 
-     
     }
 
    
