@@ -186,44 +186,66 @@ namespace Hotel_Management
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
-        /* private void btnSetting_MouseEnter(object sender, MouseEventArgs e)
-         {
-             if (Tg_Btn.IsChecked == false)
-             {
-                 Popup.PlacementTarget = btnSetting;
-                 Popup.Placement = PlacementMode.Right;
-                 Popup.IsOpen = true;
-                 Header.PopupText.Text = "Setting";
-             }
-         }*/
 
-        private void btnSetting_MouseLeave(object sender, MouseEventArgs e)
+        private void btnUser_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (Tg_Btn.IsChecked == false && PopupUserOption.IsOpen == false)
+            {
+                Popup.PlacementTarget = btnCurrentUser;
+                Popup.Placement = PlacementMode.Right;
+                Popup.IsOpen = true;
+                PopupText.Text = "User Name";
+            }
+        }
+
+        private void btnUser_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
         }
-        // End: MenuLeft PopupButton //
 
-        // Start: Button Close | Restore | Minimize 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void btnDangxuat_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+
         }
 
-        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        private void currentUser_Click(object sender, RoutedEventArgs e)
         {
-            if (WindowState == WindowState.Normal)
-                WindowState = WindowState.Maximized;
+            if(PopupUserOption.IsOpen==false)
+            {
+                PopupUserOption.PlacementTarget = btnCurrentUser;
+                PopupUserOption.Placement = PlacementMode.Right;
+                PopupUserOption.IsOpen = true;
+            }    
             else
-                WindowState = WindowState.Normal;
+            {
+                PopupUserOption.Visibility = Visibility.Collapsed;
+                PopupUserOption.IsOpen = false;
+            }    
+               
         }
-
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        // End: MenuLeft PopupButton //
+        private void CancelDialog(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            borderedituser.Visibility = Visibility.Collapsed;
+            borderdoimatkhau.Visibility = Visibility.Collapsed;
+            Dialog.IsOpen = false;
         }
-        // End: Button Close | Restore | Minimize
+        private void suathongtin_click(object sender, RoutedEventArgs e)
+        {
+            PopupUserOption.Visibility = Visibility.Collapsed;
+            PopupUserOption.IsOpen = false;
+            borderedituser.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
+        }
 
+        private void doimatkhau_click(object sender, RoutedEventArgs e)
+        {
+            PopupUserOption.Visibility = Visibility.Collapsed;
+            PopupUserOption.IsOpen = false;
+            borderdoimatkhau.Visibility = Visibility.Visible;
+            Dialog.IsOpen = true;
+        }
         private void btnDatphong_Click(object sender, RoutedEventArgs e)
         {
             MenuBtnChoose(btnDatphong);
@@ -279,9 +301,6 @@ namespace Hotel_Management
             title.Text = "Quản lý khách hàng";
         }
 
-        private void btnDangxuat_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
     }
 }

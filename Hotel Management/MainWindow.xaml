@@ -10,189 +10,398 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="Transparent" Loaded="loaded">
-    <Border Background="#c0c9e8"
-            CornerRadius="0">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <materialDesign:DialogHost
+            x:Name="Dialog"
+          CloseOnClickAway="False"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <Border x:Name="borderdoimatkhau" Visibility="Collapsed" Height="auto" Width="auto" Grid.Column="1" Padding="0" CornerRadius="10" Margin="15" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Medium"   Margin="0,0,0,0" FontSize="20" Text="Đổi mật khẩu"></TextBlock>
+                        <Border Width="350" Grid.Row="1" Padding="10,0" CornerRadius="10" Margin="10,0" Background="White">
+                            <StackPanel IsEnabled="True">
+                             
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Mật khẩu cũ"></TextBlock>
+                                    <PasswordBox x:Name="oldpassword" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập mật khẩu cũ" />
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Mật khẩu mới"></TextBlock>
+                                    <PasswordBox x:Name="newpassword" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập mật khẩu mới"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Xác nhận mật khẩu"></TextBlock>
+                                    <PasswordBox x:Name="confirmpassword" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập lại mật khẩu"/>
+                                </StackPanel>
 
-            <Border Grid.Column="0"
+
+                            </StackPanel>
+                        </Border>
+
+                        <Grid Margin="10,5" Grid.Row="2" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  Style="{StaticResource secondButton}">
+                                <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                    Hủy
+                                </Button>
+                            </Border>
+                            <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                                <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                    Xác nhận
+                                </Button>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="borderedituser" Visibility="Collapsed" Height="auto" Width="auto" Grid.Column="1" Padding="0" CornerRadius="10" Margin="15" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Medium"   Margin="0,0,0,0" FontSize="20" Text="Sửa thông tin"></TextBlock>
+                        <Border Width="350" Grid.Row="1" Padding="10,0" CornerRadius="10" Margin="10,0" Background="White">
+                            <StackPanel x:Name="UserInfoAdd" IsEnabled="True">
+                                <TextBlock FontWeight="Medium"   Margin="0,0,0,10" FontSize="20" Text="Thông tin người dùng"></TextBlock>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Họ và tên"></TextBlock>
+                                    <TextBox Focusable="False" x:Name="CustomerNameAdd" Height="32" FontSize="18"
+                                                Text="User name cant edit"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Chức vụ "></TextBlock>
+                                    <ComboBox FontSize="18"
+                                              IsEnabled="False"
+                                              SelectedIndex="1"
+                                          materialDesign:HintAssist.Hint="Chọn chức vụ"
+                                          >
+                                        <ComboBoxItem>
+                                            Quản lý
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            Nhân viên
+                                        </ComboBoxItem>
+
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu "></TextBlock>
+                                    <TextBox Focusable="False"  x:Name="CustomerIdNumberAdd"  Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="CCCD i cant edit" />
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
+                                    <TextBox x:Name="CustomerPhoneNumberAdd" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số điện thoại" />
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Email"></TextBlock>
+                                    <TextBox x:Name="CustomerEmailAdd" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập email"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Ngày sinh"></TextBlock>
+                                    <TextBox x:Name="CustomerBirthAdd" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập ngày sinh"/>
+                                </StackPanel>
+
+                               
+                            </StackPanel>
+                        </Border>
+
+                        <Grid Margin="10,5" Grid.Row="2" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  Style="{StaticResource secondButton}">
+                                <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                    Hủy
+                                </Button>
+                            </Border>
+                            <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                                <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                >
+                                    Xác nhận
+                                </Button>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
+
+        </materialDesign:DialogHost.DialogContent>
+        <Border Background="#c0c9e8"
+            CornerRadius="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0"
                     Background="#edf3ff"
                     >
-                <Grid x:Name="GridNav" Width="60">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                    <Grid x:Name="GridNav" Width="60">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                    <Grid  Grid.Row="0">
-                        <Border 
+                        <Grid  Grid.Row="0">
+                            <Border 
                               Margin="14 0 0 0"
                               Width="32" Height="24"
                               HorizontalAlignment="Left"
                             Background="#161d36"
                             >
 
-                        </Border>
+                            </Border>
 
-                        <Label Content="Hotel MG"
+                            <Label Content="Hotel MG"
                                Foreground="#161d36"
                                FontWeight="Bold"
                                FontSize="16"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                Margin="60 0 0 0"/>
-                    </Grid>
-
-                    <!-- Start: MenuItem -->
-                    <StackPanel Background="#edf3ff"  Grid.Row="1" Margin="-1 40 0 20">
-                        <Button Style="{StaticResource PopupButtonStyle}" HorizontalAlignment="Left" x:Name="btnDatphong"   MouseEnter="btnDatphong_MouseEnter" MouseLeave="btnDatphong_MouseLeave" Click="btnDatphong_Click">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="Transparent" Margin="20 0">
-                                    <materialDesign:PackIcon Height="22" Width="22" Kind="Hotel" />
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Quản lý đặt phòng">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnPhong" HorizontalAlignment="Left"   MouseEnter="btnPhong_MouseEnter" MouseLeave="btnPhong_MouseLeave" Click="btnPhong_Click">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="Transparent" Margin="20 0" >
-                                    <materialDesign:PackIcon Height="22" Width="22" Kind="Home" />
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Quản lý các phòng">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnHoadon" HorizontalAlignment="Left"   MouseEnter="btnHoadon_MouseEnter" MouseLeave="btnHoadon_MouseLeave" Click="btnHoadon_Click">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="Transparent" Margin="20 0" >
-                                    <materialDesign:PackIcon Height="22" Width="22"  Kind="CashMultiple" />
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Quản lý hóa đơn">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnDichvu" HorizontalAlignment="Left"   MouseEnter="btnDichvu_MouseEnter" Click="btnDichvu_Click" MouseLeave="btnDichvu_MouseLeave">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="Transparent" Margin="20 0" >
-                                    <materialDesign:PackIcon  Height="22" Width="22" Kind="Food" />
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Quản lý dịch vụ">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnBaocao" HorizontalAlignment="Left"   MouseEnter="btnBaocao_MouseEnter" MouseLeave="btnBaocao_MouseLeave" Click="btnBaocao_Click">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="Transparent" Margin="20 0">
-                                    <materialDesign:PackIcon  Height="22" Width="22" Kind="ChartBar" />
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Báo cáo">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnNhansu" HorizontalAlignment="Left"   MouseEnter="btnNhansu_MouseEnter" MouseLeave="btnNhansu_MouseLeave" Click="btnNhansu_Click">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="Transparent" Margin="20 0">
-                                    <materialDesign:PackIcon  Height="22" Width="22" Kind="AccountBox" />
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Quản lý nhân sự">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnKhachhang" HorizontalAlignment="Left"   MouseEnter="btnKhachhang_MouseEnter" MouseLeave="btnKhachhang_MouseLeave" Click="btnKhachhang_Click">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="Transparent" Margin="20 0" >
-                                    <materialDesign:PackIcon Height="22" Width="22" Kind="AccountStar" />
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Quản lý khách hàng">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Separator Margin="20" Background="#22223B"/>
-
-                        <Button  Style="{StaticResource PopupButtonStyle}" x:Name="btnDangxuat" HorizontalAlignment="Left"   MouseEnter="btnDangxuat_MouseEnter" MouseLeave="btnDangxuat_MouseLeave" Click="btnDangxuat_Click">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="Transparent" Margin="20 0">
-                                    <materialDesign:PackIcon  Height="22" Width="22"  Kind="ExitToApp" />
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Đăng xuất">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <!-- <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnSetting" HorizontalAlignment="Left" Foreground="Beige" Style="{DynamicResource PopupButtonStyle}"  MouseEnter="btnSetting_MouseEnter" MouseLeave="btnSetting_MouseLeave">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                <Border Background="AntiqueWhite" Margin="24 0" Height="14" Width="14">
-                                </Border>
-                                <TextBlock FontWeight="Medium" FontSize="15" Text="Quản lý đặt phòng">
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>-->
-                    </StackPanel>
-                    <!-- End: MenuItem -->
-
-                    <!-- Start: Popup User Control -->
-                    <Popup Style="{StaticResource PopupStyle}" x:Name="Popup"  AllowsTransparency="True"  HorizontalOffset="0" VerticalOffset="10">
-                        <Grid>
-                            <!-- Start: Popup User Control -->
-                            <Border x:Name="Conatiner" CornerRadius="5" Width="Auto" Height="30" Margin="10 0 0 0" Background="#bde0fe" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <!-- Star: Reusable Text -->
-                                <TextBlock x:Name="PopupText" FontSize="14" FontWeight="Regular" Panel.ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5 10 5"/>
-                                <!-- Star: Reusable Text -->
-                            </Border>
-                            <!-- End: Popup User Control -->
                         </Grid>
-                    </Popup>
-                    <!-- End: Popup User Control -->
 
-                </Grid>
-            </Border>
+                        <!-- Start: MenuItem -->
+                        <StackPanel Background="#edf3ff"  Grid.Row="1" Margin="-1 40 0 20">
+                            <Button Style="{StaticResource PopupButtonStyle}" HorizontalAlignment="Left" x:Name="btnDatphong"   MouseEnter="btnDatphong_MouseEnter" MouseLeave="btnDatphong_MouseLeave" Click="btnDatphong_Click">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0">
+                                        <materialDesign:PackIcon Height="22" Width="22" Kind="Hotel" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý đặt phòng">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnPhong" HorizontalAlignment="Left"   MouseEnter="btnPhong_MouseEnter" MouseLeave="btnPhong_MouseLeave" Click="btnPhong_Click">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0" >
+                                        <materialDesign:PackIcon Height="22" Width="22" Kind="Home" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý các phòng">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnHoadon" HorizontalAlignment="Left"   MouseEnter="btnHoadon_MouseEnter" MouseLeave="btnHoadon_MouseLeave" Click="btnHoadon_Click">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0" >
+                                        <materialDesign:PackIcon Height="22" Width="22"  Kind="CashMultiple" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý hóa đơn">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnDichvu" HorizontalAlignment="Left"   MouseEnter="btnDichvu_MouseEnter" Click="btnDichvu_Click" MouseLeave="btnDichvu_MouseLeave">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0" >
+                                        <materialDesign:PackIcon  Height="22" Width="22" Kind="Food" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý dịch vụ">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnBaocao" HorizontalAlignment="Left"   MouseEnter="btnBaocao_MouseEnter" MouseLeave="btnBaocao_MouseLeave" Click="btnBaocao_Click">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0">
+                                        <materialDesign:PackIcon  Height="22" Width="22" Kind="ChartBar" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="16" Text="Báo cáo">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnNhansu" HorizontalAlignment="Left"   MouseEnter="btnNhansu_MouseEnter" MouseLeave="btnNhansu_MouseLeave" Click="btnNhansu_Click">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0">
+                                        <materialDesign:PackIcon  Height="22" Width="22" Kind="AccountBox" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý nhân sự">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnKhachhang" HorizontalAlignment="Left"   MouseEnter="btnKhachhang_MouseEnter" MouseLeave="btnKhachhang_MouseLeave" Click="btnKhachhang_Click">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0" >
+                                        <materialDesign:PackIcon Height="22" Width="22" Kind="AccountStar" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý khách hàng">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Separator Margin="20" Background="#22223B"/>
+                            <Button  Style="{StaticResource PopupButtonStyle}" x:Name="btnDangxuat" HorizontalAlignment="Left"   MouseEnter="btnDangxuat_MouseEnter" MouseLeave="btnDangxuat_MouseLeave" Click="btnDangxuat_Click">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0">
+                                        <materialDesign:PackIcon  Height="22" Width="22"  Kind="ExitToApp" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="15" Text="Đăng xuất">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnCurrentUser" HorizontalAlignment="Left" Click="currentUser_Click"   MouseEnter="btnUser_MouseEnter" MouseLeave="btnUser_MouseLeave">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0">
+                                        <materialDesign:PackIcon  Height="22" Width="22"  Kind="AccountCircle" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" Name="CurrentUserTB" FontSize="15" Text="User Name">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <!-- End: MenuItem -->
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal">
-                    <ToggleButton x:Name="Tg_Btn" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource iToggleButtonStyle}" HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" Margin="10,15,0,15" Height="30" Width="30">
-                        <ToggleButton.Triggers>
-                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="HideStackPanel">
-                                        <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="210" To="60" Duration="0:0:0.5">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="ShowStackPanel">
-                                        <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="60" To="210" Duration="0:0:0.5">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </ToggleButton.Triggers>
-                    </ToggleButton>
-                    <TextBlock x:Name="title" Text=" title " Margin="10 0" FontSize="24" Foreground="#161d36" FontWeight="Bold"
+                        <!-- Start: Popup User Control -->
+                        <Popup Style="{StaticResource PopupStyle}" x:Name="Popup"  AllowsTransparency="True"  HorizontalOffset="0" VerticalOffset="10">
+                            <Grid>
+                                <!-- Start: Popup User Control -->
+                                <Border x:Name="Conatiner" CornerRadius="5" Width="Auto" Height="30" Margin="10 0 0 0" Background="#bde0fe" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <!-- Star: Reusable Text -->
+                                    <TextBlock x:Name="PopupText" FontSize="14" FontWeight="Regular" Panel.ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 5 10 5"/>
+                                    <!-- Star: Reusable Text -->
+                                </Border>
+                                <!-- End: Popup User Control -->
+                            </Grid>
+                        </Popup>
+                        <Popup Style="{StaticResource PopupStyle}" x:Name="PopupUserOption"  AllowsTransparency="True"  HorizontalOffset="0" VerticalOffset="10">
+                            <Grid>
+                                <!-- Start: Popup User Control -->
+                                <Border CornerRadius="5" Width="Auto" Height="auto" Margin="10" Padding="0,10" Background="#bde0fe" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="SkyBlue"/>
+                                    </Border.Effect>
+                                    <StackPanel>
+                                        <Button HorizontalAlignment="Left" Grid.Column="0"
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="16"
+                                VerticalContentAlignment="Center" 
+                                                Click="suathongtin_click"
+                                >
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Height="24" Width="24" Kind="Pencil" />
+
+                                                    <TextBlock Margin="10,0">Sửa thông tin</TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                        <Separator Margin="10" Background="#22223B"/>
+                                        <Button HorizontalAlignment="Left" Grid.Column="0"
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="16"
+                                VerticalContentAlignment="Center" 
+                                Click="doimatkhau_click"
+
+                                >
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Margin="20,0,-20,0" Height="24" Width="24" Kind="KeyVariant" >
+                                                        <materialDesign:PackIcon.RenderTransform>
+                                                            <RotateTransform  Angle="90"/>
+                                                        </materialDesign:PackIcon.RenderTransform>
+                                                    </materialDesign:PackIcon>
+                                                    <TextBlock Margin="10,0">Đổi mật khẩu</TextBlock>
+
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                                <!-- End: Popup User Control -->
+                            </Grid>
+                        </Popup>
+                        <!-- End: Popup User Control -->
+
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <ToggleButton x:Name="Tg_Btn" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource iToggleButtonStyle}" HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" Margin="10,15,0,15" Height="30" Width="30">
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="HideStackPanel">
+                                            <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="210" To="60" Duration="0:0:0.5">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="ShowStackPanel">
+                                            <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="60" To="210" Duration="0:0:0.5">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+                        <TextBlock x:Name="title" Text=" title " Margin="10 0" FontSize="24" Foreground="#161d36" FontWeight="Bold"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                </StackPanel>
+                    </StackPanel>
 
-               
 
-                <Frame Grid.Row="1"
+
+                    <Frame Grid.Row="1"
                        Name="fContainer"
                        Margin="20 0 20 20"       
                        NavigationUIVisibility="Hidden">
 
-                </Frame>
+                    </Frame>
+
+                </Grid>
+
+
 
             </Grid>
-
-
-
-        </Grid>
-    </Border>
+        </Border>
+    </materialDesign:DialogHost>
 </Window>
