@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Threading.Tasks;
 
 
 namespace Hotel_Management.Pages.QuanLyThuePhong
@@ -230,115 +231,127 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 roomNumber = room["roomName"].AsString;
                 roomType = room["roomType"].AsString;
                 LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                phongtrongList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, });
+                phongtrongList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture });
             }
 
         }
 
-        public void LayPhongThue(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer)
+        public async void LayPhongThue(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer)
         {
-            ObjectId roomId;
-            string roomNumber;
-            string roomType;
-            ObjectId customerId;
-            string customerName = "";
-            string customerPhone = "";
-            List<string> roomFurniture = new List<string>();
-            var filterEmptyRoom = Builders<BsonDocument>.Filter.Eq("roomState", "Đang thuê");
-            List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
-            List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
-            List<BsonDocument> documentsReceipt = collectionReceipt.Find(new BsonDocument()).ToList();
-            List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
-            phongthueList.Clear();
-            foreach (BsonDocument room in documentsEmptyRoom)
+            await Task.Run(() => 
             {
-                roomId = room["_id"].AsObjectId;
-                roomNumber = room["roomName"].AsString;
-                roomType = room["roomType"].AsString;
-                LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                foreach (BsonDocument receipt in documentsReceipt)
+                ObjectId roomId;
+                string roomNumber;
+                string roomType;
+                ObjectId customerId;
+                string customerName = "";
+                string customerPhone = "";
+                List<string> roomFurniture = new List<string>();
+                var filterEmptyRoom = Builders<BsonDocument>.Filter.Eq("roomState", "Đang thuê");
+                List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
+                List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
+                List<BsonDocument> documentsReceipt = collectionReceipt.Find(new BsonDocument()).ToList();
+                List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
+                phongthueList.Clear();
+                foreach (BsonDocument room in documentsEmptyRoom)
                 {
-                    if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
+                    roomId = room["_id"].AsObjectId;
+                    roomNumber = room["roomName"].AsString;
+                    roomType = room["roomType"].AsString;
+                    LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
+                    foreach (BsonDocument receipt in documentsReceipt)
                     {
-                        customerId = receipt["customerId"].AsObjectId;
-                        foreach (BsonDocument customer in documentsCustomer)
+                        if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
                         {
-                            if (customerId == customer["_id"].AsObjectId)
+                            customerId = receipt["customerId"].AsObjectId;
+                            foreach (BsonDocument customer in documentsCustomer)
                             {
-                                customerName = customer["customerName"].AsString;
-                                customerPhone = customer["phoneNumber"].AsString;
-                                break;
+                                if (customerId == customer["_id"].AsObjectId)
+                                {
+                                    customerName = customer["customerName"].AsString;
+                                    customerPhone = customer["phoneNumber"].AsString;
+                                    break;
+                                }
                             }
+                            break;
                         }
-                        break;
                     }
+                    phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
                 }
-                phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
-            }
+            });
+            
 
         }
 
-        public void LayPhongDat(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer)
+        public async void LayPhongDat(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer)
         {
-            ObjectId roomId;
-            string roomNumber;
-            string roomType;
-            ObjectId customerId;
-            string customerName = "";
-            string customerPhone = "";
-            List<string> roomFurniture = new List<string>();
-            var filterEmptyRoom = Builders<BsonDocument>.Filter.Eq("roomState", "Đã đặt");
-            List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
-            List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
-            List<BsonDocument> documentsReceipt = collectionReceipt.Find(new BsonDocument()).ToList();
-            List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
-            phongdatList.Clear();
-            foreach (BsonDocument room in documentsEmptyRoom)
+            await Task.Run(() =>
             {
-                roomId = room["_id"].AsObjectId;
-                roomNumber = room["roomName"].AsString;
-                roomType = room["roomType"].AsString;
-                LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                foreach (BsonDocument receipt in documentsReceipt)
+                ObjectId roomId;
+                string roomNumber;
+                string roomType;
+                ObjectId customerId;
+                string customerName = "";
+                string customerPhone = "";
+                List<string> roomFurniture = new List<string>();
+                var filterEmptyRoom = Builders<BsonDocument>.Filter.Eq("roomState", "Đã đặt");
+                List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
+                List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
+                List<BsonDocument> documentsReceipt = collectionReceipt.Find(new BsonDocument()).ToList();
+                List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
+                phongdatList.Clear();
+                foreach (BsonDocument room in documentsEmptyRoom)
                 {
-                    if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
+                    roomId = room["_id"].AsObjectId;
+                    roomNumber = room["roomName"].AsString;
+                    roomType = room["roomType"].AsString;
+                    LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
+                    foreach (BsonDocument receipt in documentsReceipt)
                     {
-                        customerId = receipt["customerId"].AsObjectId;
-                        foreach (BsonDocument customer in documentsCustomer)
+                        if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
                         {
-                            if (customerId == customer["_id"].AsObjectId)
+                            customerId = receipt["customerId"].AsObjectId;
+                            foreach (BsonDocument customer in documentsCustomer)
                             {
-                                customerName = customer["customerName"].AsString;
-                                customerPhone = customer["phoneNumber"].AsString;
-                                break;
+                                if (customerId == customer["_id"].AsObjectId)
+                                {
+                                    customerName = customer["customerName"].AsString;
+                                    customerPhone = customer["phoneNumber"].AsString;
+                                    break;
+                                }
                             }
+                            break;
                         }
-                        break;
                     }
+                    phongdatList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
                 }
-                phongdatList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
-            }
+            });
+            
 
         }
 
-        public void LayPhongBaoTri(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture)
+        public async void LayPhongBaoTri(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture)
         {
-            string roomNumber;
-            string roomType;
-            string roomState;
-            List<string> roomFurniture = new List<string>();
-            var filterEmptyRoom = Builders<BsonDocument>.Filter.Where(x => x["roomState"] == "Đang bảo trì" || x["roomState"] == "Đang dọn dẹp");
-            List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
-            List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
-            phongbaotriList.Clear();
-            foreach (BsonDocument room in documentsEmptyRoom)
+            await Task.Run(() =>
             {
-                roomNumber = room["roomName"].AsString;
-                roomType = room["roomType"].AsString;
-                roomState = room["roomState"].AsString;
-                LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                phongbaotriList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = roomState });
-            }
+                string roomNumber;
+                string roomType;
+                string roomState;
+                List<string> roomFurniture = new List<string>();
+                var filterEmptyRoom = Builders<BsonDocument>.Filter.Where(x => x["roomState"] == "Đang bảo trì" || x["roomState"] == "Đang dọn dẹp");
+                List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
+                List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
+                phongbaotriList.Clear();
+                foreach (BsonDocument room in documentsEmptyRoom)
+                {
+                    roomNumber = room["roomName"].AsString;
+                    roomType = room["roomType"].AsString;
+                    roomState = room["roomState"].AsString;
+                    LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
+                    phongbaotriList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = roomState });
+                }
+            });
+            
 
         }
 
