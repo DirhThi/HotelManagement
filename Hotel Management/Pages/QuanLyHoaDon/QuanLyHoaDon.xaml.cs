@@ -172,8 +172,6 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                         receiptListDisplay.Remove(item);
 
                     }
-                    DGHoadon.ItemsSource = receiptListDisplay;
-                    textSoLuong.Text = "Số lượng: " + DGHoadon.Items.Count.ToString();
                     tongTienNgay = 0;
                     for(int i = 0; i < receiptListDisplay.Count; i++)
                     {
@@ -217,6 +215,13 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                     receiptListDisplay.Add(P);
                 }
             }
+            tongTienNgay = 0;
+            for (int i = 0; i < receiptListDisplay.Count; i++)
+            {
+                tongTienNgay += receiptListDisplay[i].Total;
+            }
+            textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();
+            textTongTien.Text = "Tổng tiền: " + tongTienNgay.ToString();
             DGHoadon.Items.Refresh();
         }
     }
