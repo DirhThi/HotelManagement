@@ -219,5 +219,22 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             }
             DGHoadon.Items.Refresh();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            receiptListDisplay.RemoveAt(0);
+            DGHoadon.Items.Refresh();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Dialog.IsOpen = true;
+        }
+
+        private void CancelDialog(object sender, RoutedEventArgs e)
+        {
+
+            Dialog.IsOpen = false;
+        }
     }
 }
