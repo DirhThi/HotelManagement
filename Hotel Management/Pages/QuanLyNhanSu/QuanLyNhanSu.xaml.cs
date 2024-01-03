@@ -94,7 +94,7 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
             if (DGNhanVien.SelectedItems.Count != 0)
             {
                 MessageBoxButton button = MessageBoxButton.YesNo;
-                MessageBoxResult result = MessageBox.Show("Xóa khách hàng đã chọn ?", "Cảnh báo", button, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Xóa nhân viên đã chọn ?", "Cảnh báo", button, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
                     List<NhanVien> items = DGNhanVien.SelectedItems.Cast<NhanVien>().ToList();
@@ -135,7 +135,7 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
         {
 
             MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxResult result = MessageBox.Show("Xóa khách hàng?", "Cảnh báo", button, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Xóa nhân viên ?", "Cảnh báo", button, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
             {
