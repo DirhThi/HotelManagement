@@ -80,18 +80,36 @@
                             <DataGridTextColumn MinWidth="100"   Header="Ngày tạo" Binding="{Binding CreateDate}" IsReadOnly="True" />
                             <DataGridTextColumn MinWidth="150"  Header="Tên khách hàng" Binding="{Binding nameCustomer}" IsReadOnly="True" Width="*"/>
                             <DataGridTextColumn MinWidth="100"   Header="Tên nhân viên" Binding="{Binding nameStaff}" IsReadOnly="True" />
-                            <DataGridTemplateColumn Width="100" Header="Tùy chỉnh" IsReadOnly="True"     CanUserResize="False" CanUserReorder="False">
+                            <DataGridTemplateColumn Width="120" Header="Tùy chỉnh" IsReadOnly="True"     CanUserResize="False" CanUserReorder="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+                                        <StackPanel Margin="-20,0,0,0" Orientation="Horizontal">
+                                            <Button Background="Transparent" Foreground="#8338ec" BorderThickness="0">
 
-                                            <Button.Content>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon  Height="24" Width="24" Kind="Printer" />
-                                                    <materialDesign:PackIcon Height="24" Width="24" Kind="Delete" />
-                                                </StackPanel>
-                                            </Button.Content>
-                                        </Button>
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon  Height="24" Width="24" Kind="FileDocument" />
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button  Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon  Height="24" Width="24" Kind="Printer" />
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon Height="24" Width="24" Kind="Delete" />
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+                                        </StackPanel>
+                                        
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

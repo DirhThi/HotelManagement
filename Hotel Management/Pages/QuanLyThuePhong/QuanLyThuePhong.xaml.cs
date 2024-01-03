@@ -19,63 +19,17 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
         List<int> phongItems = new List<int>();
         List<Phong> phongtrongList = new List<Phong>() /*{
             new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" } },
-            new Phong() { maphong = "102", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh","Máy lạnh","Wifi" }},
-            new Phong() { maphong = "104", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh","Máy lạnh","Wifi" }},
-            new Phong() { maphong = "201", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "203", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "204", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "301", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "302", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "401", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "402", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "502", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "503", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "504", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-
+         ư
         }*/;
 
         List<Phong> phongthueList = new List<Phong>() /*{
-             new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" } },
-            new Phong() { maphong = "102", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh","Máy lạnh","Wifi" }},
-            new Phong() { maphong = "104", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh","Máy lạnh","Wifi" }},
-            new Phong() { maphong = "201", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "203", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "204", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "301", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "302", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "401", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "402", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "502", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "503", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "504", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-        }*/;
+}*/;
 
         List<Phong> phongdatList = new List<Phong>() /*{
-             new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" } },
-            new Phong() { maphong = "102", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh","Máy lạnh","Wifi" }},
-            new Phong() { maphong = "104", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh","Máy lạnh","Wifi" }},
-            new Phong() { maphong = "201", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "203", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "204", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "301", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "302", loaiphong = "Standard",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "401", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "402", loaiphong = "Deluxe",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "502", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "503", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "504", loaiphong = "Vip",tenkhachhang="Nguyễn Đình Thi",sodienthoai="0909090909",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-        }*/;
+          }*/;
 
         List<Phong> phongbaotriList = new List<Phong>() /*{
-            new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Đang dọn dẹp",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Đang dọn dẹp",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Đang dọn dẹp",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Đang dọn dẹp",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Đang dọn dẹp",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Đang dọn dẹp",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Đang dọn dẹp",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-            new Phong() { maphong = "101", loaiphong = "Standard",tenkhachhang="Đang dọn dẹp",ListCsvc=new List<string> { "Bàn", "Ghế", "Tivi", "Giường đôi", "Tủ lạnh", "Máy lạnh", "Wifi" }},
-
+  
         }*/;
         public QuanLyThuePhong()
         {
