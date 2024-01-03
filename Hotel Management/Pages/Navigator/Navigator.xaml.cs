@@ -235,7 +235,7 @@ namespace Hotel_Management.Pages.Navigator
             CustomerIdNumberAdd.Text = Auth.Login.currentUser.IdNumber;
             CustomerPhoneNumberAdd.Text = Auth.Login.currentUser.PhoneNumber;
             CustomerEmailAdd.Text = Auth.Login.currentUser.Email;
-            CustomerBirthAdd.Text = Auth.Login.currentUser.DateOfBirth.ToString();
+            CustomerBirthAdd.SelectedDate = Auth.Login.currentUser.DateOfBirth;
 
             borderedituser.Visibility = Visibility.Visible;
             Dialog.IsOpen = true;
@@ -304,7 +304,7 @@ namespace Hotel_Management.Pages.Navigator
         }
 
         private void SuaThongTinCurrentUser_Click(object sender, RoutedEventArgs e)
-        {
+        {         
             MessageBoxResult messageBoxResult = MessageBox.Show("Cập nhập thông tin người dùng?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.No)
                 return;
@@ -313,12 +313,13 @@ namespace Hotel_Management.Pages.Navigator
             Auth.Login.currentUser.IdNumber = CustomerIdNumberAdd.Text;
             Auth.Login.currentUser.PhoneNumber = CustomerPhoneNumberAdd.Text;
             Auth.Login.currentUser.Email = CustomerEmailAdd.Text;
-            //  Auth.Login.currentUser.DateOfBirth=CustomerBirthAdd.Text;
+            Auth.Login.currentUser.DateOfBirth=CustomerBirthAdd.SelectedDate.Value;
+           
             var filterUser = Builders<BsonDocument>.Filter.Eq("accountId", Auth.Login.currentUser.AccoutId);
             var updateUser = Builders<BsonDocument>.Update.Set("idNumber", CustomerIdNumberAdd.Text)
                                                             .Set("phoneNumber", CustomerPhoneNumberAdd.Text)
                                                             .Set("email", CustomerEmailAdd.Text)
-                                                            /*.Set("dateOfBirth",)*/;
+                                                            .Set("dateOfBirth", DateTime.SpecifyKind(CustomerBirthAdd.SelectedDate.Value, DateTimeKind.Utc));
 
             userCollection.UpdateOne(filterUser, updateUser);
         }
