@@ -67,7 +67,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
-                                >
+                                Click="DoiMatKhauCurrentUser_Click">
                                         Xác nhận
                                     </Button>
                                 </Border>
@@ -154,6 +154,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                Click="SuaThongTinCurrentUser_Click"
                                 >
                                         Xác nhận
                                     </Button>

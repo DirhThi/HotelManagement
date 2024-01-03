@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hotel_Management.MongoDatabase;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hotel_Management.Pages.Navigator
 {
@@ -21,15 +14,13 @@ namespace Hotel_Management.Pages.Navigator
     /// </summary>
     public partial class Navigator : Page
     {
-
         private Button[] menuButton;
 
         public Navigator()
         {
             InitializeComponent();
+            CurrentUserTB.Text = Auth.Login.currentUser.UserName;
         }
-
-       
 
         private void MenuBtnChoose(Button bt)
         {
@@ -45,7 +36,6 @@ namespace Hotel_Management.Pages.Navigator
                     btn.Style = (Style)Application.Current.Resources["PopupButtonStyle"];
                 }
             }
-
         }
 
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -197,7 +187,8 @@ namespace Hotel_Management.Pages.Navigator
                 Popup.PlacementTarget = btnCurrentUser;
                 Popup.Placement = PlacementMode.Right;
                 Popup.IsOpen = true;
-                PopupText.Text = "User Name";
+                //PopupText.Text = "User Name";
+                PopupText.Text = Auth.Login.currentUser.UserName;
             }
         }
 
@@ -239,6 +230,13 @@ namespace Hotel_Management.Pages.Navigator
         {
             PopupUserOption.Visibility = Visibility.Collapsed;
             PopupUserOption.IsOpen = false;
+
+            CustomerNameAdd.Text = Auth.Login.currentUser.UserName;
+            CustomerIdNumberAdd.Text = Auth.Login.currentUser.IdNumber;
+            CustomerPhoneNumberAdd.Text = Auth.Login.currentUser.PhoneNumber;
+            CustomerEmailAdd.Text = Auth.Login.currentUser.Email;
+            CustomerBirthAdd.Text = Auth.Login.currentUser.DateOfBirth.ToString();
+
             borderedituser.Visibility = Visibility.Visible;
             Dialog.IsOpen = true;
         }
@@ -305,5 +303,50 @@ namespace Hotel_Management.Pages.Navigator
             title.Text = "Quản lý khách hàng";
         }
 
+        private void SuaThongTinCurrentUser_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Cập nhập thông tin người dùng?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.No)
+                return;
+            IMongoCollection<BsonDocument> userCollection = MongoHandler.GetInstance().GetCollection("User");
+            var filterAccountId = Builders<BsonDocument>.Filter.Eq("accountId", Auth.Login.currentUser.AccoutId);
+            Auth.Login.currentUser.IdNumber = CustomerIdNumberAdd.Text;
+            Auth.Login.currentUser.PhoneNumber = CustomerPhoneNumberAdd.Text;
+            Auth.Login.currentUser.Email = CustomerEmailAdd.Text;
+            //  Auth.Login.currentUser.DateOfBirth=CustomerBirthAdd.Text;
+            var filterUser = Builders<BsonDocument>.Filter.Eq("accountId", Auth.Login.currentUser.AccoutId);
+            var updateUser = Builders<BsonDocument>.Update.Set("idNumber", CustomerIdNumberAdd.Text)
+                                                            .Set("phoneNumber", CustomerPhoneNumberAdd.Text)
+                                                            .Set("email", CustomerEmailAdd.Text)
+                                                            /*.Set("dateOfBirth",)*/;
+
+            userCollection.UpdateOne(filterUser, updateUser);
+        }
+
+        private void DoiMatKhauCurrentUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (oldpassword.Password != Auth.Login.currentUser.AccountPassword)
+            {
+                MessageBox.Show("Mật khẩu không chính xác!");
+            }
+            else if (confirmpassword.Password != newpassword.Password)
+            {
+                MessageBox.Show("Mật khẩu xác nhận không khớp!");
+            }
+            else
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Cập nhập thông tin người dùng?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.No)
+                    return;
+
+                IMongoCollection<BsonDocument> userCollection = MongoHandler.GetInstance().GetCollection("User");
+                var filterAccountId = Builders<BsonDocument>.Filter.Eq("accountId", Auth.Login.currentUser.AccoutId);
+                Auth.Login.currentUser.AccountPassword = newpassword.Password;
+                var filterUser = Builders<BsonDocument>.Filter.Eq("accountId", Auth.Login.currentUser.AccoutId);
+                var updateUser = Builders<BsonDocument>.Update.Set("accountPassword", newpassword.Password);
+                userCollection.UpdateOne(filterUser, updateUser);
+            }
+
+        }
     }
 }

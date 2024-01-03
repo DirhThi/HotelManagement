@@ -119,8 +119,6 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             {
                 phongList.Sort((left, right) => left.maphong.CompareTo(right.maphong));
                 phongIC.Items.Refresh();
-
-
             }
             if (sortCB.SelectedIndex == 1)
             {
@@ -132,25 +130,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 phongList.Sort((left, right) => left.trangthai.CompareTo(right.trangthai));
                 phongIC.Items.Refresh();
             }
-        }
-        List<Room> GetListRoom()
-        {
-            // lấy list từ database
-            List<Room> list = new List<Room>();
-            list.Add(new Room(1, "102", 1, "Normal", "Availble"));
-            list.Add(new Room(2, "104", 1, "Normal", "Availble"));
-            list.Add(new Room(3, "106", 1, "Normal", "Availble"));
-            list.Add(new Room(4, "202", 2, "Normal", "Availble"));
-            list.Add(new Room(5, "204", 2, "Normal", "Availble"));
-            list.Add(new Room(6, "206", 2, "Normal", "Availble"));
-
-            return list;
-        }
-
-        
-
-
-
+        }    
         private void themphong_click(object sender, RoutedEventArgs e)
         {
             dialogThemphong.Visibility = Visibility.Visible;
@@ -254,6 +234,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
 
         void GetListPhong()
         {
+            phongListDisplay.Clear();
             phongList.Clear();
             List<BsonDocument> rooms = MongoHandler.GetInstance().GetCollection("Room").Find(new BsonDocument()).ToList();
             foreach (BsonDocument room in rooms)
@@ -313,16 +294,15 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         }
 
         private void SuaTrangThaiPhong_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (messageBoxResult == MessageBoxResult.No)
-                return;
-
+        {      
             string maphong = (BtnSuaTrangThaiPhong.Tag).ToString();
             var filterPhong = Builders<BsonDocument>.Filter.Eq("roomName", maphong);
             BsonDocument room = MongoHandler.GetInstance().GetCollection("Room").Find(filterPhong).First();
             if (room["roomState"].ToString() != CBtrangthai.SelectedItem.ToString())
             {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Sửa trạng thái phòng?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.No)
+                    return;
                 var updateState = Builders<BsonDocument>.Update.Set("roomState", CBtrangthai.SelectedItem.ToString());
                 MongoHandler.GetInstance().GetCollection("Room").UpdateOne(filterPhong, updateState);
             }
@@ -331,11 +311,11 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
 
         private void XacNhanThemPhong_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Thêm phòng mới?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.No)
                 return;
 
-            if(TBMaPhong.Text==""||CBLoaiPhong2.SelectedIndex==-1)
+            if (TBMaPhong.Text==""||CBLoaiPhong2.SelectedIndex==-1)
             {
                 MessageBox.Show("Lỗi mã phòng hoặc loại phòng");
                 return;
@@ -383,7 +363,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
 
         private void CapNhapCSVC_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Cập nhập cở sở vật chất?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.No)
                 return;
 
@@ -413,7 +393,8 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
 
         private void SuaLoaiPhong_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            string message = (CBLoaiPhong3.SelectedIndex == 0) ? "Thêm loại phòng" : "Cập nhật loại phòng?";
+            MessageBoxResult messageBoxResult = MessageBox.Show(message, "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.No)
                 return;
 
@@ -468,7 +449,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
 
         private void XacNhanThemTepPhong_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Thêm tệp phòng?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.No)
                 return;
             IMongoCollection<BsonDocument> roomCollection = MongoHandler.GetInstance().GetCollection("Room");
