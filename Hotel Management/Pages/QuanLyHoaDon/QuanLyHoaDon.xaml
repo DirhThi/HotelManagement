@@ -117,7 +117,7 @@
                                 BorderThickness="0"
                                 FontSize="18"
                                 >
-                                    Xác nhận
+                                    In
                                 </Button>
                             </Border>
                         </Grid>

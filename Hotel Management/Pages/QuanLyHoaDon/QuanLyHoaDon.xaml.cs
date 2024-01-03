@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using MongoDB.Driver;
 using MongoDB.Bson;
+using static Hotel_Management.Pages.QuanLyKhachHang.QuanLyKhachHang;
 
 namespace Hotel_Management.Pages.QuanLyHoaDon
 {
@@ -63,6 +64,7 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             List<BsonDocument> documentsReceipt = collectionReceipt.Find(filterReceiptByDate).ToList();
             receiptList.Clear();
             receiptListDisplay.Clear();
+            tongTienNgay = 0;
             foreach (BsonDocument receipt in documentsReceipt)
             {
                 receiptIdCode = receipt["idCode"].AsString;
@@ -227,8 +229,37 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            receiptListDisplay.RemoveAt(0);
-            DGHoadon.Items.Refresh();
+            //receiptListDisplay.RemoveAt(0);
+            //DGHoadon.Items.Refresh();
+
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxResult result = MessageBox.Show("Xóa hóa đơn?", "Cảnh báo", button, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Bill item = ((FrameworkElement)sender).DataContext as Bill;
+                
+                //Xóa ngoài UI (Không xóa DB)
+                receiptList.Remove(item);
+                receiptListDisplay.Remove(item);
+                DGHoadon.ItemsSource = receiptListDisplay;
+                tongTienNgay = 0;
+                for (int i = 0; i < receiptListDisplay.Count; i++)
+                {
+                    tongTienNgay += receiptListDisplay[i].Total;
+                }
+                
+
+                //Xóa DB và update UI
+                //collectionReceipt.DeleteOne(x => x["idCode"] == item.ID);
+                //LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
+
+                DGHoadon.ItemsSource = receiptListDisplay;
+                textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();
+                textTongTien.Text = "Tổng tiền: " + tongTienNgay.ToString();
+                DGHoadon.Items.Refresh();
+
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
