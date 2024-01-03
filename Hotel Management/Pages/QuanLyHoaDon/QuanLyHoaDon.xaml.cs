@@ -375,6 +375,7 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                         serviceList.Add(new UsedService { nameServiceUsed = serviceName, price = servicePrice.ToString(), soluong = serviceQuantity.ToString(), total = serviceTotal.ToString() + " đ" });
                     }
                     serviceusedDG.ItemsSource= serviceList;
+                    serviceusedDG.Items.Refresh();
                     totalbilltext.Text = (receipt["roomCost"].AsInt32 + servicesTotal).ToString() + " đ";
                 }
                 else
