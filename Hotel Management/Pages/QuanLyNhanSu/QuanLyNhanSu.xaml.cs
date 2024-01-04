@@ -524,16 +524,14 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
         {
             bordersuanhanvien.Visibility = Visibility.Collapsed;
             borderhoadon.Visibility = Visibility.Visible;
-            /*
             Bill item = DGHoadonnhanvien.SelectedItem as Bill;
             if (item != null)
             {
                 LayChiTietHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionEmployee, collectionService, collectionServiceUsed, item);
             }
-            */
         }
 
-        /*
+        
         public void LayChiTietHoaDon(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer, IMongoCollection<BsonDocument> collectionUser, IMongoCollection<BsonDocument> collectionService, IMongoCollection<BsonDocument> collectionServiceUsed, Bill item)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("idCode", item.ID);
@@ -581,7 +579,7 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                 }
             }
         }
-        */
+        
 
         private void AcceptAddButton_Click(object sender, RoutedEventArgs e)
         {
