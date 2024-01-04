@@ -255,7 +255,6 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
 
         private void EditCustomer_Click(object sender, RoutedEventArgs e)
         {
-            borderkhachhang.Visibility = Visibility.Visible;
             Khachhang item = ((FrameworkElement)sender).DataContext as Khachhang;
             kh = item;
             LayChiTietKhachHang(collectionCustomer, item);
@@ -265,12 +264,15 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
             CustomerName.Focusable = false;
             CustomerIdNumber.Focusable = false;
             DGHoadonkhachhang.Items.Refresh();
+            borderhoadon.Visibility = Visibility.Collapsed;
+            borderkhachhang.Visibility = Visibility.Visible;
             Dialog.IsOpen = true;
         }
 
         private void CancelDialog(object sender, RoutedEventArgs e)
         {
             borderhoadon.Visibility = Visibility.Collapsed;
+            borderkhachhang.Visibility = Visibility.Visible;
             Dialog.IsOpen = false;
 
         }
