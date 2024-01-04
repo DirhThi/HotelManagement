@@ -236,7 +236,6 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
 
         private void EditStaff_Click(object sender, RoutedEventArgs e)
         {
-            bordersuanhanvien.Visibility = Visibility.Visible;
             //Editing staff, set isEditing to true (then reset to false after done editing)
             isEditing = true;
 
@@ -249,7 +248,9 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
             CustomerName.Focusable = false;
             CustomerIdNumber.Focusable = false;
             DGHoadonnhanvien.Items.Refresh();
-            borderthemnhanvien.Visibility = Visibility.Collapsed;
+            borderhoadon.Visibility =Visibility.Collapsed ;
+            bordersuanhanvien.Visibility = Visibility.Visible;
+
             Dialog.IsOpen = true;
 
         }
@@ -272,6 +273,7 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
         {
             bordersuanhanvien.Visibility = Visibility.Collapsed;
             borderthemnhanvien.Visibility = Visibility.Collapsed;
+            borderhoadon.Visibility = Visibility.Collapsed;
             //Reset isEditing to false
             isEditing = false;
             Dialog.IsOpen = false;
@@ -520,7 +522,8 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
 
         private void DGHoadonnhanvien_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show("navigate tới hóa đơn chi tiết");
+            bordersuanhanvien.Visibility = Visibility.Collapsed;
+            borderhoadon.Visibility = Visibility.Visible;
             /*
             Bill item = DGHoadonnhanvien.SelectedItem as Bill;
             if (item != null)
@@ -637,6 +640,12 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
 
 
             }
+        }
+
+        private void CancelHoadon(object sender, RoutedEventArgs e)
+        {
+            borderhoadon.Visibility = Visibility.Collapsed;
+            bordersuanhanvien.Visibility = Visibility.Visible;
         }
     }
 }
