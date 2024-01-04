@@ -34,6 +34,10 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
         public QuanLyThuePhong()
         {
             InitializeComponent();
+            phongtrongIC.ItemsSource = phongtrongList;
+            phongthueIC.ItemsSource = phongthueList;
+            phongdatIC.ItemsSource = phongdatList;
+            phongbaotriIC.ItemsSource = phongbaotriList;
             MongoClient client = new MongoClient("mongodb+srv://vitalis:arthur010203@cluster0.4opqwlz.mongodb.net/");
             IMongoDatabase database = client.GetDatabase("HotelManagement");
             IMongoCollection<BsonDocument> collectionRoom = database.GetCollection<BsonDocument>("Room");
@@ -46,10 +50,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             LayPhongDat(collectionRoom, collectionRoomType, collectionFurniture, collectionReceipt, collectionCustomer);
             LayPhongBaoTri(collectionRoom, collectionRoomType, collectionFurniture);
             //lấy dữ liệu các phòng thêm vào list tương ứng đã tạo bên trên .
-            phongtrongIC.ItemsSource = phongtrongList;
-            phongthueIC.ItemsSource = phongthueList;
-            phongdatIC.ItemsSource = phongdatList;
-            phongbaotriIC.ItemsSource = phongbaotriList;
+ 
         }
 
         private void Phong_click(object sender, RoutedEventArgs e)
@@ -190,10 +191,8 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
 
         }
 
-        public async void LayPhongThue(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer)
+        public void LayPhongThue(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer)
         {
-            await Task.Run(() => 
-            {
                 ObjectId roomId;
                 string roomNumber;
                 string roomType;
@@ -232,15 +231,12 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                     }
                     phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
                 }
-            });
-            
+            phongthueIC.Items.Refresh();
 
         }
 
         public async void LayPhongDat(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer)
         {
-            await Task.Run(() =>
-            {
                 ObjectId roomId;
                 string roomNumber;
                 string roomType;
@@ -279,15 +275,12 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                     }
                     phongdatList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
                 }
-            });
             
-
+            phongdatIC.Items.Refresh();
         }
 
         public async void LayPhongBaoTri(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture)
         {
-            await Task.Run(() =>
-            {
                 string roomNumber;
                 string roomType;
                 string roomState;
@@ -304,9 +297,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                     LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
                     phongbaotriList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = roomState });
                 }
-            });
-            
-
+            phongbaotriIC.Items.Refresh();
         }
 
         private void XacNhanSuaTrangThai_Click(object sender, RoutedEventArgs e)
@@ -339,6 +330,14 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
 
             }
 
+        }
+
+        private void tabcontrolcontry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            phongtrongIC.Items.Refresh();
+            phongthueIC.Items.Refresh();
+            phongdatIC.Items.Refresh() ;
+            phongbaotriIC.Items.Refresh();
         }
     }
 
