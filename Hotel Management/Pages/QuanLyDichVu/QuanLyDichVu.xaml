@@ -29,14 +29,14 @@
                     <TextBlock FontWeight="Medium"  Grid.ColumnSpan="2" Margin="0,0,0,0" FontSize="20" Text="Thêm dịch vụ"></TextBlock>
                     <Border Grid.RowSpan="2" Grid.Row="1"  Height="180" Width="180" CornerRadius="10" Background="#C0C9E8">
                         <Button Height="180" Width="180" Background="Transparent" BorderThickness="0">
-                            <Image  Source="/Assets/Images/addImage.png" >
+                            <Image  x:Name="image_serviceImage" Source="/Assets/Images/addImage.png" >
                             </Image>
                         </Button>
                     </Border>
                     <StackPanel Margin="15,0,0,0"  Grid.Row="1" Grid.Column="1" Orientation="Vertical">
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium"  Margin="0,0,0,0" FontSize="18" Text="Tên dịch vụ"></TextBlock>
-                            <TextBox
+                            <TextBox  x:Name="textBox_serviceName"
                             FontSize="16"
                              materialDesign:HintAssist.Hint="Nhập tên dịch vụ">
 
@@ -44,7 +44,8 @@
                         </StackPanel>
                         <StackPanel >
                             <TextBlock FontWeight="Medium"  Margin="0,0,0,0" FontSize="18" Text="Giá tiền"></TextBlock>
-                            <TextBox
+                            <TextBox x:Name="textBox_servicePrice"
+                                     PreviewTextInput="textBox_servicePrice_PreviewTextInput"
                             FontSize="16"
                              materialDesign:HintAssist.Hint="Nhập giá tiền">
 
@@ -63,11 +64,11 @@
                             </Button>
                         </Border>
                         <Border Grid.Column="1"  Style="{StaticResource mainButton}">
-                            <Button
+                            <Button x:Name="button_Save"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
-                                FontSize="18"
+                                FontSize="18" Click="button_Save_Click"
                                 >
                                 Xác nhận
                             </Button>
