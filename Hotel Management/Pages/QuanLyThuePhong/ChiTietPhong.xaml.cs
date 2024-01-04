@@ -53,17 +53,17 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             InitializeComponent();
             totalBill = totalRoomPrice + totalServiceUsedPrice;
             totalbilltext.Text = totalBill.ToString();
-            FutureDatePicker.BlackoutDates.AddDatesInPast();
-            DatePicker1.BlackoutDates.AddDatesInPast();
             DatePicker2.SelectedDate = DateTime.Now.AddDays(1);
-            DatePicker2.BlackoutDates.AddDatesInPast();
-            DatePicker2.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
+            //FutureDatePicker.BlackoutDates.AddDatesInPast();
+            //DatePicker1.BlackoutDates.AddDatesInPast();
+            //DatePicker2.BlackoutDates.AddDatesInPast();
+            //DatePicker2.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
             serviceIC.ItemsSource = ServiceList;
             serviceusedDG.ItemsSource = serviceUsedList;
             maphongtb.Text = maphong;
             loaiphongtb.Text = loaiphong;
             ValidateRoomInfomation();
-        }
+        }   
         public void ValidateRoomInfomation()
         {
             if (handler != null)
@@ -85,6 +85,13 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                             GetRoomInfo(room["receiptId"].AsObjectId);
                             GetCurrentServiceInfo(receipt["serviceId"].AsBsonArray);
 
+                        }
+                        else
+                        {
+                            FutureDatePicker.BlackoutDates.AddDatesInPast();
+                            DatePicker1.BlackoutDates.AddDatesInPast();
+                            DatePicker2.BlackoutDates.AddDatesInPast();
+                            DatePicker2.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
                         }
                     }
                 }
@@ -232,7 +239,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                     if (id == ObjectID)
                     {
                         CustomerName.Text = document["customerName"].AsString;
-                        CustomerBirth.Text = document["dateOfBirth"].AsString;
+                        CustomerBirth.Text = document["dateOfBirth"].AsDateTime.ToString();
                         CustomerPhoneNumber.Text = document["phoneNumber"].AsString;
                         CustomerEmail.Text = document["email"].AsString;
                         CustomerIdNumber.Text = document["idNumber"].AsString;
@@ -418,7 +425,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                     if (idNumber == CustomerIdNumber.Text)
                     {
                         CustomerName.Text = customer["customerName"].AsString;
-                        CustomerBirth.Text = customer["dateOfBirth"].AsString;
+                        CustomerBirth.Text = customer["dateOfBirth"].AsDateTime.ToString();
                         CustomerPhoneNumber.Text = customer["phoneNumber"].AsString;
                         CustomerEmail.Text = customer["email"].AsString;
                     }
@@ -438,7 +445,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                     if (idNumber == CustomerPhoneNumber.Text)
                     {
                         CustomerName.Text = customer["customerName"].AsString;
-                        CustomerBirth.Text = customer["dateOfBirth"].AsString;
+                        CustomerBirth.Text = customer["dateOfBirth"].AsDateTime.ToString();
                         CustomerIdNumber.Text = customer["idNumber"].AsString;
                         CustomerEmail.Text = customer["email"].AsString;
                     }

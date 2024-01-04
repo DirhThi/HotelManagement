@@ -31,27 +31,8 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
         IMongoCollection<BsonDocument> collectionUser = database.GetCollection<BsonDocument>("User");
         List<Bill> receiptList = new List<Bill>() /*{
              new Bill() { ID=123456,   Phong="101",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=234561,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=334551,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=412358,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=512479,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=684212,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=711144,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=851251,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=994573,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=108235,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=113463,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=199564,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=242322, Phong="102",LoaiThue="Theo giờ",Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=379655, Phong="102",LoaiThue="Theo giờ",Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=464647,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=535389,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=607554,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=737831,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=881238,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-             new Bill() { ID=935125,Phong="102",LoaiThue="Theo giờ", Total= "100000", CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
-
             }*/;
+        List<Bill> receiptListDisplay = new List<Bill>();
         static DateTime dateTimeChange;
         static int tongTienNgay = 0;
         public QuanLyHoaDon()
@@ -59,8 +40,8 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             InitializeComponent();
             dateTimeChange = FutureDatePicker.SelectedDate.Value;
             LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
-            DGHoadon.ItemsSource = receiptList;
-            textSoLuong.Text = "Số lượng: " + receiptList.Count.ToString();
+            DGHoadon.ItemsSource = receiptListDisplay;
+            textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();
             textTongTien.Text = "Tổng tiền: " + tongTienNgay.ToString();
         }
 
@@ -81,7 +62,8 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             var filterReceiptByDate = Builders<BsonDocument>.Filter.Where(x => x["receiptState"] == "Đã thanh toán") & Builders<BsonDocument>.Filter.Gte("checkOut", today) & Builders<BsonDocument>.Filter.Lt("checkOut", tomorrow);
             List<BsonDocument> documentsReceipt = collectionReceipt.Find(filterReceiptByDate).ToList();
             receiptList.Clear();
-            foreach(BsonDocument receipt in documentsReceipt)
+            receiptListDisplay.Clear();
+            foreach (BsonDocument receipt in documentsReceipt)
             {
                 receiptIdCode = receipt["idCode"].AsString;
                 roomId = receipt["roomId"].AsObjectId;
@@ -95,8 +77,8 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                 userName = LayUserName(userId, collectionUser);
                 DateTime temp = receipt["createDate"].ToLocalTime();
                 customerName = LayCustomerName(customerId, collectionCustomer);
-                
 
+                receiptListDisplay.Add(new Bill { ID = receiptIdCode, Phong = roomName, LoaiThue = receiptType, Total = receiptTotal, CreateDate = createDate, nameCustomer = customerName, nameStaff = userName });
                 receiptList.Add(new Bill{ ID=receiptIdCode, Phong = roomName, LoaiThue = receiptType, Total = receiptTotal, CreateDate = createDate, nameCustomer = customerName, nameStaff = userName});
             }
 
@@ -164,8 +146,8 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             {
                 tongTienNgay = 0;
                 LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
-                DGHoadon.ItemsSource = receiptList;
-                textSoLuong.Text = "Số lượng: " + receiptList.Count.ToString();
+                DGHoadon.ItemsSource = receiptListDisplay;
+                textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();
                 textTongTien.Text = "Tổng tiền: " + tongTienNgay.ToString();
                 DGHoadon.Items.Refresh();
                 dateTimeChange = FutureDatePicker.SelectedDate.Value;
@@ -187,13 +169,15 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                     foreach (Bill item in items)
                     {
                         receiptList.Remove(item);
+                        receiptListDisplay.Remove(item);
+
                     }
-                    DGHoadon.ItemsSource = receiptList;
+                    DGHoadon.ItemsSource = receiptListDisplay;
                     textSoLuong.Text = "Số lượng: " + DGHoadon.Items.Count.ToString();
                     tongTienNgay = 0;
-                    for(int i = 0; i < receiptList.Count; i++)
+                    for(int i = 0; i < receiptListDisplay.Count; i++)
                     {
-                        tongTienNgay += receiptList[i].Total;
+                        tongTienNgay += receiptListDisplay[i].Total;
                     }
                     //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
 
@@ -204,8 +188,8 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                     */
 
 
-                    DGHoadon.ItemsSource = receiptList;
-                    textSoLuong.Text = "Số lượng: " + receiptList.Count.ToString();
+                    DGHoadon.ItemsSource = receiptListDisplay;
+                    textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();
                     textTongTien.Text = "Tổng tiền: " + tongTienNgay.ToString();
                     DGHoadon.Items.Refresh();
 
@@ -219,6 +203,21 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             {
                 collectionReceipt.DeleteOne(x => x["idCode"] == item.ID);
             }
+        }
+
+        private void searchbox_textchanged(object sender, TextChangedEventArgs e)
+        {
+            receiptListDisplay.Clear();
+            int count = receiptList.Count();
+            string text = searchbox.Text;
+            foreach (Bill P in receiptList)
+            {
+                if (P.ID.Contains(text))
+                {
+                    receiptListDisplay.Add(P);
+                }
+            }
+            DGHoadon.Items.Refresh();
         }
     }
 }

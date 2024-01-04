@@ -71,6 +71,8 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                Name="BtnSuaTrangThaiPhong"
+                                Click="SuaTrangThaiPhong_Click"
                                 >
                                     Xác nhận
                                 </Button>
@@ -127,6 +129,8 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                Name="BtnXacNhanThemPhong"
+                                Click="XacNhanThemPhong_Click"
                                 >
                                     Xác nhận
                                 </Button>
@@ -233,6 +237,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                Click="XacNhanThemTepPhong_Click"
                                 >
                                     Xác nhận
                                 </Button>
@@ -254,6 +259,7 @@
                             <ComboBox                              
                             FontSize="16"
                             Name="CBLoaiPhong3"
+                            SelectionChanged="CBLoaiPhong3_SelectionChanged"
                             materialDesign:HintAssist.Hint="Chọn loại phòng"
                                 >
                                 
@@ -275,7 +281,7 @@
                                     </Style>
                                 </StackPanel.Style>
                                 <TextBlock VerticalAlignment="Center" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold">Tên loại phòng</TextBlock>
-                                <TextBox VerticalAlignment="Center" materialDesign:HintAssist.Hint="Nhập tên loại phòng"  FontSize="18" ></TextBox>
+                                <TextBox x:Name="TBTenLoaiPhong" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Nhập tên loại phòng"  FontSize="18" ></TextBox>
 
                             </StackPanel>
                             <TextBlock VerticalAlignment="Center" Margin="0,20,0,0" HorizontalAlignment="Left" FontSize="20" FontWeight="SemiBold">Điều chỉnh giá</TextBlock>
@@ -287,21 +293,21 @@
                                 <StackPanel Margin="0,0,0,10">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock VerticalAlignment="Center" Width="115" FontSize="18" FontWeight="SemiBold">Giá theo giờ </TextBlock>
-                                        <TextBox VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
+                                        <TextBox x:Name="TBGiaTheoGio" VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock VerticalAlignment="Center" Width="115" FontSize="18" FontWeight="SemiBold">Giá theo ngày</TextBlock>
-                                        <TextBox VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
+                                        <TextBox x:Name="TBGiaTheoNgay" VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel  Margin="20,10,0,10" Grid.Column="1">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock VerticalAlignment="Center" Width="115" FontSize="18" FontWeight="SemiBold">Giá giờ sau</TextBlock>
-                                        <TextBox VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
+                                        <TextBox x:Name="TBGiaGioSau" VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
                                     </StackPanel>
                                     <StackPanel  Orientation="Horizontal">
                                         <TextBlock VerticalAlignment="Center" Width="115" FontSize="18" FontWeight="SemiBold">Giá qua đêm</TextBlock>
-                                        <TextBox VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
+                                        <TextBox x:Name="TBGiaQuaDem" VerticalAlignment="Center" Width="100" FontSize="18" ></TextBox>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
@@ -362,6 +368,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                Click="SuaLoaiPhong_Click"
                                 >
                                     Xác nhận
                                 </Button>
@@ -439,6 +446,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                Click="CapNhapCSVC_Click"
                                 >
                                     Xác nhận
                                 </Button>
@@ -465,7 +473,7 @@
 
                             <TextBlock HorizontalAlignment="Right" Margin="15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Tìm kiếm</TextBlock>
                             <Border HorizontalAlignment="Right" Padding="5,0" CornerRadius="5" BorderThickness="2" BorderBrush="LightSkyBlue" Background="AliceBlue" Width="200" Height="36">
-                                <TextBox     FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập mã phòng" ></TextBox>
+                                <TextBox  x:Name="serchbox" TextChanged="Searchbox_TextChanged"  FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập mã phòng" ></TextBox>
                             </Border>
 
                             <Button HorizontalAlignment="Right" Grid.Column="1"
@@ -577,9 +585,9 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Width="240" Margin="13,13" HorizontalAlignment="Center" Orientation="Vertical">
+                                                <StackPanel Width="250" Margin="13,13" HorizontalAlignment="Left" Orientation="Vertical">
                                                     <Button  Width="auto" Height="auto" Margin="0,0" Cursor="Hand"  Grid.Row="0" Grid.Column="1"  Style="{StaticResource playlistButton}" Click="Phong_click"  >
-                                                        <Border CornerRadius="20" Margin="0,0,0,0" Width="240" Height="120" >
+                                                        <Border CornerRadius="20" Margin="0,0,0,0" Width="250" Height="120" >
                                                             <Border.Background>
                                                                 <LinearGradientBrush>
                                                                     <GradientStop Color="#0096C7" Offset="0"/>

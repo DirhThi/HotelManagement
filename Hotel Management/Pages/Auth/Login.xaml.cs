@@ -7,30 +7,28 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hotel_Management
+namespace Hotel_Management.Pages.Auth
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : Page
     {
-
-        public MainWindow()
+        public Login()
         {
             InitializeComponent();
+            button_Login.IsDefault = true;
         }
 
-        private void loaded(object sender, RoutedEventArgs e)
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-          Container.Navigate(new System.Uri("Pages/Auth/Login.xaml", UriKind.RelativeOrAbsolute));
+            LoginScreen.NavigationService.Navigate(new System.Uri("Pages/Navigator/Navigator.xaml", UriKind.RelativeOrAbsolute));
         }
-
     }
 }
