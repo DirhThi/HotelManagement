@@ -234,19 +234,27 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
 
         private void EditCustomer_Click(object sender, RoutedEventArgs e)
         {
+            borderkhachhang.Visibility = Visibility.Visible;
             Dialog.IsOpen = true;
         }
 
         private void CancelDialog(object sender, RoutedEventArgs e)
         {
+            borderhoadon.Visibility = Visibility.Collapsed;
             Dialog.IsOpen = false;
 
         }
 
+        private void CancelHoadon(object sender, RoutedEventArgs e)
+        {
+            borderhoadon.Visibility = Visibility.Collapsed;
+            borderkhachhang.Visibility = Visibility.Visible;
+        }
+
         private void DGHoadonkhachhang_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show("navigate tới hóa đơn chi tiết");
-
+            borderkhachhang.Visibility = Visibility.Collapsed;
+            borderhoadon.Visibility = Visibility.Visible;
         }
     }
 }
