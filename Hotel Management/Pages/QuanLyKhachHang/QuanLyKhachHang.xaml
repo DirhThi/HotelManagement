@@ -182,8 +182,8 @@
                             </DataGrid>
                         </Border>
                         <StackPanel Margin="10" Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
-                            <TextBlock FontSize="16" FontWeight="Medium">Số lượng : 10</TextBlock>
-                            <TextBlock Margin="100,0,0,0" FontSize="16" FontWeight="Medium">Tổng tiền : 100000</TextBlock>
+                            <TextBlock x:Name="textSoLuongHoaDon" FontSize="16" FontWeight="Medium">Số lượng : 0</TextBlock>
+                            <TextBlock x:Name="textTongTienHoaDon" Margin="100,0,0,0" FontSize="16" FontWeight="Medium">Tổng tiền : 0</TextBlock>
                         </StackPanel>
                         <Grid Margin="10,5" Grid.Row="2" Grid.Column="0">
                             <Grid.ColumnDefinitions>
@@ -202,7 +202,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
-                                >
+                                Click="Button_Click_2">
                                     Xác nhận
                                 </Button>
                             </Border>
