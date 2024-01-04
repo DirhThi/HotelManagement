@@ -17,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using static Hotel_Management.Pages.QuanLyHoaDon.QuanLyHoaDon;
+using static Hotel_Management.Pages.QuanLyKhachHang.QuanLyKhachHang;
 
 namespace Hotel_Management.Pages.QuanLyKhachHang
 {
@@ -30,10 +32,13 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
         IMongoCollection<BsonDocument> collectionRoom = handler.GetCollection("Room");
         IMongoCollection<BsonDocument> collectionReceipt = handler.GetCollection("Receipt");
         IMongoCollection<BsonDocument> collectionUser = handler.GetCollection("User");
+        IMongoCollection<BsonDocument> collectionServiceUsed = handler.GetCollection("ServiceUsed");
+        IMongoCollection<BsonDocument> collectionService = handler.GetCollection("Service");
         List<Khachhang> customerList = new List<Khachhang>(); /*{
             new Khachhang() { TenKH="Nguyễn Đình Thi",   Sodienthoai="0909090909",CCCD="12345678900966123", Ngaysinh= "23/12/2023", Email = "Mail@gmail.com"},
         };*/
         List<Khachhang> customerListDisplay = new List<Khachhang>();
+        List<UsedService> serviceList = new List<UsedService>();
 
         List<Bill> receiptList = new List<Bill>() { 
              new Bill() { ID="123456",   Phong="101",LoaiThue="Theo giờ", Total= 100000, CreateDate = "23/12/2023",nameCustomer = "Nguyễn Đình Thi",nameStaff = "Lễ tân 1"},
@@ -150,7 +155,16 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
             public string CreateDate { get; set; }
         }
 
+        public class UsedService
+        {
+            public string nameServiceUsed { get; set; }
 
+            public string price { get; set; }
+
+            public string soluong { get; set; }
+
+            public string total { get; set; }
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (DGKhachhang.SelectedItems.Count != 0)
@@ -234,6 +248,7 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                     customerListDisplay.Add(P);
                 }
             }
+            textSoLuong.Text = "Số lượng: " + customerListDisplay.Count();
             autoorder();
             DGKhachhang.Items.Refresh();
         }
@@ -268,6 +283,11 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
 
         private void DGHoadonkhachhang_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Bill item = DGHoadonkhachhang.SelectedItem as Bill;
+            if(item != null)
+            {
+                LayChiTietHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser, collectionService, collectionServiceUsed, item);
+            }
             borderkhachhang.Visibility = Visibility.Collapsed;
             borderhoadon.Visibility = Visibility.Visible;
         }
@@ -418,23 +438,134 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
 
                 }
             }
+        }
 
-            bool IsValidEmail(string email)
+        public bool IsValidEmail(string email)
+        {
+            var trimmedEmail = email.Trim();
+
+            if (trimmedEmail.EndsWith("."))
             {
-                var trimmedEmail = email.Trim();
+                return false;
+            }
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == trimmedEmail;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
-                if (trimmedEmail.EndsWith("."))
+        public string LayCustomerName(ObjectId customerId, IMongoCollection<BsonDocument> collectionCustomer)
+        {
+            string customerName = "";
+            List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument customer in documentsCustomer)
+            {
+                if (customerId == customer["_id"].AsObjectId)
                 {
-                    return false;
+                    customerName = customer["customerName"].AsString;
+                    break;
                 }
-                try
+            }
+            return customerName;
+        }
+
+        public string LayRoomType(ObjectId roomId, IMongoCollection<BsonDocument> collectionRoom)
+        {
+            string roomType = "";
+            List<BsonDocument> documentsRoom = collectionRoom.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument room in documentsRoom)
+            {
+                if (roomId == room["_id"].AsObjectId)
                 {
-                    var addr = new System.Net.Mail.MailAddress(email);
-                    return addr.Address == trimmedEmail;
+                    roomType = room["roomType"].AsString;
+                    break;
                 }
-                catch
+            }
+            return roomType;
+        }
+
+        public string LayServiceName(ObjectId serviceId, IMongoCollection<BsonDocument> collectionService)
+        {
+            string serviceName = "";
+            List<BsonDocument> documentsService = collectionService.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument service in documentsService)
+            {
+                if (serviceId == service["_id"].AsObjectId)
                 {
-                    return false;
+                    serviceName = service["serviceName"].AsString;
+                    break;
+                }
+            }
+            return serviceName;
+        }
+
+        public int LayServicePrice(ObjectId serviceId, IMongoCollection<BsonDocument> collectionService)
+        {
+            int servicePrice = -1;
+            List<BsonDocument> documentsService = collectionService.Find(new BsonDocument()).ToList();
+            foreach (BsonDocument service in documentsService)
+            {
+                if (serviceId == service["_id"].AsObjectId)
+                {
+                    servicePrice = service["servicePrice"].AsInt32;
+                    break;
+                }
+            }
+            return servicePrice;
+        }
+
+        public void LayChiTietHoaDon(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer, IMongoCollection<BsonDocument> collectionUser, IMongoCollection<BsonDocument> collectionService, IMongoCollection<BsonDocument> collectionServiceUsed, Bill item)
+        {
+            /*
+            CustomerNameOnReceipt
+            */
+            var filter = Builders<BsonDocument>.Filter.Eq("idCode", item.ID);
+            List<BsonDocument> documentsReceipt = collectionReceipt.Find(filter).ToList();
+            foreach (BsonDocument receipt in documentsReceipt)
+            {
+                CreatedDate.Text = receipt["createDate"].ToLocalTime().ToString();
+                Receiptionist.Text = LayUserName(receipt["userId"][0].AsObjectId, collectionUser);
+                ServiceType.Text = receipt["receiptType"].AsString;
+                DateReceived.Text = receipt["checkIn"].ToLocalTime().ToString();
+                DateReturned.Text = receipt["checkOut"].ToLocalTime().ToString();
+                RoomCost.Text = receipt["roomCost"].ToString() + " đ";
+                RoomName.Text = LayRoomName(receipt["roomId"].AsObjectId, collectionRoom) + " - " + LayRoomType(receipt["roomId"].AsObjectId, collectionRoom);
+                CustomerNameOnReceipt.Text = LayCustomerName(receipt["customerId"].AsObjectId, collectionCustomer);
+                if (receipt["serviceId"].AsBsonArray.Count > 0)
+                {
+                    serviceList.Clear();
+                    int serviceQuantity = -1;
+                    string serviceName = "";
+                    int servicePrice = -1;
+                    int serviceTotal = -1;
+                    int servicesTotal = 0;
+                    foreach (ObjectId sId in receipt["serviceId"].AsBsonArray)
+                    {
+                        var sFilter = Builders<BsonDocument>.Filter.Where(a => a["_id"].AsObjectId == sId);
+                        List<BsonDocument> documentsServiceUsed = collectionServiceUsed.Find(sFilter).ToList();
+                        foreach (BsonDocument service in documentsServiceUsed)
+                        {
+                            serviceQuantity = service["serviceQuantity"].AsInt32;
+                            serviceName = LayServiceName(service["serviceId"].AsObjectId, collectionService);
+                            servicePrice = LayServicePrice(service["serviceId"].AsObjectId, collectionService);
+                            serviceTotal = serviceQuantity * servicePrice;
+                            servicesTotal += serviceTotal;
+                        }
+                        serviceList.Add(new UsedService { nameServiceUsed = serviceName, price = servicePrice.ToString(), soluong = serviceQuantity.ToString(), total = serviceTotal.ToString() + " đ" });
+                    }
+                    serviceusedDG.ItemsSource = serviceList;
+                    serviceusedDG.Items.Refresh();
+                    totalbilltext.Text = (receipt["roomCost"].AsInt32 + servicesTotal).ToString() + " đ";
+                }
+                else
+                {
+                    serviceList.Clear();
+                    totalbilltext.Text = RoomCost.Text;
                 }
             }
         }
