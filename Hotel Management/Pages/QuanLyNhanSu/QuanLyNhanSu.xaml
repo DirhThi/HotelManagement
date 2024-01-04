@@ -131,70 +131,72 @@
                             <RowDefinition Height="60"/>
                         </Grid.RowDefinitions>
                         <TextBlock FontWeight="Medium"   Margin="0,0,0,0" FontSize="20" Text="Thêm nhân sự"></TextBlock>
-                        <Border Width="350" Grid.Row="1" Padding="10,0" CornerRadius="10" Margin="10,0" Background="White">
-                            <StackPanel x:Name="UserInfoAdd" IsEnabled="True">
-                                <TextBlock FontWeight="Medium"   Margin="0,0,0,10" FontSize="20" Text="Thông tin nhân sự"></TextBlock>
-                                <StackPanel Margin="0,0,0,15">
-                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Tên nhân sự *"></TextBlock>
-                                    <TextBox x:Name="Add_StaffName" Height="32" FontSize="18"
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" >
+                            <Border Width="350"   Padding="10,0" CornerRadius="10" Margin="10,0" Background="White">
+                                <StackPanel x:Name="UserInfoAdd" IsEnabled="True">
+                                    <TextBlock FontWeight="Medium"   Margin="0,0,0,10" FontSize="20" Text="Thông tin nhân sự"></TextBlock>
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock FontWeight="Medium" FontSize="18" Text="Tên nhân sự *"></TextBlock>
+                                        <TextBox x:Name="Add_StaffName" Height="32" FontSize="18"
                         materialDesign:HintAssist.Hint="Nhập tên nhân sự"/>
-                                </StackPanel>
-                                <StackPanel Margin="0,0,0,15">
-                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Chức vụ *"></TextBlock>
-                                    <ComboBox x:Name="Add_StaffPosition" FontSize="18"
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock FontWeight="Medium" FontSize="18" Text="Chức vụ *"></TextBlock>
+                                        <ComboBox x:Name="Add_StaffPosition" FontSize="18"
                                           materialDesign:HintAssist.Hint="Chọn chức vụ"
                                           >
-                                        <ComboBoxItem>
-                                            Quản lý
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            Nhân viên
-                                        </ComboBoxItem>
+                                            <ComboBoxItem>
+                                                Quản lý
+                                            </ComboBoxItem>
+                                            <ComboBoxItem>
+                                                Nhân viên
+                                            </ComboBoxItem>
 
-                                    </ComboBox>
-                                </StackPanel>
-
-                                <StackPanel Margin="0,0,0,15">
-                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
-                                    <TextBox x:Name="Add_StaffIdNumber"  Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" />
-                                </StackPanel>
-                                <StackPanel Margin="0,0,0,15">
-                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
-                                    <TextBox x:Name="Add_StaffPhoneNumber" Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập số điện thoại" />
-                                </StackPanel>
-                                <StackPanel Margin="0,0,0,15">
-                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Email"></TextBlock>
-                                    <TextBox x:Name="Add_StaffEmail" Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập email"/>
-                                </StackPanel>
-                                <StackPanel Margin="0,0,0,15">
-                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Ngày sinh"></TextBlock>
-                                    <TextBox x:Name="Add_StaffDoB" Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập ngày sinh"/>
-                                </StackPanel>
-
-                                <TextBlock FontWeight="Medium"   Margin="0,0,0,10" FontSize="20" Text="Tài khoản"></TextBlock>
-                                <Grid Margin="0" Grid.Row="2" Grid.Column="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Margin="0,0,10,0">
-                                        <TextBlock FontWeight="Medium" FontSize="18" Text="Tên tài khoản *"></TextBlock>
-                                        <TextBox x:Name="Add_StaffUsername" Height="32" FontSize="16"
-                        materialDesign:HintAssist.Hint="Nhập tên tài khoản"/>
+                                        </ComboBox>
                                     </StackPanel>
-                                    <StackPanel Margin="10,0,0,0" Grid.Column="1">
-                                        <TextBlock FontWeight="Medium" FontSize="18" Text="Mật khẩu *"></TextBlock>
-                                        <PasswordBox x:Name="Add_StaffPass"  Height="32" FontSize="16"
+
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
+                                        <TextBox x:Name="Add_StaffIdNumber"  Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" />
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
+                                        <TextBox x:Name="Add_StaffPhoneNumber" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số điện thoại" />
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock FontWeight="Medium" FontSize="18" Text="Email"></TextBlock>
+                                        <TextBox x:Name="Add_StaffEmail" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập email"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock FontWeight="Medium" FontSize="18" Text="Ngày sinh"></TextBlock>
+                                        <TextBox x:Name="Add_StaffDoB" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập ngày sinh"/>
+                                    </StackPanel>
+
+                                    <TextBlock FontWeight="Medium"   Margin="0,0,0,10" FontSize="20" Text="Tài khoản"></TextBlock>
+                                    <Grid Margin="0" Grid.Row="2" Grid.Column="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Margin="0,0,10,0">
+                                            <TextBlock FontWeight="Medium" FontSize="18" Text="Tên tài khoản *"></TextBlock>
+                                            <TextBox x:Name="Add_StaffUsername" Height="32" FontSize="16"
+                        materialDesign:HintAssist.Hint="Nhập tên tài khoản"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="10,0,0,0" Grid.Column="1">
+                                            <TextBlock FontWeight="Medium" FontSize="18" Text="Mật khẩu *"></TextBlock>
+                                            <PasswordBox x:Name="Add_StaffPass"  Height="32" FontSize="16"
                         materialDesign:HintAssist.Hint="Nhập mật khẩu"
                                                       />
-                                    </StackPanel>
-                                </Grid>
-                            </StackPanel>
-                        </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </ScrollViewer>
 
                         <Grid Margin="10,5" Grid.Row="2" Grid.Column="0">
                             <Grid.ColumnDefinitions>
