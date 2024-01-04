@@ -9,11 +9,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuanLyNhanSu">
     <materialDesign:DialogHost
+        DialogMargin="80"
             x:Name="Dialog"
           CloseOnClickAway="False"
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
-        <materialDesign:DialogHost.DialogContent>
+        <materialDesign:DialogHost.DialogContent >
             <Grid>
                 <Border Visibility="Collapsed" x:Name="bordersuanhanvien" Height="auto" Width="auto" Grid.Column="1" Padding="0" CornerRadius="10" Margin="15" Background="White">
                     <Grid>
@@ -134,7 +135,7 @@
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" >
                             <Border Width="350"   Padding="10,0" CornerRadius="10" Margin="10,0" Background="White">
                                 <StackPanel x:Name="UserInfoAdd" IsEnabled="True">
-                                    <TextBlock FontWeight="Medium"   Margin="0,0,0,10" FontSize="20" Text="Thông tin nhân sự"></TextBlock>
+                                    <TextBlock  FontWeight="Medium"   Margin="0,0,0,10" FontSize="20" Text="Thông tin nhân sự"></TextBlock>
                                     <StackPanel Margin="0,0,0,15">
                                         <TextBlock FontWeight="Medium" FontSize="18" Text="Tên nhân sự *"></TextBlock>
                                         <TextBox x:Name="Add_StaffName" Height="32" FontSize="18"
@@ -154,7 +155,6 @@
 
                                         </ComboBox>
                                     </StackPanel>
-
                                     <StackPanel Margin="0,0,0,15">
                                         <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
                                         <TextBox x:Name="Add_StaffIdNumber"  Height="32" FontSize="18"
