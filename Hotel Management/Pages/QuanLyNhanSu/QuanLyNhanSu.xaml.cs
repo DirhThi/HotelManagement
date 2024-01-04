@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 
 using MongoDB.Driver;
 using MongoDB.Bson;
-using Hotel_Management.MongoDatabase;
 
 namespace Hotel_Management.Pages.QuanLyNhanSu
 {
@@ -24,10 +23,6 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
     /// </summary>
     public partial class QuanLyNhanSu : Page
     {
-        //Add booolean variable to check if the Dialog is for Editing or Adding.
-        bool isEditing = false;
-
-        MongoHandler handler = MongoHandler.GetInstance();
         static MongoClient client = new MongoClient("mongodb+srv://vitalis:arthur010203@cluster0.4opqwlz.mongodb.net/");
         static IMongoDatabase database = client.GetDatabase("HotelManagement");
         IMongoCollection<BsonDocument> collectionEmployee = database.GetCollection<BsonDocument>("User");
@@ -184,23 +179,12 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
         private void EditStaff_Click(object sender, RoutedEventArgs e)
         {
             bordersuanhanvien.Visibility = Visibility.Visible;
-            //Editing staff, set isEditing to true (then reset to false after done editing)
-            isEditing = true;
             Dialog.IsOpen = true;
 
         }
         private void AddStaff_Click(object sender, RoutedEventArgs e)
         {
             borderthemnhanvien.Visibility = Visibility.Visible;
-            Add_StaffName.Text = "";
-            Add_StaffDoB.Text = "";
-            Add_StaffPhoneNumber.Text = "";
-            Add_StaffIdNumber.Text = "";
-            Add_StaffEmail.Text = "";
-            Add_StaffPosition.Text = "";
-            Add_StaffUsername.Text = "";
-            Add_StaffPass.Clear();
-            isEditing = false;
             Dialog.IsOpen = true;
         }
 
@@ -208,8 +192,6 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
         {
             bordersuanhanvien.Visibility = Visibility.Collapsed;
             borderthemnhanvien.Visibility = Visibility.Collapsed;
-            //Reset isEditing to false
-            isEditing = false;
             Dialog.IsOpen = false;
         }
 
@@ -218,63 +200,5 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
             MessageBox.Show("navigate tới hóa đơn chi tiết");
         }
 
-        private void AcceptAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (isEditing)
-            {
-                //Logic for editing
-            }
-            else
-            {
-                //Logic for adding
-                if (
-                Add_StaffName.Text == "" ||
-                Add_StaffDoB.Text == "" ||
-                Add_StaffPhoneNumber.Text == "" ||
-                Add_StaffIdNumber.Text == "" ||
-                Add_StaffEmail.Text == "" ||
-                Add_StaffPosition.Text == "" ||
-                Add_StaffUsername.Text == ""
-                )
-                {
-                    MessageBox.Show("Vui lòng điền đầy đủ thông tin.");
-                }
-                else
-                {
-                    if (handler != null)
-                    {
-                        IMongoCollection<BsonDocument> collection = handler.GetCollection("User");
-                        List<BsonDocument> documents = collection.Find<BsonDocument>(new BsonDocument()).ToList();
-                        foreach (BsonDocument user in documents)
-                        {
-
-                            if (user["idNumber"].AsString ==Add_StaffIdNumber.Text)
-                            {
-                                MessageBox.Show("Nhân sự này đã có trong danh sách.");
-                            }
-                        }
-                        var newDoc = new BsonDocument
-                        {
-                            {"userName", Add_StaffName.Text },
-                            { "dateOfBirth", Convert.ToDateTime(Add_StaffDoB.Text)},
-                            {"phoneNumber", Add_StaffPhoneNumber.Text },
-                            {"idNumber", Add_StaffIdNumber.Text },
-                            {"email", Add_StaffEmail.Text },
-                            {"receiptId", new BsonArray() },
-                            { "userRole", Add_StaffPosition.Text},
-                            {"accountId", Add_StaffUsername.Text },
-                            {"accountPassword", Add_StaffPass.Password }
-                            
-                        };
-                        collection.InsertOne(newDoc);
-                        LayNhanVien(handler.GetCollection("User"));
-                        DGNhanVien.Items.Refresh();
-                        Dialog.IsOpen = false;
-                    }
-                }
-
-
-            }
-        }
     }
 }

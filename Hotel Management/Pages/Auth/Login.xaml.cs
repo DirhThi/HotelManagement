@@ -23,7 +23,6 @@ namespace Hotel_Management.Pages.Auth
         public Login()
         {
             InitializeComponent();
-            button_Login.IsDefault = true;
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)

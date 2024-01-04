@@ -3,8 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Hotel_Management.Pages.QuanLyKhachHang"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -15,70 +16,88 @@
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">  
         <materialDesign:DialogHost.DialogContent>
-            <Border Height="auto" Width="auto" Grid.Column="1" Padding="0" CornerRadius="10" Margin="15" Background="White">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid Name="borderhoadon"  Visibility="Collapsed">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1*"/>
                         <RowDefinition Height="60"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock FontWeight="Medium"   Margin="0,0,0,0" FontSize="20" Text="Thông tin khách hàng"></TextBlock>
-                    <TextBlock FontWeight="Medium" Grid.Column="1"   Margin="0,0,0,0" FontSize="20" Text="Lịch sử hóa đơn"></TextBlock>
-                    <Border Width="350" Grid.Row="1" Padding="10,0" CornerRadius="10" Margin="10,0" Background="White">
-                        <StackPanel x:Name="UserInfo" IsEnabled="True">
 
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock FontWeight="Medium" FontSize="18" Text="Tên khách hàng *"></TextBlock>
-                                <TextBox x:Name="CustomerName" Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập tên khách hàng"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
-                                <TextBox x:Name="CustomerIdNumber"  Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" />
-                            </StackPanel>
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
-                                <TextBox x:Name="CustomerPhoneNumber" Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập số điện thoại" />
-                            </StackPanel>
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock FontWeight="Medium" FontSize="18" Text="Email"></TextBlock>
-                                <TextBox x:Name="CustomerEmail" Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập email"/>
-                            </StackPanel>
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock FontWeight="Medium" FontSize="18" Text="Ngày sinh"></TextBlock>
-                                <TextBox x:Name="CustomerBirth" Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập ngày sinh"/>
-                            </StackPanel>
+                    </Grid.RowDefinitions>
+                    <Border Padding="15,0" Margin="15"  BorderBrush="Black" BorderThickness="1" Background="Azure" Grid.Row="0">
+                        <StackPanel>
+
+                            <TextBlock HorizontalAlignment="Center" FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="18" Text="Khách sạn UIT"></TextBlock>
+                            <TextBlock HorizontalAlignment="Center" FontWeight="Normal" Grid.ColumnSpan="3"  FontSize="14" Text="Khu phố 6, P Linh Trung,TP Thủ Đức"></TextBlock>
+                            <TextBlock HorizontalAlignment="Center" FontWeight="Normal" Grid.ColumnSpan="3"  FontSize="14" Text="Hotline - 19001009"></TextBlock>
+                            <TextBlock HorizontalAlignment="Center" FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="18" Text="Hóa đơn thanh toán"></TextBlock>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Thời gian tạo : "></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Phòng :"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Tên nhân viên : "></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Tên khách hàng : "></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Dịch vụ thuê : "></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Nhận phòng :"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Trả phòng : "></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Tiền phòng : "></TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock x:Name="CreatedDate" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="{Binding Source={x:Static system:DateTime.Now}}"></TextBlock>
+                                    <TextBlock x:Name="RoomName" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="105 - Standard"></TextBlock>
+                                    <TextBlock x:Name="Receiptionist" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="NV1"></TextBlock>
+                                    <TextBlock x:Name="CustomerNameOnReceipt" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Nguyễn Đình Thi"></TextBlock>
+                                    <TextBlock x:Name="ServiceType" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Theo giờ"></TextBlock>
+                                    <TextBlock x:Name="DateReceived" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
+                                    <TextBlock x:Name="DateReturned" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
+                                    <TextBlock x:Name="RoomCost" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="100.000 đ"></TextBlock>
+
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,5" FontSize="18" Text="Dịch vụ "></TextBlock>
+                            <DataGrid  Focusable="False" x:Name="serviceusedDG" IsReadOnly="True"  GridLinesVisibility="None" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserResizeColumns="False" CanUserAddRows="False"  >
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                        <Setter Property="Background" Value="Azure"/>
+                                        <Setter Property="Foreground" Value="Black"/>
+                                        <Setter Property="FontSize" Value="16"/>
+                                    </Style>
+                                    <Style TargetType="{x:Type DataGridRow}">
+                                        <Setter Property="Focusable" Value="False"/>
+                                        <Setter Property="Foreground" Value="Black"/>
+                                        <Setter Property="FontSize" Value="16"/>
+                                    </Style>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Setter Property="Focusable" Value="False"/>
+                                        <Setter Property="Background" Value="Azure"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns >
+                                    <DataGridTextColumn Header="" IsReadOnly="True"  Width="8*" Binding="{Binding stt}"/>
+                                    <DataGridTextColumn Header="Tên" IsReadOnly="True"  MinWidth="100" Width="20*" Binding="{Binding nameServiceUsed}" />
+                                    <DataGridTextColumn Header="Đơn giá" IsReadOnly="True" MinWidth="75" Width="15*" Binding="{Binding price}" />
+                                    <DataGridTextColumn Header="SL" IsReadOnly="True" Width="8*" MinWidth="40" Binding="{Binding soluong}" />
+                                    <DataGridTextColumn Header="Thành tiền" IsReadOnly="True" MinWidth="75" Width="15*" Binding="{Binding total}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left" FontWeight="Medium"  Margin="5,15" FontSize="20" Text="Tổng tiền : "></TextBlock>
+                                <TextBlock x:Name="totalbilltext" HorizontalAlignment="Right" FontWeight="Medium" Grid.Column="1"  Margin="5,15" FontSize="20" Text="0"></TextBlock>
+
+                            </Grid>
+                            <TextBlock HorizontalAlignment="Center" FontWeight="Normal" Grid.Column="1"  Margin="5,15" FontSize="16" Text="Xin chân thành cảm ơn quý khách !"></TextBlock>
                         </StackPanel>
                     </Border>
-                    <Border MaxHeight="360" VerticalAlignment="Top" Grid.Column="1"  Width="350" Grid.Row="1" Padding="0,0" CornerRadius="10" Margin="10,0" Background="White">
-                        <DataGrid  Grid.Row="0" MinRowHeight="40"  SelectionMode="Single" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle0}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
-                Margin="0"
-                        SelectionChanged="DGHoadonkhachhang_SelectionChanged"
-                       x:Name="DGHoadonkhachhang"
-                   
-                                Foreground="#22223B"
-                                 >
-                         
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID"  IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding ID}"/>
-                                <DataGridTextColumn Width="auto"  Header="Phòng" Binding="{Binding Phong }" IsReadOnly="True"/>
-                                <DataGridTextColumn Width="auto"  Header="Tổng tiền" Binding="{Binding Total }" IsReadOnly="True" />
-                                <DataGridTextColumn Width="auto"   Header="Ngày tạo" Binding="{Binding CreateDate}" IsReadOnly="True" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Border>
-                    <StackPanel Margin="10" Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
-                        <TextBlock FontSize="16" FontWeight="Medium">Số lượng : 10</TextBlock>
-                        <TextBlock Margin="100,0,0,0" FontSize="16" FontWeight="Medium">Tổng tiền : 100000</TextBlock>
-                    </StackPanel>
                     <Grid Margin="10,5" Grid.Row="2" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -86,7 +105,7 @@
                         </Grid.ColumnDefinitions>
                         <Border  Style="{StaticResource secondButton}">
                             <Button
-                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelHoadon">
                                 Hủy
                             </Button>
                         </Border>
@@ -97,12 +116,101 @@
                                 BorderThickness="0"
                                 FontSize="18"
                                 >
-                                Xác nhận
+                                In
                             </Button>
                         </Border>
                     </Grid>
                 </Grid>
-            </Border>
+                <Border  Visibility="Collapsed" Name="borderkhachhang" Height="auto" Width="auto" Grid.Column="1" Padding="0" CornerRadius="10" Margin="15" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontWeight="Medium"   Margin="0,0,0,0" FontSize="20" Text="Thông tin khách hàng"></TextBlock>
+                        <TextBlock FontWeight="Medium" Grid.Column="1"   Margin="0,0,0,0" FontSize="20" Text="Lịch sử hóa đơn"></TextBlock>
+                        <Border Width="350" Grid.Row="1" Padding="10,0" CornerRadius="10" Margin="10,0" Background="White">
+                            <StackPanel x:Name="UserInfo" IsEnabled="True">
+
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Tên khách hàng *"></TextBlock>
+                                    <TextBox x:Name="CustomerName" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập tên khách hàng"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
+                                    <TextBox x:Name="CustomerIdNumber"  Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" />
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
+                                    <TextBox x:Name="CustomerPhoneNumber" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số điện thoại" />
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Email"></TextBlock>
+                                    <TextBox x:Name="CustomerEmail" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập email"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,0,0,15">
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Ngày sinh"></TextBlock>
+                                    <TextBox x:Name="CustomerBirth" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập ngày sinh"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border MaxHeight="360" VerticalAlignment="Top" Grid.Column="1"  Width="350" Grid.Row="1" Padding="0,0" CornerRadius="10" Margin="10,0" Background="White">
+                            <DataGrid  Grid.Row="0" MinRowHeight="40"  SelectionMode="Single" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle0}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
+                Margin="0"
+                        SelectionChanged="DGHoadonkhachhang_SelectionChanged"
+                       x:Name="DGHoadonkhachhang"
+                   
+                                Foreground="#22223B"
+                                 >
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID"  IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding ID}"/>
+                                    <DataGridTextColumn Width="auto"  Header="Phòng" Binding="{Binding Phong }" IsReadOnly="True"/>
+                                    <DataGridTextColumn Width="auto"  Header="Tổng tiền" Binding="{Binding Total }" IsReadOnly="True" />
+                                    <DataGridTextColumn Width="auto"   Header="Ngày tạo" Binding="{Binding CreateDate}" IsReadOnly="True" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                        <StackPanel Margin="10" Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                            <TextBlock x:Name="textSoLuongHoaDon" FontSize="16" FontWeight="Medium">Số lượng : 0</TextBlock>
+                            <TextBlock x:Name="textTongTienHoaDon" Margin="100,0,0,0" FontSize="16" FontWeight="Medium">Tổng tiền : 0</TextBlock>
+                        </StackPanel>
+                        <Grid Margin="10,5" Grid.Row="2" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  Style="{StaticResource secondButton}">
+                                <Button
+                                Background="Transparent" Foreground="#161d36" BorderThickness="0" FontSize="18" Click="CancelDialog">
+                                    Hủy
+                                </Button>
+                            </Border>
+                            <Border Grid.Column="1"  Style="{StaticResource mainButton}">
+                                <Button
+                                Background="Transparent"
+                                Foreground="#161d36"
+                                BorderThickness="0"
+                                FontSize="18"
+                                Click="Button_Click_2">
+                                    Xác nhận
+                                </Button>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+            </Grid>
         </materialDesign:DialogHost.DialogContent>
         <Border CornerRadius="10" Background="#edf3ff">
             <Grid>

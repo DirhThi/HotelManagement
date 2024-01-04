@@ -43,7 +43,7 @@
                             </StackPanel>
                         </Border>
                         <Border Margin="0,20" Height="36" Grid.Column="1"  Style="{StaticResource mainButton}">
-                            <Button x:Name="button_Login"
+                            <Button
                                 Click="LoginBtn_Click"
                                 Background="Transparent"
                                 Foreground="#161d36"
