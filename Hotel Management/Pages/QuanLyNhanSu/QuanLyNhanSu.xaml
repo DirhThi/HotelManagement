@@ -39,7 +39,7 @@
                                 </StackPanel>
                                 <StackPanel Margin="0,0,0,15">
                                     <TextBlock FontWeight="Medium" FontSize="18" Text="Chức vụ *"></TextBlock>
-                                    <ComboBox FontSize="18"
+                                    <ComboBox x:Name="CustomerRole" FontSize="18"
                                     SelectedIndex="0"
                                           materialDesign:HintAssist.Hint="Chọn chức vụ"
                                           >
@@ -93,8 +93,8 @@
                             </DataGrid>
                         </Border>
                         <StackPanel Margin="10" Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
-                            <TextBlock FontSize="16" FontWeight="Medium">Số lượng : 10</TextBlock>
-                            <TextBlock Margin="100,0,0,0" FontSize="16" FontWeight="Medium">Tổng tiền : 100000</TextBlock>
+                            <TextBlock x:Name="textSoLuongHoaDon" FontSize="16" FontWeight="Medium">Số lượng : 0</TextBlock>
+                            <TextBlock x:Name="textTongTienHoaDon" Margin="100,0,0,0" FontSize="16" FontWeight="Medium">Tổng tiền : 100000</TextBlock>
                         </StackPanel>
                         <Grid Margin="10,5" Grid.Row="2" Grid.Column="0">
                             <Grid.ColumnDefinitions>
