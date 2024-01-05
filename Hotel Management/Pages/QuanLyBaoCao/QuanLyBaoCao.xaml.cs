@@ -196,8 +196,8 @@ namespace Hotel_Management.Pages.QuanLyBaoCao
 
             foreach(receiptType rt in loaiThueList)
             {
-                soLuongLoaiThue.Add(new PieSeries { Title = rt.loaiThue, Values = new ChartValues<int> { rt.soLuong } });
-                doanhThuLoaiThue.Add(new PieSeries { Title = rt.loaiThue, Values = new ChartValues<int> { rt.tongTien } });
+                soLuongLoaiThue.Add(new PieSeries { Title = rt.loaiThue, Values = new ChartValues<int> { rt.soLuong }, DataLabels = true });
+                doanhThuLoaiThue.Add(new PieSeries { Title = rt.loaiThue, Values = new ChartValues<int> { rt.tongTien }, DataLabels = true });
             }
 
             ChartSoLuongLoaiThue.dataChart = soLuongLoaiThue;
@@ -237,8 +237,8 @@ namespace Hotel_Management.Pages.QuanLyBaoCao
 
             foreach (rooomType rt in loaiPhongList)
             {
-                soLuongLoaiPhong.Add(new PieSeries { Title = rt.loaiPhong, Values = new ChartValues<int> { rt.soLuong } });
-                doanhThuLoaiPhong.Add(new PieSeries { Title = rt.loaiPhong, Values = new ChartValues<int> { rt.tongTien } });
+                soLuongLoaiPhong.Add(new PieSeries { Title = rt.loaiPhong, Values = new ChartValues<int> { rt.soLuong },DataLabels=true });
+                doanhThuLoaiPhong.Add(new PieSeries { Title = rt.loaiPhong, Values = new ChartValues<int> { rt.tongTien }, DataLabels = true });
             }
 
             ChartSoLuongLoaiPhong.dataChart = soLuongLoaiPhong;
