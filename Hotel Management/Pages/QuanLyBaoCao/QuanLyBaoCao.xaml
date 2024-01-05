@@ -28,7 +28,8 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="ngaybatdau"
-                                        Focusable="False">
+                                        Focusable="False"
+                                        CalendarClosed="ngaybatdau_CalendarClosed">
                         </DatePicker>
                         <TextBlock Margin="40,0,15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Ngày kết thúc</TextBlock>
                         <DatePicker 
@@ -36,7 +37,8 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="ngayketthuc"
-                                        Focusable="False">
+                                        Focusable="False"
+                                        CalendarClosed="ngayketthuc_CalendarClosed">
                         </DatePicker>
                     </StackPanel>
             </Border>
@@ -53,32 +55,41 @@
                             <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Border  Margin="0,15,15,15" Grid.RowSpan="2" Padding="10" CornerRadius="10" Grid.Column="1" Background="AliceBlue">
-                        <StackPanel>
-                            <TextBlock  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Thống kê sử dụng dịch vụ" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"  Foreground="#161d36" FontSize="20" FontWeight="Medium" Text="Thống kê sử dụng dịch vụ" >
 
                             </TextBlock>
-                            <DataGrid  Grid.Row="0" MinRowHeight="45" SelectionMode="Single" CanUserResizeColumns="False" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle0}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
-                Margin="0"
+                               
+
+                                    <DataGrid HorizontalScrollBarVisibility="Auto"  Grid.Row="1" MinRowHeight="45" SelectionMode="Single" CanUserResizeColumns="False" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle0}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
+                    Margin="0"
                         
-                       x:Name="DGdichvu"
+                           x:Name="DGdichvu"
                    
-                                Foreground="#22223B"
-                                 >
+                                    Foreground="#22223B"
+                                     >
 
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Width="auto" MinWidth="110"  Header="Tên DV" Binding="{Binding TenDV }" IsReadOnly="True"/>
-                                    <DataGridTextColumn Width="auto" MinWidth="50"   Header="SL" Binding="{Binding SL}" IsReadOnly="True" />
-                                    <DataGridTextColumn Width="auto" MinWidth="110"  Header="Tổng tiền" Binding="{Binding Total }" IsReadOnly="True" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-                            <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
-                                <TextBlock Width="110" Margin="15,0,0,0" FontSize="18" FontWeight="Medium">Tổng</TextBlock>
-                                <TextBlock Width="55"  Margin="0,0,0,0" FontSize="18" FontWeight="Medium">99</TextBlock>
-                                <TextBlock FontSize="18" FontWeight="Medium">9990000</TextBlock>
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Width="auto" MinWidth="110"  Header="Tên DV" Binding="{Binding TenDV }" IsReadOnly="True"/>
+                                            <DataGridTextColumn Width="auto" MinWidth="50"   Header="SL" Binding="{Binding SL}" IsReadOnly="True" />
+                                            <DataGridTextColumn Width="auto" MinWidth="110"  Header="Tổng tiền" Binding="{Binding Total }" IsReadOnly="True" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <StackPanel Grid.Row="2"  VerticalAlignment="Bottom" Orientation="Horizontal">
+                                        <TextBlock  Width="110" Margin="15,0,0,0" FontSize="18" FontWeight="Medium">Tổng</TextBlock>
+                                <TextBlock x:Name="textTongSoLuong" Width="55"  Margin="0,0,0,0" FontSize="18" FontWeight="Medium">0</TextBlock>
+                                <TextBlock x:Name="textTongDoanhThu" FontSize="18" FontWeight="Medium">0</TextBlock>
 
 
-                            </StackPanel>
-                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                       
                     </Border>
 
                     <Grid Margin="10,10,10,0">
@@ -95,7 +106,7 @@
                                 </TextBlock>
                                 <StackPanel Margin="20,10" Orientation="Horizontal">
                                     <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="AccountCashOutline" />
-                                    <TextBlock VerticalAlignment="Center" Margin="25,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37" >
+                                    <TextBlock x:Name="textSoLuongDat" VerticalAlignment="Center" Margin="25,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37" >
 
                                     </TextBlock>
                                 </StackPanel>
@@ -108,7 +119,7 @@
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
                                     <materialDesign:PackIcon Foreground="BlueViolet" Height="55" Width="55" Kind="HomePercentOutline" />
-                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+                                    <TextBlock x:Name="textThuPhong" VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
 
                                     </TextBlock>
                                 </StackPanel>
@@ -121,7 +132,7 @@
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
                                     <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="FoodOutline" />
-                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+                                    <TextBlock x:Name="textThuDichVu" VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
 
                                     </TextBlock>
                                 </StackPanel>
@@ -134,7 +145,7 @@
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
                                     <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="CashMultiple" />
-                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+                                    <TextBlock x:Name="textTongThu" VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
 
                                     </TextBlock>
                                 </StackPanel>
