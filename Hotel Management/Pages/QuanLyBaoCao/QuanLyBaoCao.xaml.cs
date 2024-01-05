@@ -58,6 +58,9 @@ namespace Hotel_Management.Pages.QuanLyBaoCao
         SeriesCollection doanhThuLoaiPhong = new SeriesCollection();
         List<receiptType> loaiThueList = new List<receiptType>();
         List<rooomType> loaiPhongList = new List<rooomType>();
+
+        int sumTienDV = 0;
+        int sumSoLuongDV = 0;
         public QuanLyBaoCao()
         {
             InitializeComponent();
@@ -133,6 +136,8 @@ namespace Hotel_Management.Pages.QuanLyBaoCao
         public void ThongKeDichVu(IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionServiceUsed, IMongoCollection<BsonDocument> collectionService)
         {
             serviceReportList.Clear();
+            sumSoLuongDV = 0;
+            sumTienDV = 0;
             List<BsonDocument> documentServiceReport = collectionService.Find(new BsonDocument()).ToList();
             foreach(BsonDocument serviceReport in documentServiceReport)
             {
@@ -168,6 +173,15 @@ namespace Hotel_Management.Pages.QuanLyBaoCao
                     }
                 }
             }
+            foreach (serviceReport sr in serviceReportList)
+            {
+                sumTienDV += sr.Total;
+                sumSoLuongDV += sr.SL;
+            }
+
+            textTongSoLuong.Text = sumSoLuongDV.ToString();
+            textTongDoanhThu.Text = sumTienDV.ToString();
+
         }
 
         public void ThongKeLoaiThue(IMongoCollection<BsonDocument> collectionReceipt)
