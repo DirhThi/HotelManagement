@@ -87,7 +87,7 @@
             <Border  x:Name="border" CornerRadius="10" Background="#edf3ff">
             <Grid >
 
-                <TabControl x:Name="tabcontrolcontry"  Margin="10" BorderThickness="0" Background="LightGray">
+                <TabControl x:Name="tabcontrolcontry"  Margin="10" BorderThickness="0" Background="LightGray" SelectionChanged="tabcontrolcontry_SelectionChanged">
                     <TabItem Style="{StaticResource tabbarExplore }"  Header="Phòng trống">
                         <Border Margin="10 10" Background="White" CornerRadius="10" >
                             <Grid>
