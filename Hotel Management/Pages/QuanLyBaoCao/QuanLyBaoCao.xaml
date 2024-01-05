@@ -28,7 +28,8 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="ngaybatdau"
-                                        Focusable="False">
+                                        Focusable="False"
+                                        CalendarClosed="ngaybatdau_CalendarClosed">
                         </DatePicker>
                         <TextBlock Margin="40,0,15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Ngày kết thúc</TextBlock>
                         <DatePicker 
@@ -36,7 +37,8 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="ngayketthuc"
-                                        Focusable="False">
+                                        Focusable="False"
+                                        CalendarClosed="ngayketthuc_CalendarClosed">
                         </DatePicker>
                     </StackPanel>
             </Border>
@@ -95,7 +97,7 @@
                                 </TextBlock>
                                 <StackPanel Margin="20,10" Orientation="Horizontal">
                                     <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="AccountCashOutline" />
-                                    <TextBlock VerticalAlignment="Center" Margin="25,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37" >
+                                    <TextBlock x:Name="textSoLuongDat" VerticalAlignment="Center" Margin="25,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37" >
 
                                     </TextBlock>
                                 </StackPanel>
@@ -108,7 +110,7 @@
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
                                     <materialDesign:PackIcon Foreground="BlueViolet" Height="55" Width="55" Kind="HomePercentOutline" />
-                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+                                    <TextBlock x:Name="textThuPhong" VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
 
                                     </TextBlock>
                                 </StackPanel>
@@ -121,7 +123,7 @@
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
                                     <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="FoodOutline" />
-                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+                                    <TextBlock x:Name="textThuDichVu" VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
 
                                     </TextBlock>
                                 </StackPanel>
@@ -134,7 +136,7 @@
                                 </TextBlock>
                                 <StackPanel Margin="10,10" Orientation="Horizontal">
                                     <materialDesign:PackIcon Foreground="BlueViolet" Height="50" Width="50" Kind="CashMultiple" />
-                                    <TextBlock VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
+                                    <TextBlock x:Name="textTongThu" VerticalAlignment="Center" Margin="20,0,0,0"  Foreground="#161d36" FontSize="30" FontWeight="Medium" Text="37000000" >
 
                                     </TextBlock>
                                 </StackPanel>
