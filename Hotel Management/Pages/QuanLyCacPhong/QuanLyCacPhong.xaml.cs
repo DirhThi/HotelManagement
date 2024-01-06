@@ -35,24 +35,14 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
               
         List<Phong> phongList = new List<Phong> {
            new Phong() { maphong = "101", loaiphong = "Standard",trangthai = "Phòng trống"},
-            new Phong() { maphong = "102", loaiphong = "Standard",trangthai = "Đang bảo trì"},
-            new Phong() { maphong = "104", loaiphong = "Deluxe",trangthai = "Phòng trống"},
-            new Phong() { maphong = "201", loaiphong = "Standard",trangthai = "Phòng trống"},
-            new Phong() { maphong = "203", loaiphong = "Standard",trangthai = "Phòng trống"},
-            new Phong() { maphong = "204", loaiphong = "Deluxe",trangthai = "Phòng trống"},
-            new Phong() { maphong = "301", loaiphong = "Deluxe",trangthai = "Phòng trống"},
-            new Phong() { maphong = "302", loaiphong = "Standard",trangthai = "Phòng trống"},
-            new Phong() { maphong = "401", loaiphong = "Deluxe",trangthai = "Phòng trống"},
-            new Phong() { maphong = "402", loaiphong = "Deluxe",trangthai = "Phòng trống"},
-            new Phong() { maphong = "502", loaiphong = "Vip",trangthai = "Phòng trống"},
-            new Phong() { maphong = "503", loaiphong = "Vip",trangthai = "Phòng trống"},
-            new Phong() { maphong = "504", loaiphong = "Vip",trangthai = "Phòng trống"},
+        
         };
         */
 
         public QuanLyCacPhong()
         {
             InitializeComponent();
+            SetRole();
             GetListPhong();
             GetLoaiPhongList();
             GetListCSVC();
@@ -71,7 +61,64 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             suaCSVC.ItemsSource = ListCSVC;
         }
 
+        private void SetRole()
+        {
+            string currentRole = Auth.Login.currentUser.UserRole;
+            if(currentRole=="Nhân viên")
+            {
+                CBLoaiPhong.IsEnabled = false;
+                roomOption.Visibility = Visibility.Collapsed;
+            }    
 
+        }
+        private void GetColor()
+        {
+            foreach(Phong P in phongListDisplay)
+            {
+                switch (P.trangthai)
+                {
+
+                    case "Trống":
+                        {
+                            P.color1 = "#0096C7";
+                            P.color2 = "#C0C9E8";
+                            break;
+                        }
+                        
+
+                    case "Đang thuê":
+                        {
+                            P.color1 = "Coral";
+                            P.color2 = "#ffd166";
+                            break;
+                        }
+                    case "Đã đặt":
+                        {
+                            P.color1 = "#a5be00";
+                            P.color2 = "#aad576";
+                            break;
+                        }
+                    case "Đang dọn dẹp":
+                        {
+                            P.color1 = "#6c757d";
+                            P.color2 = "#c9ada7";
+                            break;
+                        }
+
+                    case "Đang bảo trì":
+                        {
+                            P.color1 = "#6c757d";
+                            P.color2 = "#c9ada7";
+                            break;
+                        }
+
+                    default:
+                        {
+                            break;
+                        }
+                }
+            }    
+        }
 
         private void Phong_click(object sender, RoutedEventArgs e)
         {
@@ -87,23 +134,18 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             BtnSuaTrangThaiPhong.Tag = maphong;
             if (!trangthaiPhongList.Contains(trangthai))
             {
-                CBLoaiPhong.IsEnabled = false;
-                CBtrangthai.IsEnabled = false;
-                BtnSuaTrangThaiPhong.IsEnabled = false;
+                MessageBox.Show("Không thể sửa thông tin phòng đang hoạt động !");
             }
             else
             {
-                CBLoaiPhong.IsEnabled = true;
-                CBtrangthai.IsEnabled = true;
-                BtnSuaTrangThaiPhong.IsEnabled = true;
+                          
+                Dialog.IsOpen = true;
             }
 
-            Dialog.IsOpen = true;
         }
-        
-      
 
-        private void CancelDialog(object sender, RoutedEventArgs e)
+
+        private void CancelDialog()
         {
             Dialog.IsOpen = false;
             dialogSuaPhong.Visibility = Visibility.Collapsed;
@@ -111,7 +153,11 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             dialogThemTepphong.Visibility = Visibility.Collapsed;
             dialogSualoaiphong.Visibility = Visibility.Collapsed;
             dialogSuaCSVC.Visibility = Visibility.Collapsed;
+        }
+        private void CancelDialog(object sender, RoutedEventArgs e)
+        {
 
+            CancelDialog();
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -246,6 +292,9 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 phongListDisplay.Add(new Phong { maphong = maphong, loaiphong = loaiphong, trangthai = trangthai });
 
             }
+
+            GetColor();
+
             phongIC.Items.Refresh();
         }
         void GetListCSVC()
@@ -307,6 +356,8 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 MongoHandler.GetInstance().GetCollection("Room").UpdateOne(filterPhong, updateState);
             }
             GetListPhong();
+            CancelDialog();
+
         }
 
         private void XacNhanThemPhong_Click(object sender, RoutedEventArgs e)
@@ -324,8 +375,10 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             IMongoCollection<BsonDocument> roomCollection = MongoHandler.GetInstance().GetCollection("Room");
             if (roomCollection.Find(filterIsExit).FirstOrDefault() == null)
             {
-                roomCollection.InsertOne(new BsonDocument { { "roomName", TBMaPhong.Text }, { "roomType", CBLoaiPhong2.SelectedItem.ToString() }, { "roomState", "Phòng trống" } });
+                roomCollection.InsertOne(new BsonDocument { { "roomName", TBMaPhong.Text }, { "roomType", CBLoaiPhong2.SelectedItem.ToString() }, { "roomState", "Trống" } });
                 GetListPhong();
+                CancelDialog();
+
             }
             else
             {
@@ -483,6 +536,9 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         public string maphong { get; set; }
         public string loaiphong { get; set; }
         public string trangthai { get; set; }
+        public string color1 { get; set; }
+        public string color2 { get; set; }
+
 
     }
 }

@@ -43,11 +43,27 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
         public QuanLyHoaDon()
         {
             InitializeComponent();
+            SetRole();
             dateTimeChange = FutureDatePicker.SelectedDate.Value;
             LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
             DGHoadon.ItemsSource = receiptListDisplay;
             textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();
             textTongTien.Text = "Tổng tiền: " + tongTienNgay.ToString();
+        }
+
+        private void SetRole()
+        {
+            string currentRole = Auth.Login.currentUser.UserRole;
+            if (currentRole == "Nhân viên")
+            {
+             //   deletebtnDG.Visibility = Visibility.Collapsed;
+                DGHoadon.SelectionMode = DataGridSelectionMode.Single;
+                DGHoadon.Columns[7].Visibility = Visibility.Collapsed;
+                DGHoadon.Columns[8].Visibility = Visibility.Visible;
+                txtHDXoa.Visibility= Visibility.Collapsed;
+
+            }
+
         }
 
         public void LayHoaDon(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer, IMongoCollection<BsonDocument> collectionUser)
@@ -383,6 +399,19 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                     serviceList.Clear();
                     totalbilltext.Text = RoomCost.Text;
                 }
+            }
+        }
+
+        private void DGHoadon_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string currentRole = Auth.Login.currentUser.UserRole;
+            if (DGHoadon.SelectedItems.Count >= 1 && currentRole != "Nhân viên")
+            {
+                deletebtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                deletebtn.Visibility = Visibility.Collapsed;
             }
         }
     }

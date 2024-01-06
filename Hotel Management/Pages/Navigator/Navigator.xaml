@@ -232,7 +232,7 @@
                                         </TextBlock>
                                     </StackPanel>
                                 </Button>
-                                <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnDichvu" HorizontalAlignment="Left"   MouseEnter="btnDichvu_MouseEnter" Click="btnDichvu_Click" MouseLeave="btnDichvu_MouseLeave">
+                                <Button  Style="{StaticResource PopupButtonStyle}" x:Name="btnDichvu" HorizontalAlignment="Left"   MouseEnter="btnDichvu_MouseEnter" Click="btnDichvu_Click" MouseLeave="btnDichvu_MouseLeave">
                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                         <Border Background="Transparent" Margin="20 0" >
                                             <materialDesign:PackIcon  Height="22" Width="22" Kind="Food" />

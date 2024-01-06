@@ -153,13 +153,14 @@
                                 <TextBox   x:Name="searchbox"  FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập ID" TextChanged="searchbox_textchanged" ></TextBox>
                             </Border>
                         </StackPanel>
-                        <Button HorizontalAlignment="Right" Grid.Column="1"
+                        <Button Visibility="Collapsed" HorizontalAlignment="Right" Grid.Column="1"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
                             VerticalContentAlignment="Center"
-                                Click="Button_Click">
+                                Click="Button_Click"
+                                Name="deletebtn">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Height="24" Width="24" Kind="Delete" />
@@ -179,7 +180,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-                        <DataGrid Grid.Row="0" MinRowHeight="45"  SelectionMode="Extended" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
+                        <DataGrid SelectionChanged="DGHoadon_SelectionChanged" Grid.Row="0" MinRowHeight="45"  SelectionMode="Extended" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
                 Margin="10"
                         
                        x:Name="DGHoadon"
@@ -215,7 +216,7 @@
                                                         </StackPanel>
                                                     </Button.Content>
                                                 </Button>
-                                                <Button Click="Button_Click_1" Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+                                                <Button  Click="Button_Click_1" Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
 
                                                     <Button.Content>
                                                         <StackPanel Orientation="Horizontal">
@@ -223,6 +224,32 @@
                                                         </StackPanel>
                                                     </Button.Content>
                                                 </Button>
+                                            </StackPanel>
+
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Visibility="Collapsed" Width="120" Header="Tùy chỉnh" IsReadOnly="True"     CanUserResize="False" CanUserReorder="False">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                                                <Button Click="Button_Click_2" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+
+                                                    <Button.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon  Height="24" Width="24" Kind="FileDocument" />
+                                                        </StackPanel>
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button  Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+
+                                                    <Button.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon  Height="24" Width="24" Kind="Printer" />
+                                                        </StackPanel>
+                                                    </Button.Content>
+                                                </Button>
+                                                
                                             </StackPanel>
 
                                         </DataTemplate>
@@ -240,7 +267,7 @@
                                     <TextBlock Name="textSoLuong" FontSize="18" FontWeight="SemiBold" Margin="10,0">Số lượng : 10</TextBlock>
                                     <TextBlock Name="textTongTien" FontSize="18" FontWeight="SemiBold" Margin="20,0,0,0">Tổng tiền : 1000000</TextBlock>
                                 </StackPanel>
-                                <TextBlock Margin="10,0" FontSize="14" FontWeight="Normal"  Foreground="Gray"    FontStyle="Italic" Grid.Column="1" HorizontalAlignment="Right">Giữ ctrl để chọn nhiều hóa đơn</TextBlock>
+                                <TextBlock x:Name="txtHDXoa" Margin="10,0" FontSize="14" FontWeight="Normal"  Foreground="Gray"    FontStyle="Italic" Grid.Column="1" HorizontalAlignment="Right">Giữ ctrl để chọn nhiều hóa đơn</TextBlock>
                             </Grid>
                         </Border>
                     </Grid>

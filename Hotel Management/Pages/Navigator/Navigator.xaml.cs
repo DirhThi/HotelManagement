@@ -19,7 +19,20 @@ namespace Hotel_Management.Pages.Navigator
         public Navigator()
         {
             InitializeComponent();
+            SetRole();
             CurrentUserTB.Text = Auth.Login.currentUser.UserName;
+        }
+
+        private void SetRole()
+        {
+            string currentRole = Auth.Login.currentUser.UserRole;
+            if (currentRole == "Nhân viên")
+            {
+                btnDichvu.Visibility = Visibility.Collapsed;
+                btnBaocao.Visibility = Visibility.Collapsed;
+                btnNhansu.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private void MenuBtnChoose(Button bt)

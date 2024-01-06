@@ -56,7 +56,7 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
         public QuanLyKhachHang()
         {
             InitializeComponent();
-            
+            SetRole();
             LayKhachHang(collectionCustomer);
             DGKhachhang.ItemsSource = customerListDisplay;
             textSoLuong.Text = "Số lượng: " + customerListDisplay.Count.ToString();
@@ -66,6 +66,20 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
             autoorder();
         }
 
+        private void SetRole()
+        {
+            string currentRole = Auth.Login.currentUser.UserRole;
+            if (currentRole == "Nhân viên")
+            {
+                //   deletebtnDG.Visibility = Visibility.Collapsed;
+                DGKhachhang.SelectionMode = DataGridSelectionMode.Single;
+                DGKhachhang.Columns[6].Visibility = Visibility.Collapsed;
+                DGKhachhang.Columns[7].Visibility = Visibility.Visible;
+                txtHDXoa.Visibility = Visibility.Collapsed;
+
+            }
+
+        }
         private void UpdateData()
         {
            SyncData();
@@ -569,6 +583,19 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                     serviceList.Clear();
                     totalbilltext.Text = RoomCost.Text;
                 }
+            }
+        }
+
+        private void DGKhachhang_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string currentRole = Auth.Login.currentUser.UserRole;
+            if (DGKhachhang.SelectedItems.Count >= 1 && currentRole != "Nhân viên")
+            {
+                deletebtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                deletebtn.Visibility = Visibility.Collapsed;
             }
         }
     }

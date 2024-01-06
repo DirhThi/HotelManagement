@@ -645,5 +645,17 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
             borderhoadon.Visibility = Visibility.Collapsed;
             bordersuanhanvien.Visibility = Visibility.Visible;
         }
+
+        private void DGNhanVien_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DGNhanVien.SelectedItems.Count >= 1)
+            {
+                deletebtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                deletebtn.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }

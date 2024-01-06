@@ -369,13 +369,14 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        <Button HorizontalAlignment="Right" Grid.Column="1"
+                        <Button Visibility="Collapsed" HorizontalAlignment="Right" Grid.Column="1"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
                             VerticalContentAlignment="Center"
-                                Click="Button_Click">
+                                Click="Button_Click"
+                                Name="deletebtn">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Height="24" Width="24" Kind="Delete" />
@@ -397,7 +398,7 @@
                         </Grid.RowDefinitions>
                         <DataGrid Grid.Row="0" MinRowHeight="45"  SelectionMode="Extended" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
                 Margin="10"
-                        
+                        SelectionChanged="DGNhanVien_SelectionChanged"
                        x:Name="DGNhanVien"
                    
                                 Foreground="#22223B"

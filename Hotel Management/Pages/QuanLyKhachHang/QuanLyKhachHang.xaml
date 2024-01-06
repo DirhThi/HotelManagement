@@ -235,13 +235,14 @@
                                 <TextBox  x:Name="searchbox"    FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập tên khách hàng" TextChanged="searchbox_textchanged" ></TextBox>
                             </Border>
                         </StackPanel>
-                        <Button HorizontalAlignment="Right" Grid.Column="1"
+                        <Button Visibility="Collapsed" HorizontalAlignment="Right" Grid.Column="1"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
                             VerticalContentAlignment="Center"
-                                Click="Button_Click">
+                                Click="Button_Click"
+                                Name="deletebtn">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Height="24" Width="24" Kind="Delete" />
@@ -263,7 +264,7 @@
                         </Grid.RowDefinitions>
                         <DataGrid Grid.Row="0"   MinRowHeight="45"  SelectionMode="Extended" CanUserSortColumns="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"  Style="{DynamicResource DataGridStyle1}"
                 Margin="10"
-                        
+                        SelectionChanged="DGKhachhang_SelectionChanged"
                        x:Name="DGKhachhang"
                    
                                 Foreground="#22223B" 
@@ -299,6 +300,24 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Visibility="Collapsed" Width="100" Header="Tùy chỉnh" IsReadOnly="True"     CanUserResize="False" CanUserReorder="False">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Margin="10,0" Click="EditCustomer_Click"  Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+                                                    <Button.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <materialDesign:PackIcon Height="24" Width="24" Kind="FileAccount" />
+                                                        </StackPanel>
+                                                    </Button.Content>
+                                                </Button>
+                                               
+
+                                            </StackPanel>
+
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                         <Border Grid.Row="1" CornerRadius="10" Background="White">
@@ -310,7 +329,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock x:Name="textSoLuong" FontSize="18" FontWeight="SemiBold" Margin="10,0">Số lượng : 10</TextBlock>
                                 </StackPanel>
-                                <TextBlock Margin="10,0" FontSize="14" FontWeight="Normal"  Foreground="Gray"    FontStyle="Italic" Grid.Column="1" HorizontalAlignment="Right">Giữ ctrl để chọn nhiều hóa đơn</TextBlock>
+                                <TextBlock Name="txtHDXoa" Margin="10,0" FontSize="14" FontWeight="Normal"  Foreground="Gray"    FontStyle="Italic" Grid.Column="1" HorizontalAlignment="Right">Giữ ctrl để chọn nhiều khách hàng</TextBlock>
                             </Grid>
                         </Border>
                     </Grid>

@@ -392,7 +392,7 @@
                 
                 <Border Grid.Row="1" Padding="5" CornerRadius="10" Margin="20,20" Background="White">
                     <Grid>
-                        <Grid Visibility="Visible" x:Name="phongtrongoption">
+                        <Grid Visibility="Collapsed" x:Name="phongtrongoption">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -418,7 +418,7 @@
                                 </Button>
                             </Border>
                         </Grid>
-                        <Grid  x:Name="phongdatoption"  Visibility="Hidden">
+                        <Grid  x:Name="phongdatoption"  Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -444,7 +444,7 @@
                                 </Button>
                             </Border>
                         </Grid>
-                        <Grid  x:Name="phongthueoption" Visibility="Hidden">
+                        <Grid  x:Name="phongthueoption" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -461,7 +461,6 @@
                             </Border>
                             <Border Grid.Column="1"  Style="{StaticResource mainButton}">
                                 <Button
-                                    IsEnabled="True"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
@@ -471,7 +470,7 @@
                                 </Button>
                             </Border>
                         </Grid>
-                        <Grid     x:Name="hoadonoption" Visibility="Hidden">
+                        <Grid     x:Name="hoadonoption" Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -488,7 +487,6 @@
                             </Border>
                             <Border Grid.Column="1"  Style="{StaticResource mainButton}">
                                 <Button
-                                    IsEnabled="True"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"

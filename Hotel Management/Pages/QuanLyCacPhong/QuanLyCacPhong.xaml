@@ -475,63 +475,64 @@
                             <Border HorizontalAlignment="Right" Padding="5,0" CornerRadius="5" BorderThickness="2" BorderBrush="LightSkyBlue" Background="AliceBlue" Width="200" Height="36">
                                 <TextBox  x:Name="serchbox" TextChanged="Searchbox_TextChanged"  FontSize="16" BorderThickness="0" materialDesign:HintAssist.Hint="Nhập mã phòng" ></TextBox>
                             </Border>
-
-                            <Button HorizontalAlignment="Right" Grid.Column="1"
+                            <StackPanel x:Name="roomOption" VerticalAlignment="Center" Orientation="Horizontal">
+                                <Button HorizontalAlignment="Right" Grid.Column="1"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
                             VerticalContentAlignment="Center" Click="themphong_click"
                                 >
-                                <Button.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Height="24" Width="24" Kind="PlusBox" />
-                                        <TextBlock>Thêm phòng</TextBlock>
-                                    </StackPanel>
-                                </Button.Content>
-                            </Button>
-                            <Button HorizontalAlignment="Right" Grid.Column="1"
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Height="24" Width="24" Kind="PlusBox" />
+                                            <TextBlock>Thêm phòng</TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button HorizontalAlignment="Right" Grid.Column="1"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
                             VerticalContentAlignment="Center" Click="themtepphong_click"
                                 >
-                                <Button.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Height="24" Width="24" Kind="FilePlus" />
-                                        <TextBlock>Thêm tệp phòng</TextBlock>
-                                    </StackPanel>
-                                </Button.Content>
-                            </Button>
-                            <Button HorizontalAlignment="Right" Grid.Column="1"
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Height="24" Width="24" Kind="FilePlus" />
+                                            <TextBlock>Thêm tệp phòng</TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button HorizontalAlignment="Right" Grid.Column="1"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
                             VerticalContentAlignment="Center" Click="QLloaiphong_click"
                                 >
-                                <Button.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Height="24" Width="24" Kind="PencilBox" />
-                                        <TextBlock>Quản lý loại phòng</TextBlock>
-                                    </StackPanel>
-                                </Button.Content>
-                            </Button>
-                            <Button HorizontalAlignment="Right" Grid.Column="1"
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Height="24" Width="24" Kind="PencilBox" />
+                                            <TextBlock>Quản lý loại phòng</TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button HorizontalAlignment="Right" Grid.Column="1"
                                 Background="Transparent"
                                 Foreground="#00bbf9"
                                 BorderThickness="0"
                                 FontSize="18"
                             VerticalContentAlignment="Center" Click="QlyCSVC_Click"
                                 >
-                                <Button.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Height="24" Width="24" Kind="TagPlus" />
-                                        <TextBlock>Quản lý CSVC</TextBlock>
-                                    </StackPanel>
-                                </Button.Content>
-                            </Button>
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Height="24" Width="24" Kind="TagPlus" />
+                                            <TextBlock>Quản lý CSVC</TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
 
 
@@ -590,12 +591,12 @@
                                                         <Border CornerRadius="20" Margin="0,0,0,0" Width="250" Height="120" >
                                                             <Border.Background>
                                                                 <LinearGradientBrush>
-                                                                    <GradientStop Color="#0096C7" Offset="0"/>
-                                                                    <GradientStop Color="#C0C9E8" Offset="1"/>
+                                                                    <GradientStop Color="{Binding color1}" Offset="0"/>
+                                                                    <GradientStop Color="{Binding color2}" Offset="1"/>
                                                                 </LinearGradientBrush>
                                                             </Border.Background>
                                                             <Border.Effect>
-                                                                <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="#0096C7"/>
+                                                                <DropShadowEffect BlurRadius="15" ShadowDepth="2"  Color="{Binding color1}"/>
                                                             </Border.Effect>
                                                             <StackPanel Margin="15,10,0,0" Orientation="Vertical">
                                                                 <TextBlock Text="{Binding maphong }" FontSize="30" FontWeight="Normal" Foreground="#edf3ff"></TextBlock>
