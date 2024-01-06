@@ -329,9 +329,9 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 IMongoCollection<BsonDocument> collectionRoomType = MongoHandler.GetInstance().GetCollection("RoomType");
                 IMongoCollection<BsonDocument> collectionFurniture = MongoHandler.GetInstance().GetCollection("Furniture");
                 LayPhongTrong(collectionRoom, collectionRoomType, collectionFurniture);
-                LayPhongBaoTri(collectionRoom, collectionRoomType, collectionFurniture);
-                Dialog.IsOpen = false;
+                LayPhongBaoTri(collectionRoom, collectionRoomType, collectionFurniture);            
             }
+            Dialog.IsOpen = false;
 
         }
 
