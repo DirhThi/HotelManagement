@@ -64,16 +64,16 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         private void SetRole()
         {
             string currentRole = Auth.Login.currentUser.UserRole;
-            if(currentRole=="Nhân viên")
+            if (currentRole == "Nhân viên")
             {
                 CBLoaiPhong.IsEnabled = false;
                 roomOption.Visibility = Visibility.Collapsed;
-            }    
+            }
 
         }
         private void GetColor()
         {
-            foreach(Phong P in phongListDisplay)
+            foreach (Phong P in phongListDisplay)
             {
                 switch (P.trangthai)
                 {
@@ -84,7 +84,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                             P.color2 = "#C0C9E8";
                             break;
                         }
-                        
+
 
                     case "Đang thuê":
                         {
@@ -117,7 +117,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                             break;
                         }
                 }
-            }    
+            }
         }
 
         private void Phong_click(object sender, RoutedEventArgs e)
@@ -138,7 +138,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             }
             else
             {
-                          
+
                 Dialog.IsOpen = true;
             }
 
@@ -176,7 +176,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 phongList.Sort((left, right) => left.trangthai.CompareTo(right.trangthai));
                 phongIC.Items.Refresh();
             }
-        }    
+        }
         private void themphong_click(object sender, RoutedEventArgs e)
         {
             dialogThemphong.Visibility = Visibility.Visible;
@@ -343,7 +343,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         }
 
         private void SuaTrangThaiPhong_Click(object sender, RoutedEventArgs e)
-        {      
+        {
             string maphong = (BtnSuaTrangThaiPhong.Tag).ToString();
             var filterPhong = Builders<BsonDocument>.Filter.Eq("roomName", maphong);
             BsonDocument room = MongoHandler.GetInstance().GetCollection("Room").Find(filterPhong).First();
@@ -354,36 +354,36 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                     return;
                 var updateState = Builders<BsonDocument>.Update.Set("roomState", CBtrangthai.SelectedItem.ToString());
                 MongoHandler.GetInstance().GetCollection("Room").UpdateOne(filterPhong, updateState);
+                GetListPhong();
+                CancelDialog();
             }
-            GetListPhong();
-            CancelDialog();
 
         }
 
         private void XacNhanThemPhong_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("Thêm phòng mới?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (messageBoxResult == MessageBoxResult.No)
-                return;
 
-            if (TBMaPhong.Text==""||CBLoaiPhong2.SelectedIndex==-1)
+            if (TBMaPhong.Text == "" || CBLoaiPhong2.SelectedIndex == -1)
             {
                 MessageBox.Show("Lỗi mã phòng hoặc loại phòng");
                 return;
-            }    
+            }
             var filterIsExit = Builders<BsonDocument>.Filter.Eq("roomName", TBMaPhong.Text);
             IMongoCollection<BsonDocument> roomCollection = MongoHandler.GetInstance().GetCollection("Room");
             if (roomCollection.Find(filterIsExit).FirstOrDefault() == null)
             {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Thêm phòng mới?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.No)
+                    return;
                 roomCollection.InsertOne(new BsonDocument { { "roomName", TBMaPhong.Text }, { "roomType", CBLoaiPhong2.SelectedItem.ToString() }, { "roomState", "Trống" } });
                 GetListPhong();
                 CancelDialog();
-
             }
             else
             {
                 MessageBox.Show("Mã phòng đã tồn tại!");
             }
+
         }
 
         private void CBLoaiPhong3_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -445,18 +445,14 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         }
 
         private void SuaLoaiPhong_Click(object sender, RoutedEventArgs e)
-        {
-            string message = (CBLoaiPhong3.SelectedIndex == 0) ? "Thêm loại phòng" : "Cập nhật loại phòng?";
-            MessageBoxResult messageBoxResult = MessageBox.Show(message, "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (messageBoxResult == MessageBoxResult.No)
-                return;
-
+        {           
             IMongoCollection<BsonDocument> roomTypeCollection = MongoHandler.GetInstance().GetCollection("RoomType");
             IMongoCollection<BsonDocument> CSVCCollection = MongoHandler.GetInstance().GetCollection("Furniture");
 
             List<BsonDocument> roomTypeList = roomTypeCollection.Find(new BsonDocument()).ToList();
             List<ObjectId> ListIdCSVC = new List<ObjectId>();
 
+            
             foreach (var item in ListCSVChientai)
             {
                 var filter = Builders<BsonDocument>.Filter.Eq("furnitureName", item);
@@ -469,7 +465,23 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
 
             if (CBLoaiPhong3.SelectedIndex == 0)
             {
-                BsonDocument newRoomType = new BsonDocument {
+                if (TBTenLoaiPhong.Text=="")
+                {
+                    MessageBox.Show("Lỗi loại phòng!");
+                    return;
+                }           
+                else if (!int.TryParse((TBGiaTheoGio.Text), out _) || !int.TryParse((TBGiaGioSau.Text), out _) || !int.TryParse((TBGiaTheoNgay.Text), out _) || !int.TryParse((TBGiaQuaDem.Text), out _))
+                {
+                    MessageBox.Show("Giá tiền chỉ được nhập số!");
+                    return;
+                }
+                else
+                {
+                    string message = (CBLoaiPhong3.SelectedIndex == 0) ? "Thêm loại phòng" : "Cập nhật loại phòng?";
+                    MessageBoxResult messageBoxResult = MessageBox.Show(message, "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (messageBoxResult == MessageBoxResult.No)
+                        return; 
+                    BsonDocument newRoomType = new BsonDocument {
                     { "roomType", TBTenLoaiPhong.Text },
                     { "firstHourPrice", Convert.ToInt32(TBGiaTheoGio.Text) },
                     { "followupHourPrice", Convert.ToInt32(TBGiaGioSau.Text) },
@@ -478,9 +490,21 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                     {"furnituresId", new BsonArray(ListIdCSVC) }
                 };
                 roomTypeCollection.InsertOne(newRoomType);
+                }
+
+               
             }
             else if (CBLoaiPhong3.SelectedIndex != -1)
             {
+                if (!int.TryParse((TBGiaTheoGio.Text), out _) || !int.TryParse((TBGiaGioSau.Text), out _) || !int.TryParse((TBGiaTheoNgay.Text), out _) || !int.TryParse((TBGiaQuaDem.Text), out _))
+                {
+                    MessageBox.Show("Giá tiền chỉ được nhập số!");
+                    return;
+                }
+                string message = (CBLoaiPhong3.SelectedIndex == 0) ? "Thêm loại phòng" : "Cập nhật loại phòng?";
+                MessageBoxResult messageBoxResult = MessageBox.Show(message, "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.No)
+                    return;
                 foreach (BsonDocument roomType in roomTypeList)
                 {
                     if (CBLoaiPhong3.SelectedItem.ToString() == roomType["roomType"].AsString)
@@ -496,22 +520,32 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                     }
                 }
             }
-
-
+            else
+            {
+                MessageBox.Show("Chưa chọn loại phòng!");
+                return;
+            }
         }
 
         private void XacNhanThemTepPhong_Click(object sender, RoutedEventArgs e)
         {
+            if (phongmoiDG.Items.Count <= 0)
+            {
+                MessageBox.Show("Chưa thêm tệp phòng!");
+                return;
+            }    
+               
             MessageBoxResult messageBoxResult = MessageBox.Show("Thêm tệp phòng?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.No)
                 return;
             IMongoCollection<BsonDocument> roomCollection = MongoHandler.GetInstance().GetCollection("Room");
             List<Phong> listphong = (List<Phong>)phongmoiDG.ItemsSource;
-            foreach(Phong phong in listphong)
+            foreach (Phong phong in listphong)
             {
-                roomCollection.InsertOne(new BsonDocument { {"roomName",phong.maphong },{"roomType",phong.loaiphong },{ "roomState","Trống"} });
+                roomCollection.InsertOne(new BsonDocument { { "roomName", phong.maphong }, { "roomType", phong.loaiphong }, { "roomState", "Trống" } });
             }
             GetListPhong();
+            CancelDialog();
         }
 
 
@@ -520,13 +554,13 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
             phongListDisplay.Clear();
             int count = phongList.Count();
             string text = serchbox.Text;
-            foreach(Phong P in phongList)
+            foreach (Phong P in phongList)
             {
-                if(P.maphong.StartsWith(text))
+                if (P.maphong.StartsWith(text))
                 {
                     phongListDisplay.Add(P);
-                }    
-            }    
+                }
+            }
             phongIC.Items.Refresh();
 
         }

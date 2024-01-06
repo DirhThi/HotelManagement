@@ -325,9 +325,12 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
             {
                 var update = Builders<BsonDocument>.Update.Set(r => r["roomState"], newStatus);
                 roomCollection.UpdateOne(filter, update);
-
-                // cập nhập list phòng 
-
+                IMongoCollection<BsonDocument> collectionRoom = MongoHandler.GetInstance().GetCollection("Room");
+                IMongoCollection<BsonDocument> collectionRoomType = MongoHandler.GetInstance().GetCollection("RoomType");
+                IMongoCollection<BsonDocument> collectionFurniture = MongoHandler.GetInstance().GetCollection("Furniture");
+                LayPhongTrong(collectionRoom, collectionRoomType, collectionFurniture);
+                LayPhongBaoTri(collectionRoom, collectionRoomType, collectionFurniture);
+                Dialog.IsOpen = false;
             }
 
         }
