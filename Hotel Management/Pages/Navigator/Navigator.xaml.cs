@@ -37,7 +37,7 @@ namespace Hotel_Management.Pages.Navigator
 
         private void MenuBtnChoose(Button bt)
         {
-            menuButton = new Button[] { btnDatphong, btnPhong, btnHoadon, btnDichvu, btnBaocao, btnNhansu, btnKhachhang };
+            menuButton = new Button[] { btnDatphong, btnDatphong1, btnPhong, btnHoadon, btnDichvu, btnBaocao, btnNhansu, btnKhachhang };
             foreach (Button btn in menuButton)
             {
                 if (btn == bt)
@@ -69,6 +69,22 @@ namespace Hotel_Management.Pages.Navigator
         }
 
         private void btnDatphong_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Popup.Visibility = Visibility.Collapsed;
+            Popup.IsOpen = false;
+        }
+        private void btnDatphong1_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (Tg_Btn.IsChecked == false)
+            {
+                Popup.PlacementTarget = btnDatphong1;
+                Popup.Placement = PlacementMode.Right;
+                Popup.IsOpen = true;
+                PopupText.Text = "Quản lý đặt phòng";
+            }
+        }
+
+        private void btnDatphong1_MouseLeave(object sender, MouseEventArgs e)
         {
             Popup.Visibility = Visibility.Collapsed;
             Popup.IsOpen = false;
@@ -267,7 +283,12 @@ namespace Hotel_Management.Pages.Navigator
             fContainer.Navigate(new System.Uri("Pages/Quanlythuephong/Quanlythuephong.xaml", UriKind.RelativeOrAbsolute));
             title.Text = "Quản lý thuê phòng";
         }
-
+        private void btnDatphong1_Click(object sender, RoutedEventArgs e)
+        {
+            MenuBtnChoose(btnDatphong1);
+            fContainer.Navigate(new System.Uri("Pages/Quanlydatphong/Quanlydatphong.xaml", UriKind.RelativeOrAbsolute));
+            title.Text = "Quản lý đặt phòng";
+        }
         private void btnPhong_Click(object sender, RoutedEventArgs e)
         {
             MenuBtnChoose(btnPhong);

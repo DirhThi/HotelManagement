@@ -43,7 +43,6 @@ namespace Hotel_Management.Pages.Auth
             {
                 if (pw.Password == user["accountPassword"].AsString)
                 {
-                    MessageBox.Show("Đăng nhập thành công!");
                     currentUser = new User() {
                         UserName = user["userName"].AsString,
                         DateOfBirth = user["dateOfBirth"].ToUniversalTime(),

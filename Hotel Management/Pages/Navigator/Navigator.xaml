@@ -210,11 +210,20 @@
                                         <Border Background="Transparent" Margin="20 0">
                                             <materialDesign:PackIcon Height="22" Width="22" Kind="Hotel" />
                                         </Border>
-                                        <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý đặt phòng">
+                                        <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý thuê phòng">
                                         </TextBlock>
                                     </StackPanel>
                                 </Button>
-                                <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnPhong" HorizontalAlignment="Left"   MouseEnter="btnPhong_MouseEnter" MouseLeave="btnPhong_MouseLeave" Click="btnPhong_Click">
+                            <Button Style="{StaticResource PopupButtonStyle}" HorizontalAlignment="Left" x:Name="btnDatphong1"   MouseEnter="btnDatphong1_MouseEnter" MouseLeave="btnDatphong1_MouseLeave" Click="btnDatphong1_Click">
+                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                    <Border Background="Transparent" Margin="20 0">
+                                        <materialDesign:PackIcon Height="22" Width="22" Kind="CalendarCheck" />
+                                    </Border>
+                                    <TextBlock FontWeight="Medium" FontSize="16" Text="Quản lý đặt phòng">
+                                    </TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PopupButtonStyle}" x:Name="btnPhong" HorizontalAlignment="Left"   MouseEnter="btnPhong_MouseEnter" MouseLeave="btnPhong_MouseLeave" Click="btnPhong_Click">
                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                         <Border Background="Transparent" Margin="20 0" >
                                             <materialDesign:PackIcon Height="22" Width="22" Kind="Home" />

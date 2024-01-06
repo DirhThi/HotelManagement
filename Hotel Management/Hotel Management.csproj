@@ -173,6 +173,12 @@
       <DependentUpon>ChartSoLuongLoaiThue.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\QuanLyCacPhong\Room.cs" />
+    <Compile Include="Pages\QuanLyDatPhong\ChiTietDatPhong.xaml.cs">
+      <DependentUpon>ChiTietDatPhong.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QuanLyDatPhong\QuanLyDatPhong.xaml.cs">
+      <DependentUpon>QuanLyDatPhong.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StaticEvents\StaticEventHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +221,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\QuanLyCacPhong\QuanLyCacPhong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyDatPhong\ChiTietDatPhong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\QuanLyDatPhong\QuanLyDatPhong.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

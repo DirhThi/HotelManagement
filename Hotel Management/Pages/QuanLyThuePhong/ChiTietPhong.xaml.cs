@@ -274,18 +274,18 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 case "Đang dọn dẹp":
                 case "Trống":
                     phongtrongoption.Visibility = Visibility.Visible;
-                    phongdatoption.Visibility = Visibility.Hidden;
-                    phongthueoption.Visibility = Visibility.Hidden;
+                    phongdatoption.Visibility = Visibility.Collapsed;
+                    phongthueoption.Visibility = Visibility.Collapsed;
                     break;
                 case "Đang thuê":
-                    phongtrongoption.Visibility = Visibility.Hidden;
-                    phongdatoption.Visibility = Visibility.Hidden;
+                    phongtrongoption.Visibility = Visibility.Collapsed;
+                    phongdatoption.Visibility = Visibility.Collapsed;
                     phongthueoption.Visibility = Visibility.Visible;
                     break;
                 case "Đã đặt":
-                    phongtrongoption.Visibility = Visibility.Hidden;
+                    phongtrongoption.Visibility = Visibility.Collapsed;
                     phongdatoption.Visibility = Visibility.Visible;
-                    phongthueoption.Visibility = Visibility.Hidden;
+                    phongthueoption.Visibility = Visibility.Collapsed;
                     break;
                 
 
