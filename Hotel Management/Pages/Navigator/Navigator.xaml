@@ -67,7 +67,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
-                                >
+                                Click="DoiMatKhauCurrentUser_Click">
                                         Xác nhận
                                     </Button>
                                 </Border>
@@ -129,8 +129,9 @@
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,15">
                                         <TextBlock FontWeight="Medium" FontSize="18" Text="Ngày sinh"></TextBlock>
-                                        <TextBox x:Name="CustomerBirthAdd" Height="32" FontSize="18"
-                        materialDesign:HintAssist.Hint="Nhập ngày sinh"/>
+                                        <!--<TextBox x:Name="CustomerBirthAdd" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập ngày sinh"/>-->
+                                    <DatePicker Name="CustomerBirthAdd" FontWeight="Medium" FontSize="18"></DatePicker>
                                     </StackPanel>
 
 
@@ -154,6 +155,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                Click="SuaThongTinCurrentUser_Click"
                                 >
                                         Xác nhận
                                     </Button>
