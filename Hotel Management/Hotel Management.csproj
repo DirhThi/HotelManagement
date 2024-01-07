@@ -174,12 +174,6 @@
     </Compile>
     <Compile Include="Pages\QuanLyCacPhong\Room.cs" />
     <Compile Include="StaticClass\ScreenCapture.cs" />
-   <Compile Include="Pages\QuanLyDatPhong\ChiTietDatPhong.xaml.cs">
-      <DependentUpon>ChiTietDatPhong.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\QuanLyDatPhong\QuanLyDatPhong.xaml.cs">
-      <DependentUpon>QuanLyDatPhong.xaml</DependentUpon>
-    </Compile>
     <Compile Include="StaticEvents\StaticEventHandler.cs" />
     <Compile Include="StaticClass\StringHandler.cs" />
     <Page Include="MainWindow.xaml">
