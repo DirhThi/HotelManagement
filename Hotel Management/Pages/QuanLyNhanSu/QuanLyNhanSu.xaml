@@ -142,7 +142,7 @@
 
                                 <StackPanel Margin="0,0,0,15">
                                     <TextBlock FontWeight="Medium" FontSize="18" Text="Tên nhân sự *"></TextBlock>
-                                    <TextBox x:Name="CustomerName" Height="32" FontSize="18"
+                                    <TextBox x:Name="CustomerName" Height="32" FontSize="18" PreviewTextInput="CustomerName_PreviewTextInput"
                         materialDesign:HintAssist.Hint="Nhập tên nhân sự"/>
                                 </StackPanel>
                                 <StackPanel Margin="0,0,0,15">
@@ -162,12 +162,12 @@
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,0,15">
-                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *" PreviewTextInput="TextBlock_PreviewTextInput"></TextBlock>
                                     <TextBox x:Name="CustomerIdNumber"  Height="32" FontSize="18"
                         materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" />
                                 </StackPanel>
                                 <StackPanel Margin="0,0,0,15">
-                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
+                                    <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *" PreviewTextInput="TextBlock_PreviewTextInput_1"></TextBlock>
                                     <TextBox x:Name="CustomerPhoneNumber" Height="32" FontSize="18"
                         materialDesign:HintAssist.Hint="Nhập số điện thoại" />
                                 </StackPanel>
@@ -246,7 +246,7 @@
                                     <TextBlock  FontWeight="Medium"   Margin="0,0,0,10" FontSize="20" Text="Thông tin nhân sự"></TextBlock>
                                     <StackPanel Margin="0,0,0,15">
                                         <TextBlock FontWeight="Medium" FontSize="18" Text="Tên nhân sự *"></TextBlock>
-                                        <TextBox x:Name="Add_StaffName" Height="32" FontSize="18"
+                                        <TextBox x:Name="Add_StaffName" Height="32" FontSize="18" PreviewTextInput="CustomerName_PreviewTextInput"
                         materialDesign:HintAssist.Hint="Nhập tên nhân sự"/>
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,15">
@@ -265,12 +265,12 @@
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,15">
                                         <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
-                                        <TextBox x:Name="Add_StaffIdNumber"  Height="32" FontSize="18"
+                                        <TextBox x:Name="Add_StaffIdNumber"  Height="32" FontSize="18" PreviewTextInput="TextBlock_PreviewTextInput"
                         materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" />
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,15">
                                         <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
-                                        <TextBox x:Name="Add_StaffPhoneNumber" Height="32" FontSize="18"
+                                        <TextBox x:Name="Add_StaffPhoneNumber" Height="32" FontSize="18" PreviewTextInput="TextBlock_PreviewTextInput"
                         materialDesign:HintAssist.Hint="Nhập số điện thoại" />
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,15">

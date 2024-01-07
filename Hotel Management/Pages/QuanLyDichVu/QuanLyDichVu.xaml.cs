@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Hotel_Management.Pages.QuanLyDichVu
 {
@@ -138,11 +139,13 @@ namespace Hotel_Management.Pages.QuanLyDichVu
                                 MessageBox.Show("Dịch vụ đã tồn tại.");
                             }
                         }
+                        string fileName = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName +"/Assets/Images/" + StaticClass.StringHandler.SpaceAndLowcaseGenerator(textBox_serviceName.Text) + ".png";
+                        ScreenCapture.ScreenCapture.SaveToPng(image_serviceImage, fileName);
                         var newDoc = new BsonDocument
                         {
                             {"serviceName", textBox_serviceName.Text },
                             {"servicePrice", Convert.ToInt32(textBox_servicePrice.Text)},
-                            {"serviceImage", image_serviceImage.Source.ToString() }
+                            {"serviceImage", "/Assets/Images/"+StaticClass.StringHandler.SpaceAndLowcaseGenerator(textBox_serviceName.Text) + ".png" }
                         };
                         collection.InsertOne(newDoc);
                         UpdateData();
@@ -152,14 +155,26 @@ namespace Hotel_Management.Pages.QuanLyDichVu
             }
 
         }
-        private static bool IsTextAllowed(string text)
-        {
-            return !StaticEvents.StaticEventHandler._regex.IsMatch(text);
-        }
+       
 
         private void textBox_servicePrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !IsTextAllowed(e.Text);
+            e.Handled = !StaticClass.StringHandler.IsTextAllowed(e.Text);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+             System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+
+            // Set the filter for image files.
+            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.bmp; *.png)|*.jpg;*.jpeg;*.bmp;*.png";
+
+            // Show the OpenFileDialog control.
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                // Load the image file.
+                image_serviceImage.Source = new BitmapImage(new Uri(openFileDialog.FileName, UriKind.RelativeOrAbsolute));
+            }
         }
     }
 

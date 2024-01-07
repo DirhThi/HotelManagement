@@ -603,6 +603,11 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                     MessageBox.Show("Vui lòng điền đầy đủ thông tin.");
                 }
                 else
+                if(!StaticClass.StringHandler.IsDateTime(Add_StaffDoB.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng định dạng ngày sinh DD/MM/YYYY.");
+                }
+                else
                 {
                     if (handler != null)
                     {
@@ -656,6 +661,21 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
             {
                 deletebtn.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void CustomerName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !StaticClass.StringHandler.IsNumberAndSymbolAllowed(e.Text);
+        }
+
+        private void TextBlock_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !StaticClass.StringHandler.IsTextAllowed(e.Text);
+        }
+
+        private void TextBlock_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !StaticClass.StringHandler.IsTextAllowed(e.Text);
         }
     }
 }
