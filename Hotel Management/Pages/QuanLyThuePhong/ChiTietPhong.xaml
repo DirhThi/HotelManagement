@@ -46,18 +46,18 @@
 
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Tên khách hàng *"></TextBlock>
-                            <TextBox x:Name="CustomerName" Height="32" FontSize="18" PreviewTextInput="CustomerName_PreviewTextInput"
-                        materialDesign:HintAssist.Hint="Nhập tên khách hàng" LostFocus="CustomerName_LostFocus"/>
+                            <TextBox x:Name="CustomerName" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập tên khách hàng"/>
                         </StackPanel>
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Số CCCD/Hộ chiếu *"></TextBlock>
-                            <TextBox x:Name="CustomerIdNumber"  Height="32" FontSize="18" PreviewTextInput="CustomerIdNumber_PreviewTextInput"
-                        materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" LostFocus="CustomerIdNumber_LostFocus"/>
+                            <TextBox x:Name="CustomerIdNumber"  Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số CCCD/Hộ chiếu" TextChanged="TextBox_TextChanged"/>
                         </StackPanel>
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Số điện thoại *"></TextBlock>
-                            <TextBox x:Name="CustomerPhoneNumber" Height="32" FontSize="18" PreviewTextInput="CustomerPhoneNumber_PreviewTextInput"
-                        materialDesign:HintAssist.Hint="Nhập số điện thoại" LostFocus="CustomerPhoneNumber_LostFocus"/>
+                            <TextBox x:Name="CustomerPhoneNumber" Height="32" FontSize="18"
+                        materialDesign:HintAssist.Hint="Nhập số điện thoại" TextChanged="CustomerPhoneNumber_TextChanged"/>
                         </StackPanel>
                         <StackPanel Margin="0,0,0,15">
                             <TextBlock FontWeight="Medium" FontSize="18" Text="Email"></TextBlock>
@@ -91,7 +91,7 @@
                             <RadioButton.Content>
                                 <StackPanel>
                                     <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Theo giờ</TextBlock>
-                                    <TextBlock x:Name="hourPrice" HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">60K/H</TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">60K/H</TextBlock>
                                 </StackPanel>
                             </RadioButton.Content>
                         </RadioButton>
@@ -99,7 +99,7 @@
                             <RadioButton.Content>
                                 <StackPanel>
                                     <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Cả ngày</TextBlock>
-                                    <TextBlock x:Name="dayPrice" HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">300K/H</TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">300K/H</TextBlock>
                                 </StackPanel>
                             </RadioButton.Content>
                         </RadioButton>
@@ -107,7 +107,7 @@
                             <RadioButton.Content>
                                 <StackPanel>
                                     <TextBlock FontSize="18" FontWeight="Medium">Qua đêm</TextBlock>
-                                    <TextBlock x:Name="nightPrice" HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">220K/H</TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">220K/H</TextBlock>
                                 </StackPanel>
                             </RadioButton.Content>
                         </RadioButton>
@@ -126,7 +126,7 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="FutureDatePicker"
-                                        Focusable="False" LostFocus="FutureDatePicker_LostFocus">
+                                        Focusable="False">
                                     </DatePicker>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Margin="20">
@@ -136,7 +136,7 @@
                                         SelectedTime="{x:Static sys:DateTime.Now}"
                                         FontSize="18"
                                       Is24Hours="True"
-                                      x:Name="PresetTimePicker" SelectedTimeChanged="PresetTimePicker_SelectedTimeChanged"
+                                      x:Name="PresetTimePicker"
                                        />
                                 </StackPanel>
                                 <StackPanel Grid.Column="2" Margin="20">
@@ -148,7 +148,7 @@
                                             </Button.Content>
                                         </Button>
                                         <TextBox Focusable="False" x:Name="giosudung"  HorizontalContentAlignment="Center" Width="30" Height="32" FontSize="18"
-                                        Text="1" TextChanged="giosudung_TextChanged"/>
+                                        Text="1"/>
                                         <Button BorderThickness="0" Foreground="#161d36"  HorizontalAlignment="Left" Background="Transparent" x:Name="congbtn" Click="congbtnclick" >
                                             <Button.Content>
                                                 <materialDesign:PackIcon Kind="Plus" />
@@ -180,7 +180,7 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="DatePicker1"
-                                        Focusable="False" LostFocus="DatePicker1_LostFocus">
+                                        Focusable="False">
                                     </DatePicker>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Margin="20">
@@ -190,7 +190,7 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="DatePicker2"
-                                        Focusable="False" LostFocus="DatePicker2_LostFocus">
+                                        Focusable="False">
                                     </DatePicker>
                                 </StackPanel>
                                 <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
@@ -216,7 +216,7 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="DatePicker3"
-                                        Focusable="False" LostFocus="DatePicker3_LostFocus">
+                                        Focusable="False">
                                     </DatePicker>
                                 </StackPanel>
                                 <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
@@ -339,11 +339,11 @@
                                             <TextBlock x:Name="CreatedDate" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="{Binding Source={x:Static system:DateTime.Now}}"></TextBlock>
                                             <TextBlock x:Name="RoomName" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="105 - Standard"></TextBlock>
                                             <TextBlock x:Name="Receiptionist" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="NV1"></TextBlock>
-                                            <TextBlock x:Name="CustomerNameOnReceipt" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" ></TextBlock>
+                                            <TextBlock x:Name="CustomerNameOnReceipt" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Nguyễn Đình Thi"></TextBlock>
                                             <TextBlock x:Name="ServiceType" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Theo giờ"></TextBlock>
-                                            <TextBlock x:Name="DateReceived" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" ></TextBlock>
-                                            <TextBlock x:Name="DateReturned" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" ></TextBlock>
-                                            <TextBlock x:Name="RoomCost" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" ></TextBlock>
+                                            <TextBlock x:Name="DateReceived" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
+                                            <TextBlock x:Name="DateReturned" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
+                                            <TextBlock x:Name="RoomCost" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="100.000 đ"></TextBlock>
 
                                         </StackPanel>
                                     </Grid>
@@ -381,7 +381,7 @@
                                             <ColumnDefinition Width="3*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock HorizontalAlignment="Left" FontWeight="Medium"  Margin="5,15" FontSize="20" Text="Tổng tiền : "></TextBlock>
-                                        <TextBlock x:Name="totalbilltext" HorizontalAlignment="Right" FontWeight="Medium" Grid.Column="1"  Margin="5,15" FontSize="20"></TextBlock>
+                                        <TextBlock x:Name="totalbilltext" HorizontalAlignment="Right" FontWeight="Medium" Grid.Column="1"  Margin="5,15" FontSize="20" Text="0"></TextBlock>
 
                                     </Grid>
                                     <!--  <TextBlock HorizontalAlignment="Center" FontWeight="Normal" Grid.Column="1"  Margin="5,15" FontSize="16" Text="Xin chân thành cảm ơn quý khách !"></TextBlock>-->
@@ -392,27 +392,27 @@
                 
                 <Border Grid.Row="1" Padding="5" CornerRadius="10" Margin="20,20" Background="White">
                     <Grid>
-                        <Grid  x:Name="phongtrongoption" Visibility="Visible">
+                        <Grid Visibility="Collapsed" x:Name="phongtrongoption">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border  Style="{StaticResource secondButton}">
-                                <Button x:Name="phongtrong_datphong"
+                                <Button x:Name="datphongbtn"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
-                                FontSize="18" Click="phongtrong_datphong_Click"
+                                FontSize="18"
                                 >
                                     Đặt phòng
                                 </Button>
                             </Border>
                             <Border Grid.Column="1"  Style="{StaticResource mainButton}">
-                                <Button x:Name="phongtrong_nhanphong"
+                                <Button x:Name="nhanphongbtn"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
-                                FontSize="18" Click="phongtrong_nhanphong_Click"
+                                FontSize="18"
                                 >
                                     Nhận phòng
                                 </Button>
@@ -424,21 +424,21 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border  Style="{StaticResource secondButton}">
-                                <Button x:Name="phongdat_huyphong"
+                                <Button x:Name="huyphongbtn"
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
-                                FontSize="18" Click="phongdat_huyphong_Click"
+                                FontSize="18"
                                 >
                                     Hủy phòng
                                 </Button>
                             </Border>
                             <Border Grid.Column="1"  Style="{StaticResource mainButton}">
-                                <Button x:Name="phongdat_nhanphong"
+                                <Button
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
-                                FontSize="18" Click="phongdat_nhanphong_Click"
+                                FontSize="18"
                                 >
                                     Nhận phòng
                                 </Button>
@@ -450,21 +450,21 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border  Style="{StaticResource secondButton}">
-                                <Button x:Name="phongthue_xacnhan"
+                                <Button
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
-                                FontSize="18" Click="phongthue_xacnhan_Click"
+                                FontSize="18"
                                 >
                                     Xác nhận
                                 </Button>
                             </Border>
                             <Border Grid.Column="1"  Style="{StaticResource mainButton}">
-                                <Button x:Name="phongthue_traphong"
+                                <Button
                                 Background="Transparent"
                                 Foreground="#161d36"
                                 BorderThickness="0"
-                                FontSize="18" Click="phongthue_traphong_Click"
+                                FontSize="18"
                                 >
                                     Trả phòng
                                 </Button>

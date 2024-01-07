@@ -21,7 +21,6 @@ namespace Hotel_Management.Pages.Auth
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    /// 
     public partial class Login : Page
     {
         public static User currentUser;
