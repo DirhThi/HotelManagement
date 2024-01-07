@@ -173,7 +173,9 @@
       <DependentUpon>ChartSoLuongLoaiThue.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\QuanLyCacPhong\Room.cs" />
-    <Compile Include="StaticEvents\StaticEventHandler.cs" />
+    <Compile Include="StaticClass\ScreenCapture.cs" />
+    <Compile Include="StaticClass\StaticEventHandler.cs" />
+    <Compile Include="StaticClass\StringHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
