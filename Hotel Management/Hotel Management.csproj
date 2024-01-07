@@ -174,7 +174,7 @@
     </Compile>
     <Compile Include="Pages\QuanLyCacPhong\Room.cs" />
     <Compile Include="StaticClass\ScreenCapture.cs" />
-    <Compile Include="StaticEvents\StaticEventHandler.cs" />
+    <Compile Include="StaticClass\StaticEventHandler.cs" />
     <Compile Include="StaticClass\StringHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
