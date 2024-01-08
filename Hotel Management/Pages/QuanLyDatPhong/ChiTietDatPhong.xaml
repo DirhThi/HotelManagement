@@ -20,12 +20,13 @@
             <Border Height="auto" Width="auto" Grid.Column="1" Padding="15" CornerRadius="10" Margin="0,0" Background="White">
                 <StackPanel>
 
-                    <TextBlock FontSize="20" FontWeight="Medium">Chọn phòng : [Loại phòng]</TextBlock>
+                    <TextBlock x:Name="textChonPhong" FontSize="20" FontWeight="Medium">Chọn phòng : [Loại phòng]</TextBlock>
                     <StackPanel Margin="0,20">
                         <TextBlock FontSize="18" FontWeight="Medium">Phòng trống</TextBlock>
                         <ComboBox
                             FontSize="18" 
-                            materialDesign:HintAssist.Hint="Hết phòng">
+                            materialDesign:HintAssist.Hint="Hết phòng"
+                            x:Name="roomNumberOption">
                             <ComboBoxItem>
                                 103
                             </ComboBoxItem>
@@ -148,8 +149,8 @@
                                 <TextBlock FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,10" FontSize="20" Text="Thông tin đặt phòng"></TextBlock>
                                 <StackPanel VerticalAlignment="Center" Margin="20,0" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3">
                                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="18" FontWeight="Medium">Loại phòng</TextBlock>
-                                    <ComboBox Margin="20,0" VerticalAlignment="Center"  FontSize="18"
-                                         materialDesign:HintAssist.Hint="Chọn loại phòng">
+                                    <ComboBox x:Name="roomOption" Margin="20,0" VerticalAlignment="Center"  FontSize="18"
+                                         materialDesign:HintAssist.Hint="Chọn loại phòng"  DropDownClosed="roomOption_DropDownClosed">
                                         <ComboBoxItem>
                                             Standard
                                         </ComboBoxItem>
@@ -165,7 +166,7 @@
                                     <RadioButton.Content>
                                         <StackPanel>
                                             <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Theo giờ</TextBlock>
-                                            <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">60K/H</TextBlock>
+                                            <TextBlock x:Name="textGiaGio" HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">60K/H</TextBlock>
                                         </StackPanel>
                                     </RadioButton.Content>
                                 </RadioButton>
@@ -173,7 +174,7 @@
                                     <RadioButton.Content>
                                         <StackPanel>
                                             <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Cả ngày</TextBlock>
-                                            <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">300K/H</TextBlock>
+                                            <TextBlock x:Name="textGiaNgay" HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">300K/H</TextBlock>
                                         </StackPanel>
                                     </RadioButton.Content>
                                 </RadioButton>
@@ -181,7 +182,7 @@
                                     <RadioButton.Content>
                                         <StackPanel>
                                             <TextBlock FontSize="18" FontWeight="Medium">Qua đêm</TextBlock>
-                                            <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">220K/H</TextBlock>
+                                            <TextBlock x:Name="textGiaDem" HorizontalAlignment="Center" FontSize="18" FontWeight="Normal">220K/H</TextBlock>
                                         </StackPanel>
                                     </RadioButton.Content>
                                 </RadioButton>
@@ -200,7 +201,8 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="FutureDatePicker"
-                                        Focusable="False">
+                                        Focusable="False"
+                                        IsEnabled="false">
                                             </DatePicker>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="20">
@@ -211,6 +213,7 @@
                                         FontSize="18"
                                       Is24Hours="True"
                                       x:Name="PresetTimePicker"
+                                      IsEnabled="false"
                                        />
                                         </StackPanel>
                                         <StackPanel Grid.Column="2" Margin="20">
@@ -234,7 +237,7 @@
                                             <TextBlock   Foreground="Gray"  FontSize="16">
                                         Số giờ sử dụng không được quá 8H, nhiều hơn 8H cần thuê theo ngày.
                                             </TextBlock>
-                                            <TextBlock   Foreground="Gray" FontSize="16">
+                                            <TextBlock x:Name="textGiaGioChiTiet"  Foreground="Gray" FontSize="16">
                                         Giờ đầu 60K/H, các giờ tiếp theo 20K/H.
                                             </TextBlock>
                                         </StackPanel>
@@ -254,7 +257,8 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="DatePicker1"
-                                        Focusable="False">
+                                        Focusable="False"
+                                        IsEnabled="False">
                                             </DatePicker>
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="20">
@@ -264,15 +268,16 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="DatePicker2"
-                                        Focusable="False">
+                                        Focusable="False"
+                                                CalendarClosed="DatePicker2_CalendarClosed">
                                             </DatePicker>
                                         </StackPanel>
                                         <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
-                                            <TextBlock Text="{Binding ElementName=DatePicker1, Path=SelectedDate, StringFormat=Giờ nhận phòng : 12:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
-
+                                            <TextBlock x:Name="textChiTietNgayVao" Foreground="Gray" FontSize="16">
+                                                .
                                             </TextBlock>
-                                            <TextBlock Text="{Binding ElementName=DatePicker2, Path=SelectedDate, StringFormat=Giờ trả phòng : 14:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
-
+                                            <TextBlock x:Name="textChiTietNgayDi" Foreground="Gray" FontSize="16">
+                                                .
                                             </TextBlock>
                                         </StackPanel>
                                     </Grid>
@@ -290,14 +295,15 @@
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="DatePicker3"
-                                        Focusable="False">
+                                        Focusable="False"
+                                        IsEnabled="False">
                                             </DatePicker>
                                         </StackPanel>
                                         <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
-                                            <TextBlock Text="{Binding ElementName=DatePicker3, Path=SelectedDate, StringFormat=Giờ nhận phòng : 21:00  {0:MM/dd/yyyy}}" Foreground="Gray" FontSize="16">
-
+                                            <TextBlock x:Name="textChiTietVaoDem" Foreground="Gray" FontSize="16">
+                                                .
                                             </TextBlock>
-                                            <TextBlock Text="Giờ trả phòng : 10:00 Ngày kế tiếp" Foreground="Gray" FontSize="16">
+                                            <TextBlock Text="Giờ trả phòng : 12:00 Ngày kế tiếp" Foreground="Gray" FontSize="16">
 
                                             </TextBlock>
                                         </StackPanel>
@@ -410,8 +416,8 @@
                                                 <TextBlock HorizontalAlignment="Left" FontWeight="Medium" Grid.ColumnSpan="3" FontSize="18" Text="Tiền phòng : "></TextBlock>
                                             </StackPanel>
                                             <StackPanel Grid.Column="1">
-                                                <TextBlock x:Name="CreatedDate" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="{Binding Source={x:Static system:DateTime.Now}}"></TextBlock>
-                                                <TextBlock x:Name="RoomName" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="105 - Standard"></TextBlock>
+                                                <TextBlock x:Name="CreatedDate" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" >.</TextBlock>
+                                                <TextBlock x:Name="RoomName" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Chưa có"></TextBlock>
                                                 <TextBlock x:Name="Receiptionist" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="NV1"></TextBlock>
                                                 <TextBlock x:Name="CustomerNameOnReceipt" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Nguyễn Đình Thi"></TextBlock>
                                                 <TextBlock x:Name="ServiceType" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Theo giờ"></TextBlock>
@@ -495,7 +501,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
-                                >
+                                Click="huyphongbtn_Click">
                                             Hủy phòng
                                         </Button>
                                     </Border>

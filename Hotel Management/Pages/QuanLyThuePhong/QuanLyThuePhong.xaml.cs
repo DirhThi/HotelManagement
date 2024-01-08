@@ -214,7 +214,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                     LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
                     foreach (BsonDocument receipt in documentsReceipt)
                     {
-                        if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
+                        if (roomId == receipt["roomId"].AsNullableObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
                         {
                             customerId = receipt["customerId"].AsObjectId;
                             foreach (BsonDocument customer in documentsCustomer)
