@@ -193,26 +193,28 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
 
         public void LayPhongThue(IMongoCollection<BsonDocument> collectionRoom, IMongoCollection<BsonDocument> collectionRoomType, IMongoCollection<BsonDocument> collectionFurniture, IMongoCollection<BsonDocument> collectionReceipt, IMongoCollection<BsonDocument> collectionCustomer)
         {
-                ObjectId roomId;
-                string roomNumber;
-                string roomType;
-                ObjectId customerId;
-                string customerName = "";
-                string customerPhone = "";
-                var filterEmptyRoom = Builders<BsonDocument>.Filter.Eq("roomState", "Đang thuê");
-                List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
-                List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
-                List<BsonDocument> documentsReceipt = collectionReceipt.Find(new BsonDocument()).ToList();
-                List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
-                phongthueList.Clear();
-                foreach (BsonDocument room in documentsEmptyRoom)
+            ObjectId roomId;
+            string roomNumber;
+            string roomType;
+            ObjectId customerId;
+            string customerName = "";
+            string customerPhone = "";
+            var filterEmptyRoom = Builders<BsonDocument>.Filter.Eq("roomState", "Đang thuê");
+            List<BsonDocument> documentsEmptyRoom = collectionRoom.Find(filterEmptyRoom).ToList();
+            List<BsonDocument> documentsFurniture = collectionFurniture.Find(new BsonDocument()).ToList();
+            List<BsonDocument> documentsReceipt = collectionReceipt.Find(new BsonDocument()).ToList();
+            List<BsonDocument> documentsCustomer = collectionCustomer.Find(new BsonDocument()).ToList();
+            phongthueList.Clear();
+            foreach (BsonDocument room in documentsEmptyRoom)
+            {
+                roomId = room["_id"].AsObjectId;
+                roomNumber = room["roomName"].AsString;
+                roomType = room["roomType"].AsString;
+                List<string> roomFurniture = new List<string>();
+                LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
+                foreach (BsonDocument receipt in documentsReceipt)
                 {
-                    roomId = room["_id"].AsObjectId;
-                    roomNumber = room["roomName"].AsString;
-                    roomType = room["roomType"].AsString;
-                    List<string> roomFurniture = new List<string>();
-                    LayDanhSachCSVC(roomFurniture, roomType, collectionRoomType, documentsFurniture);
-                    foreach (BsonDocument receipt in documentsReceipt)
+                    if (!receipt["roomId"].IsBsonNull)
                     {
                         if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
                         {
@@ -229,8 +231,10 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                             break;
                         }
                     }
-                    phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
+
                 }
+                phongthueList.Add(new Phong { maphong = roomNumber, loaiphong = roomType, ListCsvc = roomFurniture, tenkhachhang = customerName, sodienthoai = customerPhone });
+            }
             phongthueIC.Items.Refresh();
 
         }
