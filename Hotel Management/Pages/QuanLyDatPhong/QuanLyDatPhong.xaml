@@ -80,7 +80,7 @@
                                 <DataGridTextColumn Width="150"  Header="Loại phòng" Binding="{Binding Phong }" IsReadOnly="True"/>
                                 <DataGridTextColumn MinWidth="150"  Header="Loại thuê" Binding="{Binding LoaiThue }" IsReadOnly="True" Width="*"/>
                                 <DataGridTextColumn MinWidth="150"  Header="Tổng tiền" Binding="{Binding Total }" IsReadOnly="True" Width="*"/>
-                                <DataGridTextColumn MinWidth="150"  Header="Giờ nhận phòng" Binding="{Binding Total }" IsReadOnly="True" Width="*"/>
+                                <DataGridTextColumn MinWidth="150"  Header="Giờ nhận phòng" Binding="{Binding checkIn }" IsReadOnly="True" Width="*"/>
                                 <DataGridTextColumn MinWidth="150"  Header="Tên khách hàng" Binding="{Binding nameCustomer}" IsReadOnly="True" Width="*"/>
                                 <DataGridTemplateColumn Width="120" Header="Tùy chỉnh" IsReadOnly="True"     CanUserResize="False" CanUserReorder="False">
                                     <DataGridTemplateColumn.CellTemplate>

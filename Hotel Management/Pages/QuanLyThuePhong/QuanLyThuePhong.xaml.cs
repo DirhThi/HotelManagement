@@ -216,7 +216,7 @@ namespace Hotel_Management.Pages.QuanLyThuePhong
                 {
                     if (!receipt["roomId"].IsBsonNull)
                     {
-                        if (roomId == receipt["roomId"].AsObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
+                        if (roomId == receipt["roomId"].AsNullableObjectId && receipt["receiptState"].AsString == "Chưa thanh toán")
                         {
                             customerId = receipt["customerId"].AsObjectId;
                             foreach (BsonDocument customer in documentsCustomer)
