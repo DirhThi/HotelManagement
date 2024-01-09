@@ -16,15 +16,16 @@
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
         <materialDesign:DialogHost.DialogContent>
-            <Grid>
-                <Border Padding="0,0" CornerRadius="10" Margin="0,0" Background="White">
+            <Grid >
+                
+                <Border   Padding="0,0" CornerRadius="10" Margin="0,0" Background="White">
                     <Grid  Grid.RowSpan="2" Grid.Row="1" Grid.Column="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="60"/>
 
                         </Grid.RowDefinitions>
-                        <Border Padding="15,0" Margin="15"  BorderBrush="Black" BorderThickness="1" Background="Azure" Grid.Row="0">
+                        <Border  x:Name="HoaDonChiTiet"  Padding="15,0" Margin="15"  BorderBrush="Black" BorderThickness="1" Background="Azure" Grid.Row="0">
                             <StackPanel>
 
                                 <TextBlock HorizontalAlignment="Center" FontWeight="Medium" Grid.ColumnSpan="3" Margin="0,10,0,0" FontSize="18" Text="Khách sạn UIT"></TextBlock>
@@ -208,7 +209,7 @@
                                                         </StackPanel>
                                                     </Button.Content>
                                                 </Button>
-                                                <Button  Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+                                                <Button  Click="Print_Bill"   Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
 
                                                     <Button.Content>
                                                         <StackPanel Orientation="Horizontal">
@@ -241,7 +242,7 @@
                                                         </StackPanel>
                                                     </Button.Content>
                                                 </Button>
-                                                <Button  Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
+                                                <Button Click="Print_Bill"  Margin="-25,0,0,0" Background="Transparent" Foreground="#8338ec" BorderThickness="0">
 
                                                     <Button.Content>
                                                         <StackPanel Orientation="Horizontal">

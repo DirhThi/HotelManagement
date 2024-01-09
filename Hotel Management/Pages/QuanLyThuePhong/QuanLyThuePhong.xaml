@@ -231,7 +231,7 @@
                         </Border>
 
                     </TabItem>
-                    <TabItem Style="{StaticResource tabbarExplore }" Header="Phòng đã đặt" >
+                    <TabItem Visibility="Collapsed" Style="{StaticResource tabbarExplore }" Header="Phòng đã đặt" >
                         <Border Margin="10 10" Background="White" CornerRadius="10" >
                             <Grid>
                                 <Grid.RowDefinitions>

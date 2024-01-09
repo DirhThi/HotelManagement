@@ -17,6 +17,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using static Hotel_Management.Pages.QuanLyKhachHang.QuanLyKhachHang;
 using Hotel_Management.Pages.QuanLyCacPhong;
+using System.Drawing.Printing;
 
 namespace Hotel_Management.Pages.QuanLyHoaDon
 {
@@ -413,6 +414,29 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
             {
                 deletebtn.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void Print_Bill(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.IsEnabled = false;
+                PrintDialog printDialog = new PrintDialog();
+
+                if (printDialog.ShowDialog() == true)
+                {
+                 HoaDonChiTiet.Measure(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight));
+                 HoaDonChiTiet.Arrange(new Rect(new Point(50, 50), new Size(HoaDonChiTiet.ActualWidth, HoaDonChiTiet.ActualHeight)));
+                printDialog.PrintVisual(HoaDonChiTiet, "Hóa đơn");
+
+
+                }
+            }
+            finally
+            {
+                this.IsEnabled = true;
+            }
+
         }
     }
 }
