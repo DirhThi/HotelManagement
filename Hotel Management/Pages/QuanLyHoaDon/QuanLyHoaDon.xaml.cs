@@ -426,7 +426,7 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                 if (printDialog.ShowDialog() == true)
                 {
                  HoaDonChiTiet.Measure(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight));
-                 HoaDonChiTiet.Arrange(new Rect(new Point(50, 50), new Size(HoaDonChiTiet.ActualWidth, HoaDonChiTiet.ActualHeight)));
+                 HoaDonChiTiet.Arrange(new Rect(new Point(0, 0), HoaDonChiTiet.DesiredSize));
                 printDialog.PrintVisual(HoaDonChiTiet, "Hóa đơn");
 
 
