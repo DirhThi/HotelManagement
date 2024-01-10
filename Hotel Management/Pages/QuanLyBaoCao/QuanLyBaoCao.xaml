@@ -23,26 +23,13 @@
                
                     <StackPanel Margin="10"  VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Margin="0,0,15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Ngày bắt đầu</TextBlock>
-                        <DatePicker  
+                        <DatePicker 
                                         VerticalAlignment="Center"
                                         FontSize="18"
                                         SelectedDate="{x:Static sys:DateTime.Now}"
                                         x:Name="ngaybatdau"
                                         Focusable="False"
                                         CalendarClosed="ngaybatdau_CalendarClosed">
-                        <DatePicker.Style>
-                            <Style TargetType="{x:Type DatePicker}">
-                                <Setter Property="Control.Template">
-                                    <Setter.Value>
-                                        <ControlTemplate>
-                                            <TextBox x:Name="PART_TextBox"
-     Text="{Binding Path=SelectedDate, StringFormat='dd/MM/yyyy', 
-     RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DatePicker.Style>
                         </DatePicker>
                         <TextBlock Margin="40,0,15,0" VerticalAlignment="Center" FontSize="18" FontWeight="Medium">Ngày kết thúc</TextBlock>
                         <DatePicker 
@@ -52,20 +39,7 @@
                                         x:Name="ngayketthuc"
                                         Focusable="False"
                                         CalendarClosed="ngayketthuc_CalendarClosed">
-                        <DatePicker.Style>
-                            <Style TargetType="{x:Type DatePicker}">
-                                <Setter Property="Control.Template">
-                                    <Setter.Value>
-                                        <ControlTemplate>
-                                            <TextBox x:Name="PART_TextBox"
-     Text="{Binding Path=SelectedDate, StringFormat='dd/MM/yyyy', 
-     RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DatePicker.Style>
-                    </DatePicker>
+                        </DatePicker>
                     </StackPanel>
             </Border>
 
