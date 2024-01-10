@@ -418,6 +418,9 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
 
         private void Print_Bill(object sender, RoutedEventArgs e)
         {
+            Bill item = ((FrameworkElement)sender).DataContext as Bill;
+            LayChiTietHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser, collectionService, collectionServiceUsed, item);
+
             try
             {
                 this.IsEnabled = false;
@@ -426,7 +429,7 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                 if (printDialog.ShowDialog() == true)
                 {
                  HoaDonChiTiet.Measure(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight));
-                 HoaDonChiTiet.Arrange(new Rect(new Point(50, 50), new Size(HoaDonChiTiet.ActualWidth, HoaDonChiTiet.ActualHeight)));
+                 HoaDonChiTiet.Arrange(new Rect(new Point(50, 50), HoaDonChiTiet.DesiredSize));
                 printDialog.PrintVisual(HoaDonChiTiet, "Hóa đơn");
 
 
@@ -437,6 +440,28 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                 this.IsEnabled = true;
             }
 
+        }
+
+        private void Print_Bill2(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.IsEnabled = false;
+                PrintDialog printDialog = new PrintDialog();
+
+                if (printDialog.ShowDialog() == true)
+                {
+                    HoaDonChiTiet.Measure(new Size(printDialog.PrintableAreaWidth, printDialog.PrintableAreaHeight));
+                    HoaDonChiTiet.Arrange(new Rect(new Point(50, 50), HoaDonChiTiet.DesiredSize));
+                    printDialog.PrintVisual(HoaDonChiTiet, "Hóa đơn");
+
+
+                }
+            }
+            finally
+            {
+                this.IsEnabled = true;
+            }
         }
     }
 }

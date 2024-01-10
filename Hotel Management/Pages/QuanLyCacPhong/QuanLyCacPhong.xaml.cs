@@ -163,17 +163,17 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
         {
             if (sortCB.SelectedIndex == 0)
             {
-                phongList.Sort((left, right) => left.maphong.CompareTo(right.maphong));
+                phongListDisplay.Sort((left, right) => left.maphong.CompareTo(right.maphong));
                 phongIC.Items.Refresh();
             }
             if (sortCB.SelectedIndex == 1)
             {
-                phongList.Sort((left, right) => left.loaiphong.CompareTo(right.loaiphong));
+                phongListDisplay.Sort((left, right) => left.loaiphong.CompareTo(right.loaiphong));
                 phongIC.Items.Refresh();
             }
             if (sortCB.SelectedIndex == 2)
             {
-                phongList.Sort((left, right) => left.trangthai.CompareTo(right.trangthai));
+                phongListDisplay.Sort((left, right) => left.trangthai.CompareTo(right.trangthai));
                 phongIC.Items.Refresh();
             }
         }
@@ -263,6 +263,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                     MessageBox.Show("Đã tồn tại CSVC");
                 }
             }
+            CancelDialog();
         }
 
         private void tooltips_ME(object sender, System.Windows.Input.MouseEventArgs e)
@@ -316,6 +317,10 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 string roomTypeName = roomType["roomType"].AsString;
                 loaiPhongList.Add(roomTypeName);
             }
+            CBLoaiPhong2.Items.Refresh();
+            CBLoaiPhong3.Items.Refresh();
+
+            CBLoaiPhong.Items.Refresh();
         }
         void GetCSVCInRoomType(string Type)
         {
@@ -357,6 +362,17 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 GetListPhong();
                 CancelDialog();
             }
+            if (room["roomType"].ToString() != CBLoaiPhong.SelectedItem.ToString())
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Sửa loại phòng?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.No)
+                    return;
+                var updateState = Builders<BsonDocument>.Update.Set("roomType", CBLoaiPhong.SelectedItem.ToString());
+                MongoHandler.GetInstance().GetCollection("Room").UpdateOne(filterPhong, updateState);
+                GetListPhong();
+                CancelDialog();
+            }
+
 
         }
 
@@ -378,6 +394,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                 roomCollection.InsertOne(new BsonDocument { { "roomName", TBMaPhong.Text }, { "roomType", CBLoaiPhong2.SelectedItem.ToString() }, { "roomState", "Trống" } });
                 GetListPhong();
                 CancelDialog();
+                
             }
             else
             {
@@ -442,6 +459,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                     CSVCCollection.InsertOne(new BsonDocument { { "furnitureName", item } });
                 }
             }
+            CancelDialog();
         }
 
         private void SuaLoaiPhong_Click(object sender, RoutedEventArgs e)
@@ -488,8 +506,11 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                     { "dayPrice ", Convert.ToInt32(TBGiaTheoNgay.Text) },
                     { "nightPrice", Convert.ToInt32(TBGiaQuaDem.Text) },
                     {"furnituresId", new BsonArray(ListIdCSVC) }
+                      
                 };
                 roomTypeCollection.InsertOne(newRoomType);
+                    GetLoaiPhongList();
+                    CancelDialog();
                 }
 
                
@@ -519,12 +540,14 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
 
                     }
                 }
+                CancelDialog();
             }
             else
             {
                 MessageBox.Show("Chưa chọn loại phòng!");
                 return;
             }
+
         }
 
         private void XacNhanThemTepPhong_Click(object sender, RoutedEventArgs e)
@@ -561,6 +584,7 @@ namespace Hotel_Management.Pages.QuanLyCacPhong
                     phongListDisplay.Add(P);
                 }
             }
+            GetColor();
             phongIC.Items.Refresh();
 
         }

@@ -185,9 +185,6 @@ namespace Hotel_Management.Pages.QuanLyDatPhong
                         break;
                 }
             }
-            textGiaGioChiTiet.Text = "Giá giờ đầu là " + (LayGia(item.Phong, "Theo giờ") / 1000.0).ToString() + "k/giờ, các giờ sau " + (LayGiaGioSau(item.Phong) / 1000.0).ToString() + "k/giờ.";
-            textChiTietNgayVao.Text = "Giờ nhận phòng: " + System.DateTime.Now.ToShortTimeString() + " ngày " + DatePicker1.SelectedDate.Value.ToShortDateString();
-            textChiTietNgayDi.Text = "Giờ trả phòng: " + System.DateTime.Now.ToShortTimeString() + " ngày " + DatePicker2.SelectedDate.Value.ToShortDateString();
             textChiTietVaoDem.Text = "Giờ nhận phòng: " + System.DateTime.Now.ToShortTimeString() + " ngày" + DatePicker1.SelectedDate.Value.ToShortDateString();
         }
 

@@ -117,6 +117,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
+                                    Click="Print_Bill2"
                                 >
                                     In
                                 </Button>

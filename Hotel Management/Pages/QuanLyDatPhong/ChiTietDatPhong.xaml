@@ -237,9 +237,7 @@
                                             <TextBlock   Foreground="Gray"  FontSize="16">
                                         Số giờ sử dụng không được quá 8H, nhiều hơn 8H cần thuê theo ngày.
                                             </TextBlock>
-                                            <TextBlock x:Name="textGiaGioChiTiet"  Foreground="Gray" FontSize="16">
-                                        Giờ đầu 60K/H, các giờ tiếp theo 20K/H.
-                                            </TextBlock>
+                                            
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -272,14 +270,7 @@
                                                 CalendarClosed="DatePicker2_CalendarClosed">
                                             </DatePicker>
                                         </StackPanel>
-                                        <StackPanel Margin="20,0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
-                                            <TextBlock x:Name="textChiTietNgayVao" Foreground="Gray" FontSize="16">
-                                                .
-                                            </TextBlock>
-                                            <TextBlock x:Name="textChiTietNgayDi" Foreground="Gray" FontSize="16">
-                                                .
-                                            </TextBlock>
-                                        </StackPanel>
+                                        
                                     </Grid>
                                 </Border>
                                 <Border Visibility="Hidden" x:Name="borderdem" Padding="0,20" Grid.Row="3" CornerRadius="5" Grid.ColumnSpan="3" Background="Azure">
@@ -418,8 +409,8 @@
                                             <StackPanel Grid.Column="1">
                                                 <TextBlock x:Name="CreatedDate" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" >.</TextBlock>
                                                 <TextBlock x:Name="RoomName" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Chưa có"></TextBlock>
-                                                <TextBlock x:Name="Receiptionist" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="NV1"></TextBlock>
-                                                <TextBlock x:Name="CustomerNameOnReceipt" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Nguyễn Đình Thi"></TextBlock>
+                                                <TextBlock x:Name="Receiptionist" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Nguyễn trung trực"></TextBlock>
+                                                <TextBlock x:Name="CustomerNameOnReceipt" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text=""></TextBlock>
                                                 <TextBlock x:Name="ServiceType" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="Theo giờ"></TextBlock>
                                                 <TextBlock x:Name="DateReceived" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
                                                 <TextBlock x:Name="DateReturned" HorizontalAlignment="Right" FontWeight="Normal" Grid.ColumnSpan="3" FontSize="18" Text="00:00 1/1/2023"></TextBlock>
