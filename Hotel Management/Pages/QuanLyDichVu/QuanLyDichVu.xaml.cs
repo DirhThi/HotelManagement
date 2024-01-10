@@ -54,7 +54,7 @@ namespace Hotel_Management.Pages.QuanLyDichVu
                 foreach (BsonDocument service in documents)
                 {
                     string imageSource;
-                    if (service["serviceImage"].AsString == "")
+                    if (service["serviceImage"].ToString().Length==0)
                     {
                         imageSource = "/Assets/Images/addImage.png";
                     }
@@ -140,7 +140,7 @@ namespace Hotel_Management.Pages.QuanLyDichVu
                             }
                         }
                         string fileName = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName +"/Assets/Images/" + StaticClass.StringHandler.SpaceAndLowcaseGenerator(textBox_serviceName.Text) + ".png";
-                        ScreenCapture.ScreenCapture.SaveToPng(image_serviceImage, fileName);
+                        //ScreenCapture.ScreenCapture.SaveToPng(image_serviceImage, fileName);
                         var newDoc = new BsonDocument
                         {
                             {"serviceName", textBox_serviceName.Text },
