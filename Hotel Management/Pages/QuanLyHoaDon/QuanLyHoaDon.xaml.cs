@@ -245,7 +245,7 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                     List<Bill> items = DGHoadon.SelectedItems.Cast<Bill>().ToList();
                     
                     //comment đến.....
-                    foreach (Bill item in items)
+                    /*foreach (Bill item in items)
                     {
                         receiptList.Remove(item);
                         receiptListDisplay.Remove(item);
@@ -255,14 +255,14 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                     for(int i = 0; i < receiptListDisplay.Count; i++)
                     {
                         tongTienNgay += receiptListDisplay[i].Total;
-                    }
+                    }*/
                     //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
 
 
-                    /* Xóa dữ liệu trong db
+                    // Xóa dữ liệu trong db
                     XoaHoaDon(collectionReceipt, items);
                     LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
-                    */
+                    
 
 
                     DGHoadon.ItemsSource = receiptListDisplay;
@@ -317,19 +317,19 @@ namespace Hotel_Management.Pages.QuanLyHoaDon
                 Bill item = ((FrameworkElement)sender).DataContext as Bill;
                 
                 //Xóa ngoài UI (Không xóa DB)
-                receiptList.Remove(item);
+                /*receiptList.Remove(item);
                 receiptListDisplay.Remove(item);
                 DGHoadon.ItemsSource = receiptListDisplay;
                 tongTienNgay = 0;
                 for (int i = 0; i < receiptListDisplay.Count; i++)
                 {
                     tongTienNgay += receiptListDisplay[i].Total;
-                }
+                }*/
                 
 
                 //Xóa DB và update UI
-                //collectionReceipt.DeleteOne(x => x["idCode"] == item.ID);
-                //LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
+                collectionReceipt.DeleteOne(x => x["idCode"] == item.ID);
+                LayHoaDon(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
 
                 DGHoadon.ItemsSource = receiptListDisplay;
                 textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();

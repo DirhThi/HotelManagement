@@ -668,7 +668,7 @@ namespace Hotel_Management.Pages.QuanLyDatPhong
         private void huyphongbtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxResult result = MessageBox.Show("Hủy hóa đơn?", "Xác nhận", button, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Hủy hóa đơn đặt phòng?", "Xác nhận", button, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {

@@ -189,7 +189,7 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                 {
                     List<Khachhang> items = DGKhachhang.SelectedItems.Cast<Khachhang>().ToList();
                     
-                    //comment đến.....
+                    /*//comment đến.....
                     foreach (Khachhang item in items)
                     {
                         customerList.Remove(item);
@@ -197,13 +197,13 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
 
                     }
                     DGKhachhang.ItemsSource = customerListDisplay;
-                    //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
+                    //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db*/
                     
 
-                    /* Xóa dữ liệu trong db
+                    // Xóa dữ liệu trong db
                     XoaKhachHang(collectionCustomer, items);
                     LayKhachHang(collectionCustomer);
-                    */
+                    
 
                     textSoLuong.Text = "Số lượng: " + customerListDisplay.Count.ToString();
                     DGKhachhang.ItemsSource = customerListDisplay;
@@ -231,16 +231,16 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
             {
                 Khachhang item = ((FrameworkElement)sender).DataContext as Khachhang;
 
-                //comment đến.....
+                /*//comment đến.....
                 customerList.Remove(item);
                 customerListDisplay.Remove(item);
                 DGKhachhang.ItemsSource = customerListDisplay;
-                //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
+                //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db*/
 
-                /* Xóa dữ liệu trong db
+                // Xóa dữ liệu trong db
                 collectionCustomer.DeleteOne(x => x["idNumber"] == item.CCCD);
                 LayKhachHang(collectionCustomer);
-                */
+                
 
                 textSoLuong.Text = "Số lượng: " + customerListDisplay.Count.ToString();
                 DGKhachhang.ItemsSource = customerListDisplay;
@@ -402,7 +402,7 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                 if (int.TryParse(CustomerPhoneNumber.Text, out int phoneNumber) && IsValidEmail(CustomerEmail.Text) && DateTime.TryParse(CustomerBirth.Text, out DateTime date))
                 {
                     //Cập nhật UI
-                    foreach (Khachhang KH in customerList)
+                    /*foreach (Khachhang KH in customerList)
                     {
                         if (KH.CCCD == kh.CCCD)
                         {
@@ -421,16 +421,16 @@ namespace Hotel_Management.Pages.QuanLyKhachHang
                             KH.Ngaysinh = CustomerBirth.Text;
                             break;
                         }
-                    }
+                    }*/
 
 
                     //Cập nhật DB + UI
-                    /*
+                    
                     var query = Builders<BsonDocument>.Filter.Eq("idNumber", kh.CCCD);
                     var update = Builders<BsonDocument>.Update.Set("phoneNumber", CustomerPhoneNumber).Set("email", CustomerEmail.Text).Set("dateOfBirth", date);
                     collectionCustomer.UpdateOne(query, update);
                     LayKhachHang(collectionCustomer);
-                    */
+                    
 
                     DGKhachhang.Items.Refresh();
                     Dialog.IsOpen = false;
