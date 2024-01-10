@@ -221,7 +221,7 @@
                                 Foreground="#161d36"
                                 BorderThickness="0"
                                 FontSize="18"
-                                >
+                                Click="Button_Click_2">
                                     Xác nhận
                                 </Button>
                             </Border>

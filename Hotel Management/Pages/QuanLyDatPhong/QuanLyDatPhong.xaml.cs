@@ -148,15 +148,15 @@ namespace Hotel_Management.Pages.QuanLyDatPhong
                 Bill item = ((FrameworkElement)sender).DataContext as Bill;
 
                 //Xóa ngoài UI (Không xóa DB)
-                receiptList.Remove(item);
+                /*receiptList.Remove(item);
                 receiptListDisplay.Remove(item);
-                DGHoadon.ItemsSource = receiptListDisplay;
+                DGHoadon.ItemsSource = receiptListDisplay;*/
 
 
 
                 //Xóa DB và update UI
-                //collectionReceipt.DeleteOne(x => x["idCode"] == item.ID);
-                //LayHoaDonDat(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
+                collectionReceipt.DeleteOne(x => x["idCode"] == item.ID);
+                LayHoaDonDat(collectionRoom, collectionReceipt, collectionCustomer, collectionUser);
 
                 DGHoadon.ItemsSource = receiptListDisplay;
                 textSoLuong.Text = "Số lượng: " + receiptListDisplay.Count.ToString();

@@ -157,6 +157,7 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                     List<NhanVien> items = DGNhanVien.SelectedItems.Cast<NhanVien>().ToList();
 
                     //comment đến.....
+                    /*
                     foreach (NhanVien item in items)
                     {
                         employeeList.Remove(item);
@@ -164,13 +165,13 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
 
                     }
                     DGNhanVien.ItemsSource = employeeListDisplay;
+                    */
                     //...đây và bỏ comment phía dưới nếu muốn xóa dữ liệu trong db
 
 
-                    /* Xóa dữ liệu trong db
+                    
                     XoaNhanVien(collectionEmployee, items);
                     LayNhanVien(collectionEmployee);
-                    */
 
                     textSoLuong.Text = "Số lượng: " + employeeListDisplay.Count.ToString();
                     DGNhanVien.ItemsSource = employeeListDisplay;
@@ -385,6 +386,7 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                 if (int.TryParse(CustomerPhoneNumber.Text, out int phoneNumber) && IsValidEmail(CustomerEmail.Text) && DateTime.TryParse(CustomerBirth.Text, out DateTime date))
                 {
                     //Cập nhật UI
+                    /*
                     foreach (NhanVien KH in employeeList)
                     {
                         if (KH.CCCD == nv.CCCD)
@@ -407,15 +409,16 @@ namespace Hotel_Management.Pages.QuanLyNhanSu
                             break;
                         }
                     }
+                    */
 
 
                     //Cập nhật DB + UI
-                    /*
+                    
                     var query = Builders<BsonDocument>.Filter.Eq("idNumber", nv.CCCD);
                     var update = Builders<BsonDocument>.Update.Set("phoneNumber", CustomerPhoneNumber).Set("email", CustomerEmail.Text).Set("dateOfBirth", date).Set("userRole", CustomerRole.Text);
-                    collectionUser.UpdateOne(query, update);
+                    collectionEmployee.UpdateOne(query, update);
                     LayNhanVien(collectionEmployee);
-                    */
+                    
 
                     DGNhanVien.Items.Refresh();
                     Dialog.IsOpen = false;
